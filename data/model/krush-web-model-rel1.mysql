@@ -1,0 +1,131 @@
+# Create schemas
+
+# Create tables
+CREATE TABLE IF NOT EXISTS project_flux_template
+(
+    id BIGINT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS contract_template
+(
+    id BIGINT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS project_flux
+(
+    id BIGINT NOT NULL,
+    project_flux_template_id BIGINT,
+    start_date DATETIME,
+    end_date DATETIME,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS contract
+(
+    contract_template_id BIGINT,
+    start_date DATETIME,
+    end_date DATETIME    
+);
+
+CREATE TABLE IF NOT EXISTS contract_fluxes
+(
+    contract_template_id BIGINT NOT NULL,
+    flux_template_id BIGINT    
+);
+
+CREATE TABLE IF NOT EXISTS project_flux_step_template
+(
+    id BIGINT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS project_flux_steps
+(
+    project_flux_template_id BIGINT,
+    project_flux_step_template_id BIGINT    
+);
+
+CREATE TABLE IF NOT EXISTS job_template
+(
+    id BIGINT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS project_flux_step_jobs
+(
+    project_flux_step_template_id BIGINT,
+    job_template_id BIGINT    
+);
+
+CREATE TABLE IF NOT EXISTS step
+(
+    id BIGINT NOT NULL,
+    project_flux_step_template_id BIGINT,
+    project_flux_id BIGINT,
+    start_date DATETIME,
+    end_date DATETIME,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS job
+(
+    id BIGINT NOT NULL,
+    job_template_id BIGINT,
+    step_id BIGINT,
+    start_date DATETIME,
+    end_date DATETIME,
+    PRIMARY KEY(id)
+);
+
+
+# Create FKs
+ALTER TABLE contract
+    ADD    FOREIGN KEY (contract_template_id)
+    REFERENCES contract_template(id)
+;
+    
+ALTER TABLE project_flux
+    ADD    FOREIGN KEY (project_flux_template_id)
+    REFERENCES project_flux_template(id)
+;
+    
+ALTER TABLE contract_fluxes
+    ADD    FOREIGN KEY (contract_template_id)
+    REFERENCES contract_template(id)
+;
+    
+ALTER TABLE contract_fluxes
+    ADD    FOREIGN KEY (flux_template_id)
+    REFERENCES project_flux(project_flux_template_id)
+;
+    
+ALTER TABLE project_flux_steps
+    ADD    FOREIGN KEY (project_flux_template_id)
+    REFERENCES project_flux_template(id)
+;
+    
+ALTER TABLE project_flux_steps
+    ADD    FOREIGN KEY (project_flux_step_template_id)
+    REFERENCES project_flux_step_template(id)
+;
+    
+ALTER TABLE project_flux_step_jobs
+    ADD    FOREIGN KEY (project_flux_step_template_id)
+    REFERENCES project_flux_step_template(id)
+;
+    
+ALTER TABLE project_flux_step_jobs
+    ADD    FOREIGN KEY (job_template_id)
+    REFERENCES job_template(id)
+;
+    
+ALTER TABLE step
+    ADD    FOREIGN KEY (project_flux_step_template_id)
+    REFERENCES project_flux_step_template(id)
+;
+    
+
+# Create Indexes
+
