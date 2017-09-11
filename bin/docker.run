@@ -1,0 +1,1 @@
+sudo docker run --expose 8080 -p 8080:8080 --volume `pwd`:/docked -it desavera/krushweb:airflow-init /bin/bash
