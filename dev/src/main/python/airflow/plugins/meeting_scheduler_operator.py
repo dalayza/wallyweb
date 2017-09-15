@@ -17,6 +17,6 @@ class MeetingSchedulerOperator(BaseOperator):
         log.info("scheduling meeting... ")
         log.info('operator_param: %s', self.operator_param)
 
-class MyFirstPlugin(AirflowPlugin):
-    name = "meeting_scheduler_operator"
+class MeetingSchedulerPlugin(AirflowPlugin):
+    name = "meeting_scheduler_operator_plugin"
     operators = [MeetingSchedulerOperator]
