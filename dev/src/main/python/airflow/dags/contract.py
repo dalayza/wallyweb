@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import airflow
-
 from airflow.models import DAG
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.subdag_operator import SubDagOperator
 
 from airflow.example_dags.subdags.subdag import subdag
-from airflow.operators import MeetingSchedulerOperator
 
 
 DAG_NAME = 'contract_dag'
@@ -15,13 +13,12 @@ DAG_NAME = 'contract_dag'
 args = {
         'owner': 'airflow',
         'depends_on_past': False,
-        'start_date': seven_days_ago,
+        'start_date': airflow.utils.dates.days_ago(2),
         'email': ['airflow@airflow.com'],
         'email_on_failure': True,
         'email_on_retry': True,
-        'retries': 1,
-        'retry_delay': timedelta(minutes=5),
-      )
+        'retries': 1
+      }
 
 dag = DAG(
     dag_id=DAG_NAME,
@@ -36,18 +33,15 @@ start = DummyOperator(
 )
 
 onboard = SubDagOperator(
-    task_id='onboard',
-    subdag=subdag(DAG_NAME, 'onboard', args),
+    task_id='onboard_dag',
+    subdag=subdag(DAG_NAME, 'onboard_dag', args),
     default_args=args,
     dag=dag,
 )
 
-meeting_scheduler_task = MeetingSchedulerOperator(args_operator_param='This is a meeting scheduler task !',
-                                task_id='onboard_operator_task', dag=dag)
-
 ongoing = SubDagOperator(
-    task_id='ongoing',
-    subdag=subdag(DAG_NAME, 'ongoing', args),
+    task_id='ongoing_dag',
+    subdag=subdag(DAG_NAME, 'ongoing_dag', args),
     default_args=args,
     dag=dag,
 )
