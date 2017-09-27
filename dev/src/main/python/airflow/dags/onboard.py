@@ -16,7 +16,7 @@ default_args = {
         'retries': 1
       }
 
-dag = DAG('contract_dag.onboard_dag', description='The OnBoard DAG',
+dag = DAG('contract.onboard_dag', description='The OnBoard DAG for contract',
           schedule_interval='0 12 * * *',
           default_args=default_args,
           start_date=datetime(2017, 3, 20), catchup=False)

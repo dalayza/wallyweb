@@ -8,7 +8,7 @@ from airflow.operators.subdag_operator import SubDagOperator
 from airflow.example_dags.subdags.subdag import subdag
 
 
-DAG_NAME = 'contract_dag'
+DAG_NAME = 'contract'
 
 args = {
         'owner': 'airflow',
