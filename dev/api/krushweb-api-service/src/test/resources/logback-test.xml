@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user -->
+<!-- -->
+<!-- For professional support please see -->
+<!-- http://www.qos.ch/shop/products/professionalSupport -->
+<!-- -->
+<configuration>
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<fileName>/opt/apache-tomcat-8.0.2/logs/tax-api-test.log</fileName>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="com.b2winc.corpserv.log.controller.json.LogbackLayoutJson" />
+		</encoder>
+	</appender>
+	<logger name="org.apache" level="ERROR" />
+	<logger name="org.springframework" level="ERROR" />
+	<logger name="com.b2winc.corpserv" level="ERROR" />
+	<logger name="org.hibernate.type" level="ERROR" />
+	<logger name="org.hibernate" level="WARN" />
+	<root level="WARN">
+		<appender-ref ref="file" />
+	</root>
+</configuration>

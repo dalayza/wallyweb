@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user -->
+<!-- -->
+<!-- For professional support please see -->
+<!-- http://www.qos.ch/shop/products/professionalSupport -->
+<!-- -->
+<configuration>
+	<appender name="file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<fileName>/opt/apache-tomcat-8.5.5/logs/tax-api.log</fileName>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="com.b2winc.corpserv.log.controller.json.LogbackLayoutJson" />
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>/opt/apache-tomcat-8.5.5/logs/tax-api.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>250MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>2</maxHistory>
+		</rollingPolicy>
+	</appender>
+	<logger name="org.apache" level="ERROR" />
+	<logger name="org.springframework" level="ERROR" />
+	<logger name="com.b2winc.corpserv" level="ERROR" />
+	<logger name="org.hibernate.type" level="ERROR" />
+	<logger name="org.hibernate" level="WARN" />
+	<root level="WARN">
+		<appender-ref ref="file" />
+	</root>
+</configuration>
