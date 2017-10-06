@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# script for MYSQL docker container start up
+#
+# author:desavera@gmail.com
+
+docker run --name krushweb-devdb -v /opt/mysql/data:/var/lib/mysql -v `pwd`:/docked -p 3306:3306 -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -d mysql
