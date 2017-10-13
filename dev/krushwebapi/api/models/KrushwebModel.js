@@ -53,3 +53,4 @@ var ClientDataSchema = new Schema({
     
 
 module.exports = mongoose.model('Leads', LeadSchema);
+module.exports = mongoose.model('Clients', ClientSchema);
