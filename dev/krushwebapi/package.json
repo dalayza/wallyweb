@@ -17,8 +17,9 @@
     "lint": "samples lint",
     "pretest": "npm run lint",
     "system-test": "samples test app",
-    "test": "npm run system-test",
-    "e2e-test": "samples test deploy"
+    "test": "samples test app",
+    "e2e": "rm -rf node_modules/ &&  samples test build --deploy --timeout 20m --builderProject $GCLOUD_PROJECT",
+    "cover": "nyc --cache npm test; nyc report --reporter=html"
   },
   "dependencies": {
     "ejs": "^2.5.7",
