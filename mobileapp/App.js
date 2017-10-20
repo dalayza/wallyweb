@@ -112,18 +112,18 @@ const styles = StyleSheet.create({
 
 export default class App extends React.Component {
   state = {
-    moviesList: []
+    leadsList: []
   }
 
   componentDidMount(){
-    this.getMovies()
+    this.getLeads()
       .then(responseJson => {
-          this.setState({moviesList: responseJson})
+          this.setState({leadsList: responseJson})
       })
   }
 
-  getMovies(){
-    return fetch('https://krushweb-183017.appspot.com/leads') //http://facebook.github.io/react-native/movies.json
+  getLeads(){
+    return fetch('https://krushweb-183017.appspot.com/leads')
           .then(response => response.json())
           .then((responseJson) => {
             return responseJson;
@@ -135,7 +135,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-	    	<View>
+	    <View>
           <View style={styles.topBar}>
               <View style={styles.container}>        
                 <Row size={12}>
@@ -164,7 +164,7 @@ export default class App extends React.Component {
           
             <View style={styles.leadWrapper}>
               {
-                this.state.moviesList.map((elem,index) => {
+                this.state.leadsList.map((elem,index) => {
                   return (
 
                     <View style={[styles.leadRow,{ backgroundColor: (index % 2 == 0) ? '#f4f4f4' : '#fff' }]}>
@@ -189,49 +189,6 @@ export default class App extends React.Component {
                   )
                 })
               }
-
-              {/*
-              <View style={[styles.leadRow, styles.leadRowOdd]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-
-              <View style={[styles.leadRow, styles.leadRowEven]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-
-              */}
 
             </View>
 
