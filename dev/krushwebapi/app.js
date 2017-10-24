@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 var leads_routes = require('./api/routes/LeadsRoutes');
 var clients_routes = require('./api/routes/ClientsRoutes');
 leads_routes(app);
-//clients_routes(app); 
+clients_routes(app); 
 
 app.listen(port);
 

@@ -59,24 +59,20 @@ var ClientSchema = new Schema({
   email: {
     type: String,
     required: 'client email is required'
-  }
-});
-
-var ClientDataSchema = new Schema({
-  client_id: {
-    type: String,
-    required: 'lead client identification is required'
   },
-  name: {
+  passwd: {
     type: String,
-    required: 'client data name is required'
+    required: 'client password is required'
   },
-  value: {
-    type: String,
-    required: 'client data value is required'
-  }
+  metadata: {
+    type: "array",
+    items: {
+      type: "string"
+    },
+    "minItems": 1,
+    "uniqueItems": true
+  },
 });
-    
 
 module.exports = mongoose.model('Leads', LeadSchema);
 module.exports = mongoose.model('Clients', ClientSchema);

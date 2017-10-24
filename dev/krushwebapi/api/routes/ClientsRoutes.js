@@ -9,6 +9,6 @@ module.exports = function(app) {
 
   app.route('/clients/:clientId')
     .get(clients_controller.read_a_client)
-    .put(clients_controller.update_a_clientlead)
-    .delete(clients_controller.delete_a_clientlead);
+    .put(clients_controller.update_a_client)
+    .delete(clients_controller.delete_a_client);
 };
