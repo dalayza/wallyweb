@@ -7,16 +7,7 @@ var express = require('express'),
 
 //mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-//mongoose.connect('mongodb://localhost/krushwebdb'); 
 mongoose.connect('mongodb://admin:admin123@ds121015.mlab.com:21015/krushwebdb');
-
-//var MongoClient = require('mongodb').MongoClient;
-
-//var uri = "mongodb://admin:admin123@dbcluster-shard-00-00-dvepw.mongodb.net:27017,dbcluster-shard-00-01-dvepw.mongodb.net:27017,dbcluster-shard-00-02-dvepw.mongodb.net:27017/krushwebdb?ssl=true&replicaSet=dbcluster-shard-0&authSource=admin";
-//var uri = "mongodb://admin:admin123@ds121015.mlab.com:21015/krushwebdb";
-//MongoClient.connect(uri, function(err, db) {
-//  db.close();
-//});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

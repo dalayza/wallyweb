@@ -8,9 +8,13 @@ var LeadSchema = new Schema({
     type: String,
     required: 'lead client identification is required'
   },
-  contact: {
+  email: {
     type: String,
-    required: 'lead contact is required'
+    required: 'lead email is required'
+  },
+  phone: {
+    type: String,
+    required: 'lead phone is required'
   },
   source: {
     type: String,
