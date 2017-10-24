@@ -100,19 +100,42 @@ const styles = StyleSheet.create({
   },
   colFormat:{
     padding: 10,
-  }
+  },
+  bottomSpace: {
+    width: '100%',
+    paddingTop: 30,
+    height: 70,    
+  },
 
 });
 
 
 export default class App extends React.Component {
   state = {
+    leadsList: []
+  }
 
+  componentDidMount(){
+    this.getLeads()
+      .then(responseJson => {
+          this.setState({leadsList: responseJson})
+      })
+  }
+
+  getLeads(){
+    return fetch('https://krushweb-183017.appspot.com/leads')
+          .then(response => response.json())
+          .then((responseJson) => {
+            return responseJson;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
   }
 
   render() {
     return (
-	    	<View>
+	    <View>
           <View style={styles.topBar}>
               <View style={styles.container}>        
                 <Row size={12}>
@@ -134,236 +157,42 @@ export default class App extends React.Component {
           </View>
           <ScrollView>
 
-            
-
             <View style={styles.leadDate}>
               <Text style={[styles.textBold, styles.textCenter]}>Hoje</Text> 
             </View>
+
           
             <View style={styles.leadWrapper}>
-          
-              <View style={[styles.leadRow, styles.leadRowOdd]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
+              {
+                this.state.leadsList.map((elem,index) => {
+                  return (
 
-              <View style={[styles.leadRow, styles.leadRowEven]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
+                    <View style={[styles.leadRow,{ backgroundColor: (index % 2 == 0) ? '#f4f4f4' : '#fff' }]}>
+                      <View style={styles.leadCaption}>
+                        <Text style={[styles.leadCaptionInfo, styles.textBold]}>{elem.client_id}</Text>
+                        <Text style={styles.leadCaptionInfo}></Text>
+                        <Text style={styles.leadCaptionInfo}>{elem.contact} </Text>
+                      </View>
+                      <View style={styles.leadOptions}>
+                        <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
+                          <View style={[styles.leadContact, styles.leadContactPhone]}>
+                            <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
+                          </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight onPress={() => Linking.openURL('mailto:'+elem.contact+'?subject=&body=')} underlayColor="transparent">
+                          <View style={[styles.leadContact, styles.leadContactMail]}>   
+                            <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
+                          </View>
+                        </TouchableHighlight>
+                      </View>
                     </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-
-              <View style={[styles.leadRow, styles.leadRowOdd]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-
-              <View style={styles.leadDate}>
-                <Text style={[styles.textBold, styles.textCenter]}>Ontem</Text> 
-              </View>
-
-              <View style={[styles.leadRow, styles.leadRowOdd]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-
-              <View style={[styles.leadRow, styles.leadRowEven]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-              <View style={[styles.leadRow, styles.leadRowOdd]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-
-              <View style={[styles.leadRow, styles.leadRowEven]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-              <View style={[styles.leadRow, styles.leadRowOdd]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-
-              <View style={[styles.leadRow, styles.leadRowEven]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-              <View style={[styles.leadRow, styles.leadRowOdd]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
-
-              <View style={[styles.leadRow, styles.leadRowEven]}>
-                <View style={styles.leadCaption}>
-                  <Text style={[styles.leadCaptionInfo, styles.textBold]}>Neymar Santos Junior</Text>
-                  <Text style={styles.leadCaptionInfo}>(21) 99187-4043</Text>
-                  <Text style={styles.leadCaptionInfo}>neymar@psg.com</Text>
-                </View>
-                <View style={styles.leadOptions}>
-                  <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactPhone]}>
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                    </View>
-                  </TouchableHighlight>
-                  <TouchableHighlight onPress={() => Linking.openURL('mailto:neymar@psg.com?subject=&body=')} underlayColor="transparent">
-                    <View style={[styles.leadContact, styles.leadContactMail]}>   
-                      <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              </View>
+                  )
+                })
+              }
 
             </View>
+
+            <View style={styles.bottomSpace}></View>
             
           </ScrollView>
         </View> 
