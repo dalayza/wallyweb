@@ -170,16 +170,16 @@ export default class App extends React.Component {
                     <View style={[styles.leadRow,{ backgroundColor: (index % 2 == 0) ? '#f4f4f4' : '#fff' }]}>
                       <View style={styles.leadCaption}>
                         <Text style={[styles.leadCaptionInfo, styles.textBold]}>{elem.client_id}</Text>
-                        <Text style={styles.leadCaptionInfo}></Text>
-                        <Text style={styles.leadCaptionInfo}>{elem.contact} </Text>
+                        <Text style={styles.leadCaptionInfo}>{elem.phone}</Text>
+                        <Text style={styles.leadCaptionInfo}>{elem.email} </Text>
                       </View>
                       <View style={styles.leadOptions}>
-                        <TouchableHighlight onPress={() => Linking.openURL('tel:21991874043')} underlayColor="transparent">
+                        <TouchableHighlight onPress={() => Linking.openURL('tel:'+elem.phone)} underlayColor="transparent">
                           <View style={[styles.leadContact, styles.leadContactPhone]}>
                             <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
                           </View>
                         </TouchableHighlight>
-                        <TouchableHighlight onPress={() => Linking.openURL('mailto:'+elem.contact+'?subject=&body=')} underlayColor="transparent">
+                        <TouchableHighlight onPress={() => Linking.openURL('mailto:'+elem.email+'?subject=&body=')} underlayColor="transparent">
                           <View style={[styles.leadContact, styles.leadContactMail]}>   
                             <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
                           </View>
