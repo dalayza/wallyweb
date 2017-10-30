@@ -1,6 +1,5 @@
 'use strict';
 
-
 var mongoose = require('mongoose'),
   Lead = mongoose.model('Leads');
 
@@ -12,9 +11,6 @@ exports.list_all_leads = function(req, res) {
   });
 };
 
-
-
-
 exports.create_a_lead = function(req, res) {
   var new_lead = new Lead(req.body);
   new_lead.save(function(err, lead) {
@@ -24,7 +20,6 @@ exports.create_a_lead = function(req, res) {
   });
 };
 
-
 exports.read_a_lead = function(req, res) {
   Lead.findById(req.params.leadId, function(err, lead) {
     if (err)
@@ -33,7 +28,6 @@ exports.read_a_lead = function(req, res) {
   });
 };
 
-
 exports.update_a_lead = function(req, res) {
   Lead.findOneAndUpdate({_id: req.params.leadId}, req.body, {new: true}, function(err, lead) {
     if (err)
@@ -41,7 +35,6 @@ exports.update_a_lead = function(req, res) {
     res.json(lead);
   });
 };
-
 
 exports.delete_a_lead = function(req, res) {
 

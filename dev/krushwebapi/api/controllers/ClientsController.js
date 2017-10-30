@@ -1,6 +1,5 @@
 'use strict';
 
-
 var mongoose = require('mongoose'),
   Client = mongoose.model('Clients');
 
@@ -12,9 +11,6 @@ exports.list_all_clients = function(req, res) {
   });
 };
 
-
-
-
 exports.create_a_client = function(req, res) {
   var new_client = new Client(req.body);
   new_client.save(function(err, client) {
@@ -24,7 +20,6 @@ exports.create_a_client = function(req, res) {
   });
 };
 
-
 exports.read_a_client = function(req, res) {
   Client.findById(req.params.clientId, function(err, client) {
     if (err)
@@ -32,7 +27,6 @@ exports.read_a_client = function(req, res) {
     res.json(client);
   });
 };
-
 
 exports.update_a_client = function(req, res) {
   Client.findOneAndUpdate({_id: req.params.clientId}, req.body, {new: true}, function(err, client) {
@@ -42,9 +36,7 @@ exports.update_a_client = function(req, res) {
   });
 };
 
-
 exports.delete_a_client = function(req, res) {
-
 
   Client.remove({
     _id: req.params.clientId
@@ -54,4 +46,3 @@ exports.delete_a_client = function(req, res) {
     res.json({ message: 'Client successfully deleted' });
   });
 };
-

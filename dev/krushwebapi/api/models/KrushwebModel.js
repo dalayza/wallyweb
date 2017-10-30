@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 var LeadSchema = new Schema({
   client_id: {
     type: String,
@@ -74,5 +73,24 @@ var ClientSchema = new Schema({
   },
 });
 
+var SessionsSchema = new Schema({
+  client_id: {
+    type: String,
+    required: 'session client identification is required'
+  },
+  created_date: {
+    type: Date,
+    default: Date.now
+  },
+  status: {
+    type: [{
+      type: String,
+      enum: ['active', 'inactive']
+    }],
+    default: ['active']
+  }
+});
+
 module.exports = mongoose.model('Leads', LeadSchema);
 module.exports = mongoose.model('Clients', ClientSchema);
+module.exports = mongoose.model('Sessions', SessionsSchema);
