@@ -3,6 +3,7 @@ var express = require('express'),
   port = process.env.PORT || 8080,
   mongoose = require('mongoose'),
   Lead = require('./api/models/KrushwebModel'),
+  Client = require('./api/models/KrushwebModel'),
   bodyParser = require('body-parser');
 
 //mongoose instance connection url connection
