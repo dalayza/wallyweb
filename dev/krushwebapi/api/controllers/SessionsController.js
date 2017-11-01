@@ -2,7 +2,8 @@
 
 
 var mongoose = require('mongoose'),
-  Session = mongoose.model('Sessions');
+  Session = mongoose.model('Sessions'),
+  Client = mongoose.model('Clients');
 
 exports.list_all_sessions = function(req, res) {
   Session.find({}, function(err, session) {
@@ -13,11 +14,22 @@ exports.list_all_sessions = function(req, res) {
 };
 
 exports.login = function(req, res) {
-  var new_session = new Session(req.body);
-  new_session.save(function(err, session) {
+
+  Client.findById({_id:req.body.client_id}, function(err, client) {
     if (err)
       res.send(err);
-    res.json(session);
+
+    if (client.passwd == req.body.passwd) {
+
+      var new_session = new Session({"client_id":req.body.client_id});
+    
+      new_session.save(function(err, session) {
+        if (err)
+          res.send(err);
+        res.json(session);
+      });
+    } else
+      res.json({ message: 'Please check client_id and password...' });
   });
 };
 
