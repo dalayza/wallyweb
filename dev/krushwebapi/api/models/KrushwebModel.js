@@ -57,7 +57,8 @@ var ClientSchema = new Schema({
   },
   email: {
     type: String,
-    required: 'client email is required'
+    required: 'client email is required',
+    unique: true
   },
   passwd: {
     type: String,
@@ -74,9 +75,10 @@ var ClientSchema = new Schema({
 });
 
 var SessionsSchema = new Schema({
-  client_id: {
+  email: {
     type: String,
-    required: 'session client identification is required'
+    required: 'session client email identification is required',
+    unique: true
   },
   created_date: {
     type: Date,
