@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, TextInput, Button, TouchableHighlight, Linking, Alert, Switch, Slider, Picker, Modal, ListView, WebView, ImageBackground } from 'react-native';
 import {Column as Col, Row} from 'react-native-flexbox-grid';
-
+import { StackNavigator } from 'react-navigation';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,194 +11,155 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   wrapper: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#212121',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  topBar: {
-  	backgroundColor: '#92d400',
-    width: '100%',
-    justifyContent: 'center',
-  	paddingTop: 30,
-  	height: 70,
+  text: {
+    color: '#fff'
   },
-  simbolMacroTopBar:{
-    alignSelf: 'flex-end', 
+  text_right: {
+    textAlign: 'right' 
   },
-  textWhite:{
-  	color: '#ffffff',  	
+  formControl:{
+    height: 40, 
+    borderColor: '#fff', 
+    borderWidth: 1,
+    color: '#fff',
+    textAlign: 'center',
+    marginBottom: 15
   },
-  textBold:{
-    fontWeight: 'bold',
-  },
-  textCenter:{
-    alignSelf: 'center',
-  	justifyContent: 'center',
-  },
-  leadWrapper:{
-  	width: '100%',
-  	justifyContent: 'center',
-
-  },
-  leadRow:{  	
-  	width: '100%',
-    borderLeftColor: '#008ad4',
-    borderLeftWidth: 5,
-    borderLeftStyle: 'solid',
-    flex: 1, 
-    flexDirection: 'row'
-  },
-  leadRowOdd: {
-    backgroundColor: '#f4f4f4',    
-  },
-  leadRowEven: {
-    backgroundColor: '#ffffff',    
-  },
-  leadCaption:{
-    // display: 'flex',
-    // alignSelf: 'flex-start',
-  	width: '75%',
-  	color: '#000000',
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
-    minHeight: 80,
-  },
-  leadCaptionInfo:{
-    color: '#3C3C3B',
-    fontSize: 16,
-    lineHeight: 26,
-
-  },
-  leadOptions:{
-    justifyContent: 'flex-end',
-  	width: '25%',    
-  },
-  leadContact:{
-    width: 75,
-    height: 55,
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  leadContactPhone:{
-    backgroundColor: '#92d400'
-  },
-  leadContactMail:{
-    backgroundColor: '#ff9500'
-  },
-  leadContactIcons:{
-    width: 20,
-  },
-  leadDate:{
-    width: '100%',
-    height: 40,
-    alignSelf: 'center',
-    justifyContent: 'center',
-  },
-  colFormat:{
+  formButton:{
+    backgroundColor: 'red',
+    borderRadius: 10,
     padding: 10,
+    marginBottom: 15,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 10,
+    shadowOpacity: 0.25
   },
-  bottomSpace: {
-    width: '100%',
-    paddingTop: 30,
-    height: 70,    
+  btnDefault:{
+    width: 300,
+    borderRadius: 10,
+    marginBottom: 15,
   },
-
+  logoMacro:{
+    width: 250,
+    height: 44,
+    marginBottom: 30
+  },
+  marginText:{
+    marginBottom: 15
+  }
 });
+  
+  {/* Tela Inicial */}
+  const HomeScreen = ({ navigation }) => (
+    <View style={styles.wrapper}>
+      <View style={styles.container}>
+        <Image source={{uri: 'http://agenciamacro.com.br/wp-content/uploads/2015/01/Logo_MACRO_light.png'}} style={styles.logoMacro} />          
+        <Button 
+          title="Cadastre-se"
+          color=''
+          onPress={()=> navigation.navigate('RegisterScreen')}
+        />
+        <Text style={styles.marginText}></Text>
+         <Button 
+          title="Sou Cadastrado"
+          color='#91d300'
+          onPress={() => navigation.navigate('LoginScreen')}
+        />
+      </View>
+    </View>
+  );
 
+  {/* Tela de Login */}
+  const LoginScreen = () => (
+    <View style={styles.wrapper}>
+      <View style={styles.container}>
+        <Image source={{uri: 'http://agenciamacro.com.br/wp-content/uploads/2015/01/Logo_MACRO_light.png'}} style={styles.logoMacro} />
 
-export default class App extends React.Component {
-  state = {
-    leadsList: []
-  }
-
-  componentDidMount(){
-    this.getLeads()
-      .then(responseJson => {
-          this.setState({leadsList: responseJson})
-      })
-  }
-
-  getLeads(){
-    return fetch('https://krushweb-183017.appspot.com/leads')
-          .then(response => response.json())
-          .then((responseJson) => {
-            return responseJson;
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-  }
-
-  render() {
-    return (
-	    <View>
-          <View style={styles.topBar}>
-              <View style={styles.container}>        
-                <Row size={12}>
-                  <Col sm={3} style={styles.colFormat}>
-                    <Text>
-                      Logout
-                    </Text>
-                  </Col>
-                  <Col sm={6} style={styles.colFormat}>
-                    <Text style={[styles.textCenter, styles.textWhite, styles.textBold]}>
-                       Gestão de Leads
-                    </Text>
-                  </Col>
-                  <Col sm={3} style={styles.colFormat}>
-                    <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/logo-macro.png?v=2'}} style={[{width: 27, height: 27}, styles.simbolMacroTopBar]} />
-                  </Col>
-                </Row>      
-              </View>
-          </View>
-          <ScrollView>
-
-            <View style={styles.leadDate}>
-              <Text style={[styles.textBold, styles.textCenter]}>Hoje</Text> 
-            </View>
-
-          
-            <View style={styles.leadWrapper}>
-              {
-                this.state.leadsList.map((elem,index) => {
-                  return (
-
-                    <View style={[styles.leadRow,{ backgroundColor: (index % 2 == 0) ? '#f4f4f4' : '#fff' }]}>
-                      <View style={styles.leadCaption}>
-                        <Text style={[styles.leadCaptionInfo, styles.textBold]}>{elem.client_id}</Text>
-                        <Text style={styles.leadCaptionInfo}>{elem.phone}</Text>
-                        <Text style={styles.leadCaptionInfo}>{elem.email} </Text>
-                      </View>
-                      <View style={styles.leadOptions}>
-                        <TouchableHighlight onPress={() => Linking.openURL('tel:'+elem.phone)} underlayColor="transparent">
-                          <View style={[styles.leadContact, styles.leadContactPhone]}>
-                            <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/phone.png?v=2'}} style={{width: 30, height: 30}} />
-                          </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight onPress={() => Linking.openURL('mailto:'+elem.email+'?subject=&body=')} underlayColor="transparent">
-                          <View style={[styles.leadContact, styles.leadContactMail]}>   
-                            <Image source={{uri: 'http://agenciamacro.com.br/mobileapp/assets/icons/mail.png?v=2'}} style={{width: 35, height: 35}} />              
-                          </View>
-                        </TouchableHighlight>
-                      </View>
-                    </View>
-                  )
-                })
-              }
-
-            </View>
-
-            <View style={styles.bottomSpace}></View>
+        <TextInput
+            style={styles.formControl}
+            placeholder="Login"
+            placeholderTextColor="gray"
+          />
+        <TextInput
+            style={styles.formControl}
+            placeholder="Senha"
+            placeholderTextColor="gray"
+            secureTextEntry={true}
             
-          </ScrollView>
-        </View> 
-    );
-  }
-}
+          />
+        <Button 
+            style={styles.btnDefault}
+            title="Entrar"
+            color=''
+            onPress={() => navigation.navigate('LeadListScreen')}
+          />
+      </View>
+    </View>    
+  );
+
+  {/* Tela de Cadastro */}
+  const RegisterScreen = () => (
+    <View style={styles.wrapper}>
+      <View style={styles.container}>
+        <Image source={{uri: 'http://agenciamacro.com.br/wp-content/uploads/2015/01/Logo_MACRO_light.png'}} style={styles.logoMacro} />
+
+        <TextInput
+            style={styles.formControl}
+            placeholder="Login"
+            placeholderTextColor="gray"
+          />
+        <TextInput
+            style={styles.formControl}
+            placeholder="Email"
+            placeholderTextColor="gray"
+        />
+        <TextInput
+            style={styles.formControl}
+            placeholder="Senha"
+            placeholderTextColor="gray"
+            secureTextEntry={true}
+          />
+        <Button 
+            style={styles.btnDefault}
+            title="Cadastrar"
+            color=''
+            onPress={()=>{}}
+        />       
+      </View>
+    </View>   
+  );
+
+  const RootNavigator = StackNavigator({
+    HomeScreen: {
+      screen: HomeScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    LoginScreen: {
+      screen: LoginScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    RegisterScreen: {
+      screen: RegisterScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+  });
+
+export default RootNavigator;
 
 
 
