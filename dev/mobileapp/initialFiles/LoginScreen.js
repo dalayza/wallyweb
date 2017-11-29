@@ -1,8 +1,9 @@
+
+
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, TextInput, Button, TouchableHighlight , Alert, Switch, Slider, Picker, Modal, ListView, WebView } from 'react-native';
-import { StackNavigator,} from 'react-navigation';
-
-
+import { StyleSheet, Text, View, ScrollView, Image, TextInput, Button, TouchableHighlight, Linking, Alert, Switch, Slider, Picker, Modal, ListView, WebView, ImageBackground } from 'react-native';
+import {Column as Col, Row} from 'react-native-flexbox-grid';
+import { StackNavigator } from 'react-navigation';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,116 +59,112 @@ const styles = StyleSheet.create({
     marginBottom: 15
   }
 });
+  
+  {/* Tela Inicial */}
+  const HomeScreen = ({ navigation }) => (
+    <View style={styles.wrapper}>
+      <View style={styles.container}>
+        <Image source={{uri: 'http://agenciamacro.com.br/wp-content/uploads/2015/01/Logo_MACRO_light.png'}} style={styles.logoMacro} />          
+        <Button 
+          title="Cadastre-se"
+          color=''
+          onPress={()=> navigation.navigate('RegisterScreen')}
+        />
+        <Text style={styles.marginText}></Text>
+         <Button 
+          title="Sou Cadastrado"
+          color='#91d300'
+          onPress={() => navigation.navigate('LoginScreen')}
+        />
+      </View>
+    </View>
+  );
 
-
-export default class App extends React.Component {
-  state = {
-    counter: 0,
-    textLogin: 'Usuário',
-    textNome: 'Nome',
-    textEmail: 'Email',
-    textSenha: 'Senha',
-    switchValue: true,
-    language: 'Item 1',
-    open: false
-  }
-
-  constructor(props){
-    super(props);
-    setInterval(()=>{this.increment();}, 1000);
-
-    // const ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
-    // this.state = {
-    //   dataSource: ds.cloneWithRows([
-    //     {source: {uri: "http://lorempixel.com/300/200"}},
-    //     {source: {uri: "http://lorempixel.com/300/200"}},
-    //     {source: {uri: "http://lorempixel.com/300/200"}},
-    //     {source: {uri: "http://lorempixel.com/300/200"}},
-    //   ])
-    // };
-  }
-
-  increment(){
-    this.setState({counter: this.state.counter+1});
-  }
-
-  render() {
-    return (  
-
-      <View style={styles.wrapper}>
-        <View style={styles.container}>
-    {/* Tela Inicial */}
-        {/*
-          <Image source={{uri: 'http://agenciamacro.com.br/wp-content/uploads/2015/01/Logo_MACRO_light.png'}} style={styles.logoMacro} />
-          
-          <Button 
-            title="Cadastre-se"
-            color=''
-            onPress={()=>{}}
-          />
-          <Text style={styles.marginText}></Text>
-
-          <Button 
-            title="Sou Cadastrado"
-            color='#91d300'
-            onPress={()=>{}}
-          />
-        */}
-
-        {/* Tela de Login */}
-        {/*
+  {/* Tela de Login */}
+  const LoginScreen = () => (
+    <View style={styles.wrapper}>
+      <View style={styles.container}>
         <Image source={{uri: 'http://agenciamacro.com.br/wp-content/uploads/2015/01/Logo_MACRO_light.png'}} style={styles.logoMacro} />
 
         <TextInput
             style={styles.formControl}
-            placeholder={this.state.textLogin}
+            placeholder="Login"
             placeholderTextColor="gray"
           />
         <TextInput
             style={styles.formControl}
-            placeholder={this.state.textSenha}
+            placeholder="Senha"
             placeholderTextColor="gray"
             secureTextEntry={true}
+            
           />
-        </View>
         <Button 
             style={styles.btnDefault}
             title="Entrar"
             color=''
-            onPress={()=>{}}
+            onPress={() => navigation.navigate('LeadListScreen')}
           />
-          */}
+      </View>
+    </View>    
+  );
 
-        {/* Tela de Cadastro */}
-        
+  {/* Tela de Cadastro */}
+  const RegisterScreen = () => (
+    <View style={styles.wrapper}>
+      <View style={styles.container}>
         <Image source={{uri: 'http://agenciamacro.com.br/wp-content/uploads/2015/01/Logo_MACRO_light.png'}} style={styles.logoMacro} />
 
         <TextInput
             style={styles.formControl}
-            placeholder={this.state.textLogin}
+            placeholder="Login"
             placeholderTextColor="gray"
           />
         <TextInput
             style={styles.formControl}
-            placeholder={this.state.textEmail}
+            placeholder="Email"
             placeholderTextColor="gray"
         />
         <TextInput
             style={styles.formControl}
-            placeholder={this.state.textSenha}
+            placeholder="Senha"
             placeholderTextColor="gray"
             secureTextEntry={true}
           />
-        </View>
         <Button 
             style={styles.btnDefault}
             title="Cadastrar"
             color=''
             onPress={()=>{}}
-        />        
-
+        />       
       </View>
-    );
-  }
-}
+    </View>   
+  );
+
+  const RootNavigator = StackNavigator({
+    HomeScreen: {
+      screen: HomeScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    LoginScreen: {
+      screen: LoginScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    RegisterScreen: {
+      screen: RegisterScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+  });
+
+export default RootNavigator;
+
+
+
+
+
 
