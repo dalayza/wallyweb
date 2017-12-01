@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, ScrollView, Image, TextInput, Button, Touchable
 import {Column as Col, Row} from 'react-native-flexbox-grid';
 import { SafeAreaView, StackNavigator } from 'react-navigation';
 
+import Login from './Login';
+
 const styles = StyleSheet.create({
   container: {
     // flex: 2,
@@ -126,6 +128,31 @@ class LeadsScreen extends React.Component {
       })
   }
 
+
+  userLogout(){
+      alert('Logout');
+      fetch('https://krushwebapi.appspot.com/session', {
+        method: 'DELETE',
+        headers: new Headers({
+           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        }),
+        body: "email="+this.props.navigation.email
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.props.navigation.navigate('Login');
+         // console.log(responseJson);         
+         // alert(JSON.stringify(responseJson));
+         // this.setState({
+         //    data: responseJson,
+         //    statusLogin: 'out'
+         // });
+      })
+      .catch((error) => {
+         console.error(error);
+      });
+  }
+
   getLeads(){
     return fetch('https://krushwebapi.appspot.com/leads')
           .then(response => response.json())
@@ -138,15 +165,19 @@ class LeadsScreen extends React.Component {
   }
 
   render() {
+    // const { params } = this.props.navigation.state;
     return (
       <View>
           <View style={styles.topBar}>
               <View style={styles.container}>        
                 <Row size={12}>
                   <Col sm={3} style={styles.colFormat}>
-                    <Text>
-                      Logout
-                    </Text>
+
+                    <TouchableHighlight onPress={() => {this.userLogout()} }>
+                      <Text>
+                        Logout
+                      </Text>
+                    </TouchableHighlight>
                   </Col>
                   <Col sm={6} style={styles.colFormat}>
                     <Text style={[styles.textCenter, styles.textWhite, styles.textBold]}>
@@ -170,7 +201,6 @@ class LeadsScreen extends React.Component {
               {
                 this.state.leadsList.map((elem,index) => {
                   return (
-
                     <View style={[styles.leadRow,{ backgroundColor: (index % 2 == 0) ? '#f4f4f4' : '#fff' }]}>
                       <View style={styles.leadCaption}>
                         <Text style={[styles.leadCaptionInfo, styles.textBold]}>{elem.client_id}</Text>
@@ -204,8 +234,17 @@ class LeadsScreen extends React.Component {
   }
 }
 
+// const ExampleRoutes = {
+//   Login: {
+//     name: 'Login Example',
+//     description: 'A card stack',
+//     screen: Login,
+//   }
+// };
+
 const Leads = StackNavigator(
   {
+    // ...ExampleRoutes,
     Home: {
       screen: LeadsScreen,
     },

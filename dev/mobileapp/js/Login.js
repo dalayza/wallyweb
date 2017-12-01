@@ -88,7 +88,7 @@ class MyLoginScreen extends React.Component {
               statusLogin: 'in'
            });
 
-           this.props.navigation.navigate('Leads');
+           this.props.navigation.navigate('Leads', { email: 'webmasterteste@agenciamacro.com.br' });
         })
         .catch((error) => {
            console.error(error);
@@ -97,28 +97,6 @@ class MyLoginScreen extends React.Component {
       }else{
         alert("Preencha os campos corretamente");
       }
-   }
-   userLogout(){
-      alert('Logout');
-      fetch('https://krushwebapi.appspot.com/session', {
-        method: 'DELETE',
-        headers: new Headers({
-           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-        }),
-        body: "email="+this.state.inputUserEmail.trim()
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-         console.log(responseJson);
-         alert(JSON.stringify(responseJson));
-         this.setState({
-            data: responseJson,
-            statusLogin: 'out'
-         });
-      })
-      .catch((error) => {
-         console.error(error);
-      });
    }
 
    render() {
@@ -151,15 +129,16 @@ class MyLoginScreen extends React.Component {
               />
            
             
-            <Text>Clique no botão abaixo para sair</Text>
+            
+
+            {/*
+              <Text>Clique no botão abaixo para sair</Text>
             <Button 
               style={styles.btnDefault}
               title="Logout"
               color=''
               onPress={() => {this.userLogout()}}
             />
-
-            {/*
             <Button 
               title="Leads"
               color='#91d300'
@@ -176,8 +155,8 @@ class MyLoginScreen extends React.Component {
 
 const ExampleRoutes = {
   Leads: {
-    name: 'Stack Example',
-    description: 'A card stack',
+    name: 'Leads',
+    description: '',
     screen: Leads,
   },
 };

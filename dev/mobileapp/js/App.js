@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 import { SafeAreaView, StackNavigator } from 'react-navigation';
 
-import Banner from './Banner';
 import Login from './Login';
 import SimpleStack from './SimpleStack';
 
@@ -45,11 +44,6 @@ const ExampleRoutes = {
     name: 'Login Example',
     description: 'A card stack',
     screen: Login,
-  },
-  SimpleStack: {
-    name: 'Stack Example',
-    description: 'A card stack',
-    screen: SimpleStack,
   },
 };
 
