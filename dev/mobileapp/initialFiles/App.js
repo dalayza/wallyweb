@@ -1,3 +1,7 @@
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView, Image, TextInput, Button, TouchableHighlight, Linking, Alert, Switch, Slider, Picker, Modal, ListView, WebView, ImageBackground } from 'react-native';
+import {Column as Col, Row} from 'react-native-flexbox-grid';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
 });
 
 
-  
+export default class App extends React.Component {
   state = {
     leadsList: []
   }
@@ -119,7 +123,7 @@ const styles = StyleSheet.create({
   }
 
   getLeads(){
-    return fetch('https://krushweb-183017.appspot.com/leads')
+    return fetch('https://krushwebapi.appspot.com/leads')
           .then(response => response.json())
           .then((responseJson) => {
             return responseJson;
@@ -128,10 +132,10 @@ const styles = StyleSheet.create({
             console.error(error);
           });
   }
-  
+
   render() {
     return (
-	    <View>
+      <View>
           <View style={styles.topBar}>
               <View style={styles.container}>        
                 <Row size={12}>
