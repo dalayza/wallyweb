@@ -69,6 +69,7 @@ class MyLoginScreen extends React.Component {
       data: '',
       statusLogin: '',
     }
+
     userLogin(){
       if(this.state.inputUserEmail.trim() !== "" && this.state.inputUserPassword.trim() !== ""){
         fetch('https://krushwebapi.appspot.com/session', {
@@ -88,7 +89,7 @@ class MyLoginScreen extends React.Component {
               statusLogin: 'in'
            });
 
-           this.props.navigation.navigate('Leads', { email: 'webmasterteste@agenciamacro.com.br' });
+           this.props.navigation.navigate('Leads', { email: this.state.data.email });
         })
         .catch((error) => {
            console.error(error);
