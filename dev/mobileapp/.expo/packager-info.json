@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 10904,
-  "expoServerNgrokUrl": "https://zi-v8v.hyanncoelho.mobileapp.exp.direct",
-  "packagerNgrokUrl": "https://packager.zi-v8v.hyanncoelho.mobileapp.exp.direct",
-  "ngrokPid": 8200
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

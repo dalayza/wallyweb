@@ -130,7 +130,6 @@ class LeadsScreen extends React.Component {
 
 
   userLogout(){
-      alert('Logout');
       fetch('https://krushwebapi.appspot.com/session', {
         method: 'DELETE',
         headers: new Headers({
