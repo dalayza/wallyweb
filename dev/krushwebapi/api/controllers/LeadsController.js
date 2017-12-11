@@ -4,10 +4,11 @@ var mongoose = require('mongoose'),
   Lead = mongoose.model('Leads');
 
 exports.list_all_leads = function(req, res) {
-  Lead.find({}, function(err, lead) {
+  Lead.find({}, function(err, leads) {
     if (err)
       res.send(err);
-    res.json(lead);
+    var sorted = leads.sort( { created_date: 1 } )
+    res.json(sorted);
   });
 };
 
