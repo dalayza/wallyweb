@@ -1,14 +1,21 @@
 {
   "name": "mobileapp",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Hello Expo!",
-  "author": null,
+  "author": "Mário de Sá Vera",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "expo": "^21.0.0",
-    "react": "16.0.0-alpha.12",
+    "react": "^16.0.0-alpha.12",
     "react-native": "https://github.com/expo/react-native/archive/sdk-21.0.2.tar.gz",
-    "react-navigation": "^1.0.0-beta.21"
-  }
+    "react-native-flexbox-grid": "^0.3.2",
+    "react-navigation": "^1.0.0-beta.21",
+    "websql": "^0.4.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC"
 }

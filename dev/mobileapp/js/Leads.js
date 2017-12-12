@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
     width: '100%',
     borderLeftColor: '#008ad4',
     borderLeftWidth: 5,
-    borderLeftStyle: 'solid',
+    // TODO : mvera
+    //borderLeftStyle: 'solid',
     flex: 1, 
     flexDirection: 'row'
   },
@@ -255,8 +256,9 @@ const Leads = StackNavigator(
     /*
    * Use modal on iOS because the card mode comes from the right,
    * which conflicts with the drawer example gesture
-   */
+TODO : mvera
     mode: Platform.OS === 'ios' ? 'modal' : 'card',
+   */
   }
 );
 
