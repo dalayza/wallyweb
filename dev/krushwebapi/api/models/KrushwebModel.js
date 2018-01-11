@@ -50,19 +50,24 @@ var LeadSchema = new Schema({
   }
 });
 
-var ClientSchema = new Schema({
+var UserSchema = new Schema({
   name: {
     type: String,
-    required: 'client name is required'
+    required: 'user name is required'
+  },
+  name: {
+    type: String,
+    required: 'user name is required',
+    unique: true
   },
   email: {
     type: String,
-    required: 'client email is required',
+    required: 'user email is required',
     unique: true
   },
   passwd: {
     type: String,
-    required: 'client password is required'
+    required: 'user password is required'
   },
   metadata: {
     type: "array",
@@ -77,7 +82,7 @@ var ClientSchema = new Schema({
 var SessionsSchema = new Schema({
   email: {
     type: String,
-    required: 'session client email identification is required',
+    required: 'session user email identification is required',
     unique: true
   },
   created_date: {
@@ -94,5 +99,5 @@ var SessionsSchema = new Schema({
 });
 
 module.exports = mongoose.model('Leads', LeadSchema);
-module.exports = mongoose.model('Clients', ClientSchema);
+module.exports = mongoose.model('Users', UserSchema);
 module.exports = mongoose.model('Sessions', SessionsSchema);
