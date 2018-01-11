@@ -131,7 +131,7 @@ class LeadsScreen extends React.Component {
 
 
   userLogout(){
-      fetch('https://krushwebapi.appspot.com/session', {
+      fetch('https://162.221.195.113:8080/session', {
         method: 'DELETE',
         headers: new Headers({
            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
@@ -154,7 +154,7 @@ class LeadsScreen extends React.Component {
   }
 
   getLeads(){
-    return fetch('https://krushwebapi.appspot.com/leads')
+    return fetch('https://162.221.195.113:8080/leads')
           .then(response => response.json())
           .then((responseJson) => {
             return responseJson;

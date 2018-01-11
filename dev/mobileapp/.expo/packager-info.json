@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19001,
-  "packagerPort": 19002,
-  "packagerPid": 31082,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 4973,
   "expoServerNgrokUrl": "https://ys-ykp.desavera.mobileapp.exp.direct",
   "packagerNgrokUrl": "https://packager.ys-ykp.desavera.mobileapp.exp.direct",
-  "ngrokPid": 31122
+  "ngrokPid": 5026
 }

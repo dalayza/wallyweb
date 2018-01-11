@@ -72,7 +72,7 @@ class MyLoginScreen extends React.Component {
 
     userLogin(){
       if(this.state.inputUserEmail.trim() !== "" && this.state.inputUserPassword.trim() !== ""){
-        fetch('https://krushwebapi.appspot.com/session', {
+        fetch('https://162.221.195.113:8080/session', {
           method: 'POST',
           headers: new Headers({
              "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
