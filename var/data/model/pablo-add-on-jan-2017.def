@@ -1,0 +1,41 @@
+1. META_CLIENT
+    1. id
+    2. creation_date
+    3. firstname
+    4. lastname
+    5. phone
+    6. email
+    7. product
+    8. branch
+    9. pipedrive_user_id
+    10. chatfuel_user_id
+    11. user_id  
+2. DEAL
+    1. id
+    2. title
+    3. price
+    4. meta_client
+    5. source
+    6. campaign
+    7. targets
+    8. creation_date
+    9. meta_client_id
+    10. pipedrive_deal_id
+    11. user_id 
+3. EVENTS
+    1. id
+    2. type:”call, meeting, note”
+    3. title
+    4. description
+    5. due_date
+    6. start_time
+    7. due_time
+    8. duration
+    9. meta_client_id
+    10. deal_id 
+4. USER
+    1. id
+    2. name
+    3. phone
+    4. email
+    5. password
