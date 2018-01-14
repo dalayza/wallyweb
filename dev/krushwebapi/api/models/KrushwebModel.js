@@ -1,4 +1,3 @@
- strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -6,12 +5,11 @@ var Schema = mongoose.Schema;
 var EventSchema = new Schema({
   title: {
     type: String,
-    required: 'event title is required',
-    unique: true
+    required: 'event title is required'
   },
-  etype:”call, meeting, note”
+  etype: {
     type: String,
-    enum : ['call','meeting','note']
+    enum : ['call','meeting','note'],
     required: 'event etype is required'
   },
   description: {
@@ -35,13 +33,18 @@ var EventSchema = new Schema({
     type: Number,
     required: 'event duration timestamp is required'
   },
-  metaclient_id: {type : Schema.ObjectId, ref : 'MetaClient'},
   deal_id: {type : Schema.ObjectId, ref : 'Deal'}
 });
 
-var MetaClientSchema = new Schema({
+var MetaclientSchema = new Schema({
 
   // TODO : 11. user_id ???
+  //pipedrive_user_id: {
+  //  type: Number
+  //},
+  //chatfuel_user_id: {
+  //  type: Number
+  //},
 
   firstname: {
     type: String,
@@ -55,50 +58,48 @@ var MetaClientSchema = new Schema({
   },
   email: {
     type: String,
-    required: 'lead email is required'
+    required: 'metaclient email is required'
   },
   phone: {
     type: String,
-    required: 'lead phone is required'
+    required: 'metaclient phone is required'
   },
   product: {
     type: String,
-    required: 'lead email is required'
+    required: 'metaclient product is required'
   },
   branch: {
-    type: String,
-    required: 'lead phone is required'
-  },
-  pipedrive_user_id: {
-    type: Number
-  },
-  chatfuel_user_id: {
-    type: Number
+    type: String
   },
   created_date: {
     type: Date,
     default: Date.now
   },
+  
+  // var params for a person/organization
   metadata: Schema.Types.Mixed
 });
 
 var DealSchema = new Schema({
 
-    // TODO : 11. user_id 
+    // TODO : 11. user_id
+    //pipedrive_user_id: {
+    // type: Number
+    // },
 
   title: {
     type: String,
-    required: 'event title is required',
+    required: 'deal title is required',
     unique: true
   },
   source: {
     type: String,
     enum : ['origem','landing-page','facebook bot','site'],
-    required: 'lead source is required'
+    required: 'deal source is required'
   },
   campaign: {
     type: String,
-    required: 'lead campaign is required'
+    required: 'deal campaign is required'
   },
   targets: {
     type: "array",
@@ -110,7 +111,8 @@ var DealSchema = new Schema({
   },
   status: {
     type: String,
-    required: 'deal status is required'
+    required: 'deal status is required',
+    default: "LEAD"
   },
   currency: {
     type: String,
@@ -120,14 +122,11 @@ var DealSchema = new Schema({
     type: Number,
     required: 'deal currency is required'
   },
-  pipedrive_user_id: {
-    type: Number
-  },
   created_date: {
     type: Date,
     default: Date.now
   },
-  metaclient_id: {type : Schema.ObjectId, ref : 'MetaClient'},
+  metaclient_id: {type : Schema.ObjectId, ref : 'Metaclient'},
   followers: {
     type: "array",
     items: {
@@ -145,11 +144,11 @@ var ClientSchema = new Schema({
   },
   name: {
     type: String,
-    required: 'client name is required',
-    unique: true
+    required: 'client name is required'
   },
   phone: {
     type: String,
+    required: 'client phone is required',
     unique: true
   }
 });
@@ -198,6 +197,6 @@ var SessionsSchema = new Schema({
 module.exports = mongoose.model('Users', UserSchema);
 module.exports = mongoose.model('Sessions', SessionsSchema);
 module.exports = mongoose.model('Clients', ClientSchema);
-module.exports = mongoose.model('MetaClients', MetaClientSchema);
+module.exports = mongoose.model('Metaclients', MetaclientSchema);
 module.exports = mongoose.model('Deals', DealSchema);
 module.exports = mongoose.model('Events', EventSchema);
