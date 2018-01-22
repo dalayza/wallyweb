@@ -3,7 +3,7 @@ module.exports = function(app) {
   var metaclients_controller = require('../controllers/MetaclientsController');
 
 /**
- * @api {get} /deals Request All Metaclients
+ * @api {get} /metaclients Request All Metaclients
  * @apiName ListAllMetaclients
  * @apiGroup api
  *
@@ -11,7 +11,7 @@ module.exports = function(app) {
  */
 
 /**
- * @api {post} /deals Creates a Metaclient
+ * @api {post} /metaclients Creates a Metaclient
  * @apiName CreateMetaclient
  * @apiGroup api
  *
@@ -23,7 +23,7 @@ module.exports = function(app) {
 
 
 /**
- * @api {get} /deals/:id Request a Metaclient
+ * @api {get} /metaclients/:id Request a Metaclient
  * @apiName ReadMetaclient 
  * @apiGroup api
  *
@@ -33,7 +33,7 @@ module.exports = function(app) {
  */
 
 /**
- * @api {put} /deals/:id Update a Metaclient
+ * @api {put} /metaclients/:id Update a Metaclient
  * @apiName UpdateMetaclient
  * @apiGroup api
  *
@@ -43,7 +43,7 @@ module.exports = function(app) {
  */
 
 /**
- * @api {delete} /deals/:id Delete a Metaclient
+ * @api {delete} /metaclients/:id Delete a Metaclient
  * @apiName DeleteMetaclient
  * @apiGroup api
  *

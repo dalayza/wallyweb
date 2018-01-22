@@ -1,3 +1,6 @@
+dev/backup
 backup
 deploy
+*.zip
+*.class
 
