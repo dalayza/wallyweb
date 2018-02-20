@@ -38,13 +38,6 @@ var EventSchema = new Schema({
 
 var MetaclientSchema = new Schema({
 
-  // TODO : 11. user_id ???
-  //pipedrive_user_id: {
-  //  type: Number
-  //},
-  //chatfuel_user_id: {
-  //  type: Number
-  //},
 
   firstname: {
     type: String,
@@ -81,11 +74,6 @@ var MetaclientSchema = new Schema({
 });
 
 var DealSchema = new Schema({
-
-    // TODO : 11. user_id
-    //pipedrive_user_id: {
-    // type: Number
-    // },
 
   title: {
     type: String,
@@ -154,6 +142,7 @@ var ClientSchema = new Schema({
 });
 
 var UserSchema = new Schema({
+
   name: {
     type: String,
     required: 'user name is required',
@@ -172,6 +161,18 @@ var UserSchema = new Schema({
     type: String,
     required: 'user password is required'
   },
+  services_credentials: [{
+    service: {
+      type:String,
+      enum:['pipedrive','slack'],
+      required:true},
+    user_id: {
+      type: Number,
+      required: true},
+    token_id: {
+      type: String,
+      required: true}
+    }],
   client_id: {type : Schema.ObjectId, ref : 'Client'}
 });
 

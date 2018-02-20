@@ -1,0 +1,76 @@
+USER (O usuário do Wally)
+user_id
+username
+password
+name
+phone
+client_id (json array)
+services_credentials {[service_id, service_user_id, token_id],[]} - Array
+
+CLIENT(Os cliente da Macro)
+client_id
+client_name
+client_adress
+client_phone
+
+SERVICES
+service_id
+service_name
+
+EVENTS
+client_id*
+user_id
+event_id
+deal_id*
+meta_client_id
+service_id
+event_service_id
+
+META_CLIENT (Leads dos nossos clientes)
+meta_client_id
+meta_client_name
+meta_client_phone
+email
+source (origem, landing-age, facebook bot, site)
+business_id
+Lead_events_types
+user_id (usuário dono da negociação)
+client_id (empresa proprietária do lead)
+webhooks (json strings) (tokens de integrações como pipedrive, totalvoice, etc)
+
+
+META_CLIENT_ORGANIZATION (empresa dos leads)
+meta_client_org_id
+meta_client_org_name
+meta_client_org_regid
+meta_client_org_adress
+meta_client_id
+
+DEALS (negociação em andamento)
+deal_id
+deal_status
+currency
+meta_client_id
+meta_client_org_id
+product_id (json strings)
+followers ((json strings)
+
+ACTIVITY: (notas, ligações, reuniões, comentários, agendamentos)
+event_id
+subject
+type
+due_date
+due_time
+duration
+deal_id
+person_id
+org_id
+
+LEAD_EVENTS_TYPES (tipos de eventos permitidos)
+name
+integrations(salesforce, google agenda, total voice, twillio)
+
+PRODUCTS
+product_id
+product_name
+product_price
