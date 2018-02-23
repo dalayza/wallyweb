@@ -12,8 +12,8 @@ var sequelize = new Sequelize(
 // load models
 var models = [
   'Lead',
-  'Client',
-  'ClientData'
+  'User',
+  'UserData'
 ];
 models.forEach(function(model) {
   module.exports[model] = sequelize.import(__dirname + '/' + model);

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd deploy
+rm -rf bin
+rm -rf dev
+cp -r ../bin bin
+cp -r ../dev/krushwebapi dev
+~/util/hyper run --detach --name krushwebapi --expose 8080 --expose 8793 --expose 3000 -p 80:8080 -p 8793:8793 -p 3000:3000 --volume `pwd`:/docked desavera/krushweb:krushwebapi-r1 /docked/bin/krushwebapi.run
+~/util/hyper fip attach 162.221.195.113 krushwebapi

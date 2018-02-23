@@ -1,3 +1,8 @@
+dev/backup
+doc/dev/krushwebapi
+dev/krushwebapi/doc
 backup
 deploy
+*.zip
+*.class
 

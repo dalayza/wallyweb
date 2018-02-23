@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd /docked/dev/krushwebapi/ && /usr/bin/npm run start
+cd /docked/dev/ && /usr/bin/npm run start

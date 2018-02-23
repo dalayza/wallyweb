@@ -1,0 +1,1 @@
+curl -H "Content-Type: application/json" -X POST -d '{"product":"novo contrato 7","product_source_type":"origem","campaign":"Verao 2018","metaclient_name":"Mariooilaaas","metaclient_phone":"21966323-323432","metaclient_email":"desreeraveraaas@gmail.com","client_name":"Souza Cruz"}' http://localhost/deals
