@@ -36,17 +36,29 @@ var EventSchema = new Schema({
   deal_id: {type : Schema.ObjectId, ref : 'Deal'}
 });
 
-var MetaclientSchema = new Schema({
+var MetaclientOrganizationSchema = new Schema({
 
-
-  firstname: {
+  org_name: {
     type: String,
-    required: 'metaclient first name is required',
+    required: 'organization name is required',
     unique: true
   },
-  lastname: {
+  org_regid: {
     type: String,
-    required: 'metaclient last name is required',
+    required: 'organization registration id is required',
+    unique: true
+  },
+  org_address: {
+    type: String,
+    required: 'organization address is required'
+  }
+});
+
+var MetaclientSchema = new Schema({
+
+  name: {
+    type: String,
+    required: 'metaclient name is required',
     unique: true
   },
   email: {
@@ -57,33 +69,30 @@ var MetaclientSchema = new Schema({
     type: String,
     required: 'metaclient phone is required'
   },
-  product: {
-    type: String,
-    required: 'metaclient product is required'
-  },
   branch: {
     type: String
+  },
+  client_id: {
+    type : Schema.ObjectId, ref : 'Client',
+    required: 'metaclient client is required'
   },
   created_date: {
     type: Date,
     default: Date.now
-  },
-  
-  // var params for a person/organization
-  metadata: Schema.Types.Mixed
+  }
 });
 
 var DealSchema = new Schema({
 
-  title: {
+  product: {
     type: String,
-    required: 'deal title is required',
-    unique: true
+    required: 'deal product is required'
   },
-  source: {
+  product_source_type: {
     type: String,
     enum : ['origem','landing-page','facebook bot','site'],
-    required: 'deal source is required'
+    required: 'deal source is required',
+    default: 'origem'
   },
   campaign: {
     type: String,
@@ -100,21 +109,28 @@ var DealSchema = new Schema({
   status: {
     type: String,
     required: 'deal status is required',
-    default: "LEAD"
+    default: 'LEAD'
   },
   currency: {
     type: String,
-    required: 'deal currency is required'
+    required: 'deal currency is required',
+    default: 'REAL'
   },
   price: {
-    type: Number,
-    required: 'deal currency is required'
+    type: Number
   },
   created_date: {
     type: Date,
     default: Date.now
   },
-  metaclient_id: {type : Schema.ObjectId, ref : 'Metaclient'},
+  metaclient_id: {
+    type : Schema.ObjectId, 
+    ref : 'Metaclient'
+  },
+  metaclient_org_id: {
+    type : Schema.ObjectId, 
+    ref : 'MetaclientOrganization'
+  },
   followers: {
     type: "array",
     items: {
@@ -132,7 +148,8 @@ var ClientSchema = new Schema({
   },
   name: {
     type: String,
-    required: 'client name is required'
+    required: 'client name is required',
+    unique: true
   },
   phone: {
     type: String,
@@ -199,5 +216,6 @@ module.exports = mongoose.model('Users', UserSchema);
 module.exports = mongoose.model('Sessions', SessionsSchema);
 module.exports = mongoose.model('Clients', ClientSchema);
 module.exports = mongoose.model('Metaclients', MetaclientSchema);
+module.exports = mongoose.model('MetaclientOrganizations', MetaclientOrganizationSchema);
 module.exports = mongoose.model('Deals', DealSchema);
 module.exports = mongoose.model('Events', EventSchema);
