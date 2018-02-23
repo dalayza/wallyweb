@@ -1,9 +1,8 @@
 'use strict';
 
-
 var mongoose = require('mongoose'),
   Session = mongoose.model('Sessions'),
-  Client = mongoose.model('Clients');
+  User = mongoose.model('Users');
 
 exports.list_all_sessions = function(req, res) {
   Session.find({}, function(err, session) {
@@ -15,13 +14,13 @@ exports.list_all_sessions = function(req, res) {
 
 exports.login = function(req, res) {
 
-  Client.findOne({email:req.body.email}, function(err, client) {
+  User.findOne({email:req.body.email}, function(err, user) {
     if (err)
       res.send(err);
 
-    if (client.passwd.toString() == req.body.passwd) {
+    if (user.passwd.toString() == req.body.passwd) {
 
-      var new_session = new Session({"email":client.email});
+      var new_session = new Session({"email":user.email});
     
       new_session.save(function(err, session) {
         if (err)

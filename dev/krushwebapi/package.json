@@ -22,8 +22,10 @@
     "cover": "nyc --cache npm test; nyc report --reporter=html"
   },
   "dependencies": {
+    "apidoc": "^0.17.6",
     "ejs": "^2.5.7",
     "express": "^4.16.1",
-    "mongoose": "^4.12.0"
+    "mongoose": "^4.12.0",
+    "swagger": "^0.7.5"
   }
 }

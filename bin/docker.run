@@ -1,0 +1,1 @@
+sudo docker run --expose 8080 --expose 8793 --expose 3000 -p 80:8080 -p 8793:8793 -p 3000:3000 --volume `pwd`:/docked -it desavera/krushweb:krushwebapi-r1 /bin/bash
