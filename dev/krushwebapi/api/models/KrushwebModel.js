@@ -38,19 +38,35 @@ var EventSchema = new Schema({
 
 var MetaclientOrganizationSchema = new Schema({
 
-  org_name: {
+  name: {
     type: String,
     required: 'organization name is required',
     unique: true
   },
-  org_regid: {
+  regid: {
     type: String,
     required: 'organization registration id is required',
     unique: true
   },
-  org_address: {
+  address: {
     type: String,
     required: 'organization address is required'
+  },
+  email: {
+    type: String,
+    required: 'organization email is required',
+    unique: true
+  },
+  phone: {
+    type: String,
+    required: 'organization phone is required'
+  },
+  branch: {
+    type: String
+  },
+  client_id: {
+    type : Schema.ObjectId, ref : 'Client',
+    required: 'organization client is required'
   }
 });
 
@@ -63,7 +79,8 @@ var MetaclientSchema = new Schema({
   },
   email: {
     type: String,
-    required: 'metaclient email is required'
+    required: 'metaclient email is required',
+    unique: true
   },
   phone: {
     type: String,
@@ -84,15 +101,19 @@ var MetaclientSchema = new Schema({
 
 var DealSchema = new Schema({
 
+  title: {
+    type: String,
+    required: 'deal title is required'
+  },
   product: {
     type: String,
     required: 'deal product is required'
   },
   product_source_type: {
     type: String,
-    enum : ['origem','landing-page','facebook bot','site'],
+    enum : ['landing-page','facebook bot','site'],
     required: 'deal source is required',
-    default: 'origem'
+    default: 'site'
   },
   campaign: {
     type: String,
@@ -150,6 +171,9 @@ var ClientSchema = new Schema({
     type: String,
     required: 'client name is required',
     unique: true
+  },
+  branch: {
+    type: String
   },
   phone: {
     type: String,
