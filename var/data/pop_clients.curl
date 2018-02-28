@@ -1,1 +1,1 @@
-curl -H "Content-Type: application/json" -X POST -d '{"name":"Client da macro","phone":"778769568583","email":"sitjo@gmail.com","branch":"Copacabana","address":"Rua do Carmos"}' http://api.agenciamacro.com/clients
+curl -H "Content-Type: application/json" -X POST -d '{"name":"TDD mocked client...","phone":"0000000000","email":"mockedclient@mock.com","branch":"Mock","address":"Mocked Street..."}' http://api.agenciamacro.com/clients
