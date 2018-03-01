@@ -22,16 +22,13 @@ var EventSchema = new Schema({
     required: 'event due_date is required'
   },
   start_time: {
-    type: String,
-    required: 'event start_time is required'
+    type: String
   },
   due_time: {
-    type: String,
-    required: 'event due_time is required'
+    type: String
   },
   duration: {
-    type: Number,
-    required: 'event duration timestamp is required'
+    type: Number
   },
   deal_id: {type : Schema.ObjectId, ref : 'Deal'}
 });
@@ -40,13 +37,11 @@ var MetaclientOrganizationSchema = new Schema({
 
   name: {
     type: String,
-    required: 'organization name is required',
-    unique: true
+    required: 'organization name is required'
   },
   regid: {
     type: String,
-    required: 'organization registration id is required',
-    unique: true
+    required: 'organization registration id is required'
   },
   address: {
     type: String,
@@ -54,44 +49,30 @@ var MetaclientOrganizationSchema = new Schema({
   },
   email: {
     type: String,
-    required: 'organization email is required',
-    unique: true
+    required: 'organization email is required'
   },
   phone: {
     type: String,
     required: 'organization phone is required'
   },
-  branch: {
-    type: String
-  },
-  client_id: {
-    type : Schema.ObjectId, ref : 'Client',
-    required: 'organization client is required'
-  }
+  branch: [{
+    name: String
+  }]
 });
 
 var MetaclientSchema = new Schema({
 
   name: {
     type: String,
-    required: 'metaclient name is required',
-    unique: true
+    required: 'metaclient name is required'
   },
   email: {
     type: String,
-    required: 'metaclient email is required',
-    unique: true
+    required: 'metaclient email is required'
   },
   phone: {
     type: String,
     required: 'metaclient phone is required'
-  },
-  branch: {
-    type: String
-  },
-  client_id: {
-    type : Schema.ObjectId, ref : 'Client',
-    required: 'metaclient client is required'
   },
   created_date: {
     type: Date,
@@ -159,26 +140,24 @@ var DealSchema = new Schema({
     },
     "minItems": 1,
     "uniqueItems": true
+  },
+  client_id: {
+    type : Schema.ObjectId, ref : 'Client',
+    required: 'deal client is required'
   }
 });
 
 var ClientSchema = new Schema({
   address: {
-    type: String,
-    required: 'client address is required'
+    type: String
   },
   name: {
     type: String,
     required: 'client name is required',
     unique: true
   },
-  branch: {
-    type: String
-  },
   phone: {
-    type: String,
-    required: 'client phone is required',
-    unique: true
+    type: String
   }
 });
 
