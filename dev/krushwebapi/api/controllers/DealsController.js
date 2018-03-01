@@ -46,8 +46,7 @@ exports.create_a_deal = function(req, res) {
 
       var new_metaclient = new Metaclient({"name" : metaclient_name,
                                        "phone": metaclient_phone,
-                                       "email": metaclient_email,
-                                       "client_id": client._id});
+                                       "email": metaclient_email});
 
       // adds a new metaclient if not exists...
       new_metaclient.save(function(err, metaclient) {
@@ -56,6 +55,7 @@ exports.create_a_deal = function(req, res) {
 
           new_deal.metaclient_id = metaclient._id;
           new_deal.title = metaclient.name + " " + new_deal.product;
+          new_deal.client_id = client._id;
     
           // finally saves the deal...
           new_deal.save(function(err, deal) {
@@ -84,6 +84,7 @@ exports.create_a_deal = function(req, res) {
 
           new_deal.metaclient_org_id = metaclient_org._id;
           new_deal.title = metaclient_org.name + " " + new_deal.product;
+          new_deal.client_id = client._id;
 
           // finally saves the deal...
           new_deal.save(function(err, deal) {

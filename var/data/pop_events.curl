@@ -1,0 +1,1 @@
+curl -H "Content-Type: application/json" -X POST -d '{"deal_id":"5a985a2516e16b01daedabc7","title":"a call","etype":"call","description":"this is our first event saved...","start_time":"10:15am","due_time":"10:30am"}' http://localhost/events
