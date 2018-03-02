@@ -1,0 +1,1 @@
+curl -H "Content-Type: application/json" -X POST -d '{"name":"mvera","email":"mvera@gmail.com","password":"admin123"}' http://localhost/api/auth/register
