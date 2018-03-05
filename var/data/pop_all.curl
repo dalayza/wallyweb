@@ -1,0 +1,3 @@
+var/data/pop_clients.curl
+var/data/pop_deals.curl
+var/data/pop_users.curl
