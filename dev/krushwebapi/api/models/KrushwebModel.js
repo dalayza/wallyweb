@@ -158,7 +158,10 @@ var ClientSchema = new Schema({
   },
   phone: {
     type: String
-  }
+  },
+  branch: [{
+    name: String
+  }]
 });
 
 var UserSchema = new Schema({
