@@ -1,7 +1,10 @@
 var chai = require('chai');
 var mongoose = require('mongoose');
 var chaiHttp = require('chai-http');
-//var server = require('../app'); // my express app
+
+// TODO : create env vars to use same app.js
+//var server = require('../test'); // test app
+
 var should = chai.should();
 
 chai.use(chaiHttp);

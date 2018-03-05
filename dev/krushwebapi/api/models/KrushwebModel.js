@@ -30,7 +30,19 @@ var EventSchema = new Schema({
   duration: {
     type: Number
   },
-  deal_id: {type : Schema.ObjectId, ref : 'Deal'}
+  services_credentials: [{
+    service: {
+      type:String,
+      enum:['totalvoice'],
+      required:true},
+    user_id: {
+      type: Number,
+      required: true},
+    token_id: {
+      type: String,
+      required: true}
+    }],
+  deal_id: {type : Schema.ObjectId, ref : 'Deal',required : true}
 });
 
 var MetaclientOrganizationSchema = new Schema({
@@ -217,6 +229,48 @@ var SessionsSchema = new Schema({
     default: ['active']
   }
 });
+var VoicecallBillingSchema = new Schema({
+Custo	ID Totalvoice	URL da gravação	Tempo Cobrado												
+  client_name: {
+    type: String,
+    required: 'client name is required'
+  },
+  deal_id: {type : Schema.ObjectId, ref : 'Deal',required : true},
+  created_date: {
+    type: Date,
+    default: Date.now
+  },
+  branch_phone_number: {
+    type: String,
+    required: 'branch phone number is required'
+  },
+  deal_phone_number: {
+    type: String,
+    required: 'deal phone number is required'
+  },
+  status: {
+    type: String,
+    required: 'call status is required',
+    default: 'sem resposta'
+  },
+  cost: {
+    type: Number
+    required: 'call cost is required'
+  },
+  calling_service_id: {
+    type: String,
+    required: 'call system id is required'
+  },
+  calling_url: {
+    type: String
+  },
+  duration: {
+    type: Number
+    required: 'call duration is required'
+  }
+});
+
+module.exports = mongoose.model('Users', UserSchema);
 
 module.exports = mongoose.model('Users', UserSchema);
 module.exports = mongoose.model('Sessions', SessionsSchema);
