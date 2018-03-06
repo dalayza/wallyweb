@@ -9,7 +9,7 @@ var EventSchema = new Schema({
   },
   event_type: {
     type: String,
-    enum : ['call','meeting','e-mail','note'],
+    enum : ['call','meeting','note','e-mail'],
     required: 'event etype is required'
   },
   start_date: {
@@ -74,7 +74,7 @@ var MetaclientOrganizationSchema = new Schema({
     type: String,
     required: 'organization phone is required'
   },
-  branch: [{
+  branches: [{
     name: String
   }]
 });
@@ -111,9 +111,26 @@ var DealSchema = new Schema({
   },
   source: {
     type: String,
+<<<<<<< HEAD
     enum : ['facebook bot','google','networking','linkedin','desk','phone','metaclient','inbound marketing'],
     required: 'deal source is required',
     default: 'metaclient'
+=======
+    enum : ['landing-page','facebook bot','site','networking','google'],
+    required: 'deal source is required',
+    default: 'site'
+  },
+  campaign: {
+    type: String
+  },
+  targets: {
+    type: "array",
+    items: {
+      type: "string"
+    },
+    "minItems": 1,
+    "uniqueItems": true
+>>>>>>> 3d23e07f86dcd2ac79cb29318994ab5cd203b57d
   },
   status: {
     type: String,
