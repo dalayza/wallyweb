@@ -22,9 +22,9 @@ exports.create_a_event = function(req, res) {
 
 exports.create_first_call_event = function(deal) {
 
-  var new_event = new Event({'title':'FIRST CALL',
-                             'event_type':'call',
-                             'owner':deal.owner,'deal_id':deal.deal_id});
+  var new_event = new Event({"title":"FIRST CALL",
+                             "event_type":"call",
+                             "owner":deal.owner,"deal_id":deal.deal_id});
 
   new_event.save(function(err, aevent) {
     if (err)

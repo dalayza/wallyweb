@@ -1,10 +1,10 @@
 'use strict';
 
+var events = require('./EventsController');
 var mongoose = require('mongoose'),
   Metaclient = mongoose.model('Metaclients'),
   MetaclientOrganization = mongoose.model('MetaclientOrganizations'),
   Client = mongoose.model('Clients'),
-  Event = mongoose.model('Events'),
   Deal = mongoose.model('Deals');
 
 exports.list_all_deals = function(req, res) {
@@ -39,6 +39,9 @@ exports.create_a_deal = function(req, res) {
   // first we search for the Client...
   var client =  Client.findOne({name:client_name}, function(err, client) {
 
+  // TODO: get client_id from body ...
+  var client_id = client._id;
+
     if (err)
       res.send(err);
 
@@ -56,14 +59,14 @@ exports.create_a_deal = function(req, res) {
 
           new_deal.metaclient_id = metaclient._id;
           new_deal.title = metaclient.name + " " + new_deal.product;
-          new_deal.client_id = client._id;
+          new_deal.client_id = client_id;
     
           // finally saves the deal...
           new_deal.save(function(err, deal) {
              if (err)
                res.send(err);
 
-             Event.createFirstCallEvent(deal);
+             events.create_first_call_event(deal);
 
              res.json(deal);
           });
@@ -79,7 +82,7 @@ exports.create_a_deal = function(req, res) {
                                                    "regid": metaclient_org_regid,
                                                    "address": metaclient_org_address,
                                                    "email": metaclient_org_email,
-                                                   "client_id": client._id});
+                                                   "client_id": client_id});
 
       // adds a new metaclientOrganization if not exists...
       new_metaclient_org.save(function(err, metaclient_org) {
@@ -88,14 +91,14 @@ exports.create_a_deal = function(req, res) {
 
           new_deal.metaclient_org_id = metaclient_org._id;
           new_deal.title = metaclient_org.name + " " + new_deal.product;
-          new_deal.client_id = client._id;
+          new_deal.client_id = client_id;
 
           // finally saves the deal...
           new_deal.save(function(err, deal) {
              if (err)
                res.send(err);
 
-             Event.createFirstCallEvent(deal);
+             events.create_first_call_event(deal);
 
              res.json(deal);
           });

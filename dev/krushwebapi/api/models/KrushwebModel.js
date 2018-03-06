@@ -109,11 +109,11 @@ var DealSchema = new Schema({
     type: String,
     required: 'deal product is required'
   },
-  product_source_type: {
+  source: {
     type: String,
     enum : ['facebook bot','google','networking','linkedin','desk','phone','metaclient','inbound marketing'],
     required: 'deal source is required',
-    default: 'site'
+    default: 'metaclient'
   },
   status: {
     type: String,
@@ -154,13 +154,14 @@ var DealSchema = new Schema({
 
 var ClientSchema = new Schema({
 
-  address: {
-    type: String
-  },
   name: {
     type: String,
     required: 'client name is required',
     unique: true
+  },
+  owner: {type : Schema.ObjectId, ref : 'User',required : true},
+  address: {
+    type: String
   },
   phone: {
     type: String
@@ -171,8 +172,7 @@ var ClientSchema = new Schema({
   extension: {
     type: String
   },
-  parent_id: {type : Schema.ObjectId, ref : 'Client'},
-  owner: {type : Schema.ObjectId, ref : 'User',required : true}
+  parent_id: {type : Schema.ObjectId, ref : 'Client'}
 });
 
 var UserSchema = new Schema({
