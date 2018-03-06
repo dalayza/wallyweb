@@ -1,1 +1,2 @@
-curl -H "Content-Type: application/json" -X POST -d '{"name":"NET","phone":"000000","email":"net@net.com","branches":[{"name":"net branch 1"},{"name":"net branch 2"}]}' http://localhost/clients
+curl -H "Content-Type: application/json" -X POST -d '{"name":"NET","phone":"000000","email":"net@net.com","owner":"5a9eda39a2e82d00725b5a39"}' http://localhost/clients
+
