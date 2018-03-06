@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
   Metaclient = mongoose.model('Metaclients'),
   MetaclientOrganization = mongoose.model('MetaclientOrganizations'),
   Client = mongoose.model('Clients'),
+  Event = mongoose.model('Events'),
   Deal = mongoose.model('Deals');
 
 exports.list_all_deals = function(req, res) {
@@ -61,6 +62,9 @@ exports.create_a_deal = function(req, res) {
           new_deal.save(function(err, deal) {
              if (err)
                res.send(err);
+
+             Event.createFirstCallEvent(deal);
+
              res.json(deal);
           });
       });
@@ -90,6 +94,9 @@ exports.create_a_deal = function(req, res) {
           new_deal.save(function(err, deal) {
              if (err)
                res.send(err);
+
+             Event.createFirstCallEvent(deal);
+
              res.json(deal);
           });
       });

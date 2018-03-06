@@ -1,34 +1,31 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 var EventSchema = new Schema({
+
   title: {
     type: String,
     required: 'event title is required'
   },
-  etype: {
+  event_type: {
     type: String,
-    enum : ['call','meeting','note'],
+    enum : ['call','meeting','e-mail','note'],
     required: 'event etype is required'
   },
-  description: {
-    type: String,
-    required: 'event description is required'
-  },
-  due_date: {
+  start_date: {
     type: Date,
     default: Date.now,
-    required: 'event due_date is required'
+    required: 'event start_date is required'
   },
-  start_time: {
+  status: {
+    type: String,
+    enum: ['done','open'],
+    required:true,
+    default:'open'
+  },
+  owner: {type : Schema.ObjectId, ref : 'User',required : true},
+  description: {
     type: String
-  },
-  due_time: {
-    type: String
-  },
-  duration: {
-    type: Number
   },
   services_credentials: [{
     service: {
@@ -42,7 +39,17 @@ var EventSchema = new Schema({
       type: String,
       required: true}
     }],
-  deal_id: {type : Schema.ObjectId, ref : 'Deal',required : true}
+  address: {
+    type: String
+  },
+  duration: {
+    type: Number
+  },
+  duration_scale: {
+    type: String,
+    enum: ['day','hour','minute']
+  },
+  deal_id: {type : Schema.ObjectId, ref : 'Deal'}
 });
 
 var MetaclientOrganizationSchema = new Schema({
@@ -104,21 +111,9 @@ var DealSchema = new Schema({
   },
   product_source_type: {
     type: String,
-    enum : ['landing-page','facebook bot','site'],
+    enum : ['facebook bot','google','networking','linkedin','desk','phone','metaclient','inbound marketing'],
     required: 'deal source is required',
     default: 'site'
-  },
-  campaign: {
-    type: String,
-    required: 'deal campaign is required'
-  },
-  targets: {
-    type: "array",
-    items: {
-      type: "string"
-    },
-    "minItems": 1,
-    "uniqueItems": true
   },
   status: {
     type: String,
@@ -130,6 +125,12 @@ var DealSchema = new Schema({
     required: 'deal currency is required',
     default: 'REAL'
   },
+  client_id: {
+    type : Schema.ObjectId, ref : 'Client',
+    required: 'deal client is required'
+  },
+  owner: {type : Schema.ObjectId, ref : 'User',required : true},
+  tags: [String],
   price: {
     type: Number
   },
@@ -145,21 +146,14 @@ var DealSchema = new Schema({
     type : Schema.ObjectId, 
     ref : 'MetaclientOrganization'
   },
-  followers: {
-    type: "array",
-    items: {
-      type: "string"
-    },
-    "minItems": 1,
-    "uniqueItems": true
-  },
-  client_id: {
-    type : Schema.ObjectId, ref : 'Client',
-    required: 'deal client is required'
-  }
+  followers: [{
+    type : Schema.ObjectId, 
+    ref : 'User'
+  }]
 });
 
 var ClientSchema = new Schema({
+
   address: {
     type: String
   },
@@ -170,7 +164,15 @@ var ClientSchema = new Schema({
   },
   phone: {
     type: String
-  }
+  },
+  mobile: {
+    type: String
+  },
+  extension: {
+    type: String
+  },
+  parent_id: {type : Schema.ObjectId, ref : 'Client'},
+  owner: {type : Schema.ObjectId, ref : 'User',required : true}
 });
 
 var UserSchema = new Schema({
@@ -224,46 +226,6 @@ var SessionsSchema = new Schema({
       enum: ['active', 'inactive']
     }],
     default: ['active']
-  }
-});
-var VoicecallBillingSchema = new Schema({
-Custo	ID Totalvoice	URL da gravação	Tempo Cobrado												
-  client_name: {
-    type: String,
-    required: 'client name is required'
-  },
-  deal_id: {type : Schema.ObjectId, ref : 'Deal',required : true},
-  created_date: {
-    type: Date,
-    default: Date.now
-  },
-  branch_phone_number: {
-    type: String,
-    required: 'branch phone number is required'
-  },
-  deal_phone_number: {
-    type: String,
-    required: 'deal phone number is required'
-  },
-  status: {
-    type: String,
-    required: 'call status is required',
-    default: 'sem resposta'
-  },
-  cost: {
-    type: Number
-    required: 'call cost is required'
-  },
-  calling_service_id: {
-    type: String,
-    required: 'call system id is required'
-  },
-  calling_url: {
-    type: String
-  },
-  duration: {
-    type: Number
-    required: 'call duration is required'
   }
 });
 
