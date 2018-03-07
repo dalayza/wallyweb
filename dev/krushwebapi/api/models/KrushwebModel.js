@@ -53,11 +53,16 @@ var EventSchema = new Schema({
   client_id: {type : Schema.ObjectId, ref : 'Client'}
 });
 
+/*
+ * for both Metaclient/Organization there are no unicity requirements..
+ * we basically just link the deal with them.
+ */
 var MetaclientOrganizationSchema = new Schema({
 
   name: {
     type: String,
-    required: 'organization name is required'
+    required: 'organization name is required',
+    default:'SEM NOME'
   },
   regid: {
     type: String
@@ -78,7 +83,8 @@ var MetaclientSchema = new Schema({
 
   name: {
     type: String,
-    required:true
+    required:true,
+    default:'SEM NOME'
   },
   email: {
     type: String
@@ -97,10 +103,6 @@ var DealSchema = new Schema({
   title: {
     type: String,
     required: 'deal title is required'
-  },
-  product: {
-    type: String,
-    required: 'deal product is required'
   },
   source: {
     type: String,
@@ -122,7 +124,10 @@ var DealSchema = new Schema({
     type : Schema.ObjectId, ref : 'Client',
     required: 'deal client is required'
   },
-  owner_user_id: {type : Schema.ObjectId, ref : 'User',required : true},
+  product: {
+    type: [String]
+  },
+  owner_user_id: {type : Schema.ObjectId, ref : 'User'},
   tags: [String],
   price: {
     type: Number

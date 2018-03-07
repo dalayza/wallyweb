@@ -1,1 +1,1 @@
-curl -H "Content-Type: application/json" -X POST -d '{"product":"teste 6","metaclient_name":"Bonytjd","metaclient_phone":"73555","metaclient_email":"sfd@gmail.com","client_name":"NET","owner_user_id":"5a9eda38a2e82d00725b5a39"}' http://localhost/deals
+curl -H "Content-Type: application/json" -X POST -d '{"product":"teste 7","metaclient_name":"Bjd","metaclient_phone":"735","metaclient_email":"sd@gmail.com","client_name":"NET","owner_user_id":"5a9eda38a2e82d00725b5a39"}' http://localhost/deals
