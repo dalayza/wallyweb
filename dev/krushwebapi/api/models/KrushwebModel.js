@@ -7,30 +7,37 @@ var EventSchema = new Schema({
     type: String,
     required: 'event title is required'
   },
-  etype: {
+  event_type: {
     type: String,
-    enum : ['call','meeting','note'],
+    enum : ['call','meeting','note','e-mail'],
     required: 'event etype is required'
   },
   description: {
     type: String,
     required: 'event description is required'
   },
-  due_date: {
+  start_date: {
     type: Date,
     default: Date.now,
     required: 'event due_date is required'
   },
-  start_time: {
-    type: String
-  },
-  due_time: {
-    type: String
-  },
   duration: {
     type: Number
   },
-  deal_id: {type : Schema.ObjectId, ref : 'Deal'}
+  services_credentials: [{
+    service: {
+      type:String,
+      enum:['totalvoice'],
+      required:true},
+    user_id: {
+      type: Number,
+      required: true},
+    token_id: {
+      type: String,
+      required: true}
+    }],
+  deal_id: {type : Schema.ObjectId, ref : 'Deal'},
+  user_id: {type : Schema.ObjectId, ref : 'User'}
 });
 
 var MetaclientOrganizationSchema = new Schema({
@@ -55,7 +62,7 @@ var MetaclientOrganizationSchema = new Schema({
     type: String,
     required: 'organization phone is required'
   },
-  branch: [{
+  branches: [{
     name: String
   }]
 });
@@ -90,15 +97,14 @@ var DealSchema = new Schema({
     type: String,
     required: 'deal product is required'
   },
-  product_source_type: {
+  source: {
     type: String,
-    enum : ['landing-page','facebook bot','site'],
+    enum : ['landing-page','facebook bot','site','networking','google'],
     required: 'deal source is required',
     default: 'site'
   },
   campaign: {
-    type: String,
-    required: 'deal campaign is required'
+    type: String
   },
   targets: {
     type: "array",
@@ -214,6 +220,8 @@ var SessionsSchema = new Schema({
     default: ['active']
   }
 });
+
+module.exports = mongoose.model('Users', UserSchema);
 
 module.exports = mongoose.model('Users', UserSchema);
 module.exports = mongoose.model('Sessions', SessionsSchema);

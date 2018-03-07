@@ -1,3 +1,3 @@
-curl -H "Content-Type: application/json" -X POST -d '{"name":"xyz1","email":"xyz1@gmail.com","phone":"1234-3231","passwd":"xyz"}' http://localhost:8080/users
-curl -H "Content-Type: application/json" -X POST -d '{"name":"xyz2","email":"xyz2@gmail.com","phone":"1234-3232","passwd":"xyz"}' http://localhost:8080/users
-curl -H "Content-Type: application/json" -X POST -d '{"name":"xyz3","email":"xyz3@gmail.com","phone":"1234-3233","passwd":"xyz","services_credentials":[{"service":"pipedrive","user_id":"1234","token_id":"rtr7tr882h"},{"service":"slack","user_id":"4","token_id":"8935u65u65"}]}' http://localhost:8080/users
+curl -H "Content-Type: application/json" -X POST -d '{"name":"xyz1","email":"xyz1@gmail.com","phone":"1234-3231","passwd":"xyz"}' http://localhost/users
+curl -H "Content-Type: application/json" -X POST -d '{"name":"xyz2","email":"xyz2@gmail.com","phone":"1234-3232","passwd":"xyz"}' http://localhost/users
+curl -H "Content-Type: application/json" -X POST -d '{"name":"xyz3","email":"xyz3@gmail.com","phone":"1234-3233","passwd":"xyz","services_credentials":[{"service":"pipedrive","user_id":"1234","token_id":"rtr7tr882h"},{"service":"slack","user_id":"4","token_id":"8935u65u65"}]}' http://localhost/users
