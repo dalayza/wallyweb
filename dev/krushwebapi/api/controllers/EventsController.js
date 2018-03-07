@@ -4,11 +4,46 @@ var mongoose = require('mongoose'),
   Event = mongoose.model('Events');
 
 exports.list_all_events = function(req, res) {
-  Event.find({}, function(err, aevent) {
-    if (err)
-      res.send(err);
-    res.json(aevent);
-  });
+
+  if (req.param('ownerUserId') !== undefined) {
+    Event.find({owner_user_id:req.param('ownerUserId')},function(err, aevent) {
+      if (err)
+        res.send(err);
+      res.json(aevent);
+    });
+  } else if (req.param('dealId') !== undefined) {
+    Event.find({deal_id:req.param('dealId')},function(err, aevent) {
+      if (err)
+        res.send(err);
+      res.json(aevent);
+    });
+  } else if (req.param('clientId') !== undefined) {
+    Event.find({client_id:req.param('clientId')},function(err, deals) {
+      if (err)
+        res.send(err);
+      
+      res.json(deals);
+    });
+  } else if (req.param('startDate') !== undefined) {
+    Event.find({start_date:{$gt:new Date(req.param('startDate')).getTime(),$lt:new Date(req.param('endDate')).getTime()}},function(err, deals) {
+      if (err)
+        res.send(err);
+      
+      res.json(deals);
+    });
+  } else if (req.param('eventType') !== undefined) {
+    Event.find({event_type:req.param('eventType')},function(err, aevent) {
+      if (err)
+        res.send(err);
+      res.json(aevent);
+    });
+  } else {
+    Event.find({}, function(err, aevent) {
+      if (err)
+        res.send(err);
+      res.json(aevent);
+    });
+  }
 };
 
 exports.create_a_event = function(req, res) {
@@ -24,18 +59,22 @@ exports.create_first_call_event = function(deal) {
 
   var new_event = new Event({"title":"FIRST CALL",
                              "event_type":"call",
-                             "owner":deal.owner,"deal_id":deal.deal_id});
+                             "owner_user_id":deal.owner_user_id,
+                             "client_id":deal.client_id,
+                             "deal_id":deal.deal_id});
 
   new_event.save(function(err, aevent) {
     if (err)
-      console.out("error on creating a first call event...");
+      console.log("error on creating a first call event..." + err.toString());
   });
 };
+
 
 exports.read_a_event = function(req, res) {
   Event.findById(req.params.eventId, function(err, aevent) {
     if (err)
       res.send(err);
+    
     res.json(aevent);
   });
 };
