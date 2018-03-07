@@ -52,7 +52,6 @@ exports.create_a_deal = function(req, res) {
                                        "phone": metaclient_phone,
                                        "email": metaclient_email});
 
-      // adds a new metaclient if not exists...
       new_metaclient.save(function(err, metaclient) {
           if (err)
             res.send(err);
@@ -84,7 +83,6 @@ exports.create_a_deal = function(req, res) {
                                                    "email": metaclient_org_email,
                                                    "client_id": client_id});
 
-      // adds a new metaclientOrganization if not exists...
       new_metaclient_org.save(function(err, metaclient_org) {
           if (err)
             res.send(err);

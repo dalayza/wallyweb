@@ -55,4 +55,5 @@ module.exports = function(app) {
     .get(events_controller.read_a_event)
     .put(events_controller.update_a_event)
     .delete(events_controller.delete_a_event);
+
 };

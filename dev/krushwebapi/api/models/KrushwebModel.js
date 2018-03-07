@@ -23,7 +23,7 @@ var EventSchema = new Schema({
     required:true,
     default:'open'
   },
-  owner: {type : Schema.ObjectId, ref : 'User',required : true},
+  owner_user_id: {type : Schema.ObjectId, ref : 'User',required : true},
   description: {
     type: String
   },
@@ -49,49 +49,48 @@ var EventSchema = new Schema({
     type: String,
     enum: ['day','hour','minute']
   },
-  deal_id: {type : Schema.ObjectId, ref : 'Deal'}
+  deal_id: {type : Schema.ObjectId, ref : 'Deal'},
+  client_id: {type : Schema.ObjectId, ref : 'Client'}
 });
 
+/*
+ * for both Metaclient/Organization there are no unicity requirements..
+ * we basically just link the deal with them.
+ */
 var MetaclientOrganizationSchema = new Schema({
 
   name: {
     type: String,
-    required: 'organization name is required'
+    required: 'organization name is required',
+    default:'SEM NOME'
   },
   regid: {
-    type: String,
-    required: 'organization registration id is required'
+    type: String
   },
   address: {
-    type: String,
-    required: 'organization address is required'
+    type: String
   },
   email: {
-    type: String,
-    required: 'organization email is required'
+    type: String
   },
   phone: {
-    type: String,
-    required: 'organization phone is required'
+    type: String
   },
-  branches: [{
-    name: String
-  }]
+  parent_id: {type : Schema.ObjectId, ref : 'MetaclientOrganization'}
 });
 
 var MetaclientSchema = new Schema({
 
   name: {
     type: String,
-    required: 'metaclient name is required'
+    required:true,
+    default:'SEM NOME'
   },
   email: {
-    type: String,
-    required: 'metaclient email is required'
+    type: String
   },
   phone: {
-    type: String,
-    required: 'metaclient phone is required'
+    type: String
   },
   created_date: {
     type: Date,
@@ -105,32 +104,11 @@ var DealSchema = new Schema({
     type: String,
     required: 'deal title is required'
   },
-  product: {
-    type: String,
-    required: 'deal product is required'
-  },
   source: {
     type: String,
-<<<<<<< HEAD
     enum : ['facebook bot','google','networking','linkedin','desk','phone','metaclient','inbound marketing'],
     required: 'deal source is required',
     default: 'metaclient'
-=======
-    enum : ['landing-page','facebook bot','site','networking','google'],
-    required: 'deal source is required',
-    default: 'site'
-  },
-  campaign: {
-    type: String
-  },
-  targets: {
-    type: "array",
-    items: {
-      type: "string"
-    },
-    "minItems": 1,
-    "uniqueItems": true
->>>>>>> 3d23e07f86dcd2ac79cb29318994ab5cd203b57d
   },
   status: {
     type: String,
@@ -146,7 +124,10 @@ var DealSchema = new Schema({
     type : Schema.ObjectId, ref : 'Client',
     required: 'deal client is required'
   },
-  owner: {type : Schema.ObjectId, ref : 'User',required : true},
+  product: {
+    type: [String]
+  },
+  owner_user_id: {type : Schema.ObjectId, ref : 'User'},
   tags: [String],
   price: {
     type: Number
@@ -176,7 +157,7 @@ var ClientSchema = new Schema({
     required: 'client name is required',
     unique: true
   },
-  owner: {type : Schema.ObjectId, ref : 'User',required : true},
+  owner_user_id: {type : Schema.ObjectId, ref : 'User',required : true},
   address: {
     type: String
   },
