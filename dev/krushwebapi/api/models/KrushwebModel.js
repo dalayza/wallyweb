@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 var EventSchema = new Schema({
+
   title: {
     type: String,
     required: 'event title is required'
@@ -12,17 +12,20 @@ var EventSchema = new Schema({
     enum : ['call','meeting','note','e-mail'],
     required: 'event etype is required'
   },
-  description: {
-    type: String,
-    required: 'event description is required'
-  },
   start_date: {
     type: Date,
     default: Date.now,
-    required: 'event due_date is required'
+    required: 'event start_date is required'
   },
-  duration: {
-    type: Number
+  status: {
+    type: String,
+    enum: ['done','open'],
+    required:true,
+    default:'open'
+  },
+  owner_user_id: {type : Schema.ObjectId, ref : 'User',required : true},
+  description: {
+    type: String
   },
   services_credentials: [{
     service: {
@@ -36,50 +39,58 @@ var EventSchema = new Schema({
       type: String,
       required: true}
     }],
+  address: {
+    type: String
+  },
+  duration: {
+    type: Number
+  },
+  duration_scale: {
+    type: String,
+    enum: ['day','hour','minute']
+  },
   deal_id: {type : Schema.ObjectId, ref : 'Deal'},
-  user_id: {type : Schema.ObjectId, ref : 'User'}
+  client_id: {type : Schema.ObjectId, ref : 'Client'}
 });
 
+/*
+ * for both Metaclient/Organization there are no unicity requirements..
+ * we basically just link the deal with them.
+ */
 var MetaclientOrganizationSchema = new Schema({
 
   name: {
     type: String,
-    required: 'organization name is required'
+    required: 'organization name is required',
+    default:'SEM NOME'
   },
   regid: {
-    type: String,
-    required: 'organization registration id is required'
+    type: String
   },
   address: {
-    type: String,
-    required: 'organization address is required'
+    type: String
   },
   email: {
-    type: String,
-    required: 'organization email is required'
+    type: String
   },
   phone: {
-    type: String,
-    required: 'organization phone is required'
+    type: String
   },
-  branches: [{
-    name: String
-  }]
+  parent_id: {type : Schema.ObjectId, ref : 'MetaclientOrganization'}
 });
 
 var MetaclientSchema = new Schema({
 
   name: {
     type: String,
-    required: 'metaclient name is required'
+    required:true,
+    default:'SEM NOME'
   },
   email: {
-    type: String,
-    required: 'metaclient email is required'
+    type: String
   },
   phone: {
-    type: String,
-    required: 'metaclient phone is required'
+    type: String
   },
   created_date: {
     type: Date,
@@ -93,26 +104,11 @@ var DealSchema = new Schema({
     type: String,
     required: 'deal title is required'
   },
-  product: {
-    type: String,
-    required: 'deal product is required'
-  },
   source: {
     type: String,
-    enum : ['landing-page','facebook bot','site','networking','google'],
+    enum : ['facebook bot','google','networking','linkedin','desk','phone','metaclient','inbound marketing'],
     required: 'deal source is required',
-    default: 'site'
-  },
-  campaign: {
-    type: String
-  },
-  targets: {
-    type: "array",
-    items: {
-      type: "string"
-    },
-    "minItems": 1,
-    "uniqueItems": true
+    default: 'metaclient'
   },
   status: {
     type: String,
@@ -124,6 +120,15 @@ var DealSchema = new Schema({
     required: 'deal currency is required',
     default: 'REAL'
   },
+  client_id: {
+    type : Schema.ObjectId, ref : 'Client',
+    required: 'deal client is required'
+  },
+  product: {
+    type: [String]
+  },
+  owner_user_id: {type : Schema.ObjectId, ref : 'User'},
+  tags: [String],
   price: {
     type: Number
   },
@@ -139,32 +144,33 @@ var DealSchema = new Schema({
     type : Schema.ObjectId, 
     ref : 'MetaclientOrganization'
   },
-  followers: {
-    type: "array",
-    items: {
-      type: "string"
-    },
-    "minItems": 1,
-    "uniqueItems": true
-  },
-  client_id: {
-    type : Schema.ObjectId, ref : 'Client',
-    required: 'deal client is required'
-  }
+  followers: [{
+    type : Schema.ObjectId, 
+    ref : 'User'
+  }]
 });
 
 var ClientSchema = new Schema({
-  address: {
-    type: String
-  },
+
   name: {
     type: String,
     required: 'client name is required',
     unique: true
   },
+  owner_user_id: {type : Schema.ObjectId, ref : 'User',required : true},
+  address: {
+    type: String
+  },
   phone: {
     type: String
-  }
+  },
+  mobile: {
+    type: String
+  },
+  extension: {
+    type: String
+  },
+  parent_id: {type : Schema.ObjectId, ref : 'Client'}
 });
 
 var UserSchema = new Schema({

@@ -1,1 +1,1 @@
-curl -H "Content-Type: application/json" -X POST -d '{"product":"novo teste 4","product_source_type":"site","campaign":"Verao 2018","metaclient_name":"Moirtoiyuiyo Company","metaclient_phone":"77876583","metaclient_email":"soijyjo@gmail.com","client_name":"NET"}' http://localhost/deals
+curl -H "Content-Type: application/json" -X POST -d '{"product":"teste 7","metaclient_name":"Bjd","metaclient_phone":"735","metaclient_email":"sd@gmail.com","client_name":"NET","owner_user_id":"5a9eda38a2e82d00725b5a39"}' http://localhost/deals
