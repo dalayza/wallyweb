@@ -13,7 +13,7 @@ var express = require('express'),
 
 //mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://admin:admin123@ds259865.mlab.com:59865/krushwebdb');
+mongoose.connect('mongodb://admin:admin123@ds253918.mlab.com:53918/wallytmpdb');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

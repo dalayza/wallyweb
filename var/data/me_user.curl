@@ -1,0 +1,1 @@
+curl -X GET --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTEyZWYzZDIxYmZiMDAxOWZhNzA5MiIsImlhdCI6MTUyMDUxMjc1NiwiZXhwIjoxNTIwNTk5MTU2fQ.O38JeS-OuZu9XIckyd_EXa7R5Ca8xcw_dEIPf7Bdcek" http://api.agenciamacro.com/auth/me
