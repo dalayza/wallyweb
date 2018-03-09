@@ -1,6 +1,9 @@
 'use strict';
 module.exports = function(app) {
+
   var deals_controller = require('../controllers/DealsController');
+  var VerifyToken = require('../../auth/VerifyToken');
+
 
 /**
  * @api {get} /deals Request All Deals
@@ -17,9 +20,8 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Deal created.
  */
-  app.route('/deals')
-    .get(deals_controller.list_all_deals)
-    .post(deals_controller.create_a_deal);
+  app.get('/deals',deals_controller.list_all_deals);
+  app.post('/deals',deals_controller.create_a_deal);
 
 /**
  * @api {get} /deals/:id Request a Deal
@@ -50,9 +52,7 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Deal unique ID confirmation.
  */
-  app.route('/deals/:dealId')
-    .get(deals_controller.read_a_deal)
-    .put(deals_controller.update_a_deal)
-    .delete(deals_controller.delete_a_deal);
-
+  app.get('/deals/:dealId',deals_controller.read_a_deal);
+  app.put('/deals/:dealId',deals_controller.update_a_deal);
+  app.delete('/deals/:dealId',deals_controller.delete_a_deal);
 };

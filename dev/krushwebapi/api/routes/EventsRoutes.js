@@ -1,6 +1,8 @@
 'use strict';
 module.exports = function(app) {
+
   var events_controller = require('../controllers/EventsController');
+  var VerifyToken = require('../../auth/VerifyToken');
 
 /**
  * @api {get} /events Request All Events
@@ -17,9 +19,8 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Event created.
  */
-  app.route('/events')
-    .get(events_controller.list_all_events)
-    .post(events_controller.create_a_event);
+  app.get('/events',events_controller.list_all_events);
+  app.put('/events',events_controller.create_a_event);
 
 /**
  * @api {get} /events/:id Request a Event
@@ -50,10 +51,8 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Event unique ID confirmation.
  */
-
-  app.route('/events/:eventId')
-    .get(events_controller.read_a_event)
-    .put(events_controller.update_a_event)
-    .delete(events_controller.delete_a_event);
+  app.get('/events/:eventId',events_controller.read_a_event);
+  app.put('/events/:eventId',events_controller.update_a_event)
+  app.delete('/events/:eventId',events_controller.delete_a_event);
 
 };

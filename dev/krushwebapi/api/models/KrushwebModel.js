@@ -23,7 +23,7 @@ var EventSchema = new Schema({
     required:true,
     default:'open'
   },
-  owner_user_id: {type : Schema.ObjectId, ref : 'User',required : true},
+  owner_user_id: {type : Schema.ObjectId, ref : 'User'},
   description: {
     type: String
   },
@@ -92,6 +92,9 @@ var MetaclientSchema = new Schema({
   phone: {
     type: String
   },
+  organization_name: {
+    type: String
+  },
   created_date: {
     type: Date,
     default: Date.now
@@ -125,7 +128,9 @@ var DealSchema = new Schema({
     required: 'deal client is required'
   },
   product: {
-    type: [String]
+    type: [String],
+    required:true,
+    default:["não especificado"]
   },
   owner_user_id: {type : Schema.ObjectId, ref : 'User'},
   tags: [String],
@@ -176,9 +181,7 @@ var ClientSchema = new Schema({
 var UserSchema = new Schema({
 
   name: {
-    type: String,
-    required: 'user name is required',
-    unique: true
+    type: String
   },
   email: {
     type: String,
@@ -186,8 +189,13 @@ var UserSchema = new Schema({
     unique: true
   },
   phone: {
-    type: String,
-    unique: true
+    type: String
+  },
+  mobile: {
+    type: String
+  },
+  extension: {
+    type: String
   },
   passwd: {
     type: String,
@@ -205,7 +213,7 @@ var UserSchema = new Schema({
       type: String,
       required: true}
     }],
-  client_id: {type : Schema.ObjectId, ref : 'Client'}
+  client_id: [{type : Schema.ObjectId, ref : 'Client'}]
 });
 
 var SessionsSchema = new Schema({

@@ -34,30 +34,61 @@ exports.create_a_deal = function(req, res) {
   var metaclient_org_phone = req.body.metaclient_org_phone; 
   var metaclient_org_email = req.body.metaclient_org_email; 
 
-  var client_name = req.body.client_name;
+  var client_id = req.body.client_id;
 
-  // first we search for the Client...
-  var client =  Client.findOne({name:client_name}, function(err, client) {
-
-  // TODO: get client_id from body ...
-  var client_id = client._id;
-
-    if (err)
-      res.send(err);
-
-    // this means save it as a Metaclient...
-    if (metaclient_name != null) {
+  // this means save it as a Metaclient...
+  if (metaclient_name != null) {
 
       var new_metaclient = new Metaclient({"name" : metaclient_name,
                                        "phone": metaclient_phone,
                                        "email": metaclient_email});
+
+      // this will be the metaclient organization...
+      if (metaclient_org_name != null) {
+
+        new_metaclient.organization_name=metaclient_org_name;
+        var new_metaclient_org = new MetaclientOrganization({"name" : metaclient_org_name});
+
+        new_metaclient_org.save(function(err, metaclient_org) {
+          if (err)
+            res.send(err);
+
+          new_deal.metaclient_org_id = metaclient_org._id;
+          new_metaclient.save(function(err, metaclient) {
+            if (err)
+              res.send(err);
+
+            new_deal.metaclient_id = metaclient._id;
+   
+            // applies only for an null title...
+            if (new_deal.title === undefined) {
+              new_deal.title = metaclient.name + " - " + new_deal.product[0];
+            }
+            new_deal.client_id = client_id;
+    
+            // finally saves the deal...
+            new_deal.save(function(err, deal) {
+               if (err)
+                 res.send(err);
+
+               events.create_first_call_event(deal);
+
+               res.json(deal);
+            });
+          });
+        });
+      } else {
 
       new_metaclient.save(function(err, metaclient) {
           if (err)
             res.send(err);
 
           new_deal.metaclient_id = metaclient._id;
-          new_deal.title = metaclient.name + " " + new_deal.product;
+   
+          // applies only for an null title...
+          if (new_deal.title === undefined) {
+            new_deal.title = metaclient.name + " - " + new_deal.product[0];
+          }
           new_deal.client_id = client_id;
     
           // finally saves the deal...
@@ -71,7 +102,9 @@ exports.create_a_deal = function(req, res) {
           });
       });
 
-    } else
+    }
+
+  } else
 
     // this means save it as a MetaclientOrganization...
     if (metaclient_org_name != null) {
@@ -88,7 +121,12 @@ exports.create_a_deal = function(req, res) {
             res.send(err);
 
           new_deal.metaclient_org_id = metaclient_org._id;
-          new_deal.title = metaclient_org.name + " " + new_deal.product;
+
+          // applies only for an null title...
+          if (new_deal.title === undefined) {
+            new_deal.title = metaclient_org.name + " - " + new_deal.product[0];
+          }
+
           new_deal.client_id = client_id;
 
           // finally saves the deal...
@@ -101,8 +139,7 @@ exports.create_a_deal = function(req, res) {
              res.json(deal);
           });
       });
-    }
-  });
+  }
 };
 
 exports.read_a_deal = function(req, res) {

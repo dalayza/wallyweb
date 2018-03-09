@@ -1,0 +1,1 @@
+~/util/hyper volume ls | grep -v d22 | awk -F" " '{print $2}' | xargs -i ~/util/hyper volume rm {}

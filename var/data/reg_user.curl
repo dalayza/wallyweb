@@ -1,1 +1,15 @@
-curl -H "Content-Type: application/json" -X POST -d '{"name":"mvera","email":"mvera@gmail.com","password":"admin123"}' http://localhost/api/auth/register
+#!/bin/bash
+
+
+# 
+# script for populating Deals documents.
+#
+
+target=http://localhost/auth/register
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/auth/register
+fi
+
+curl -H "Content-Type: application/json" -X POST -d '{"email":"tos@gmail.com","passwd":"admin123"}' $target
+

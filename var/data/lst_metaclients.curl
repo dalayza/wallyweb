@@ -1,0 +1,1 @@
+curl -X GET --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTA5YzE5YTFjYzJlMDBkMzZlMjY0MiIsImlhdCI6MTUyMDQ3NTE2MSwiZXhwIjoxNTIwNTYxNTYxfQ.GkDHGDcekohq1Sl1bd0CG5Tym5Ummr_ug0qfXshQbtc" http://localhost/metaclients
