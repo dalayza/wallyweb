@@ -197,6 +197,9 @@ var UserSchema = new Schema({
   extension: {
     type: String
   },
+  role: {
+    type: String
+  },
   passwd: {
     type: String,
     required: 'user password is required'

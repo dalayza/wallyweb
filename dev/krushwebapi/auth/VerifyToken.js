@@ -1,5 +1,9 @@
 var jwt = require('jsonwebtoken');
 var config = require('../config');
+var mongoose = require('mongoose'),
+  User = mongoose.model('Users');
+
+
 function verifyToken(req, res, next) {
   var token = req.headers['x-access-token'];
   if (!token)
@@ -8,8 +12,16 @@ function verifyToken(req, res, next) {
     if (err)
     return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
     // if everything good, save to request for use in other routes
+    req.user = decoded;
     req.userId = decoded.id;
-    next();
+
+    User.findById(req.userId, { passwd: 0 }, function (err, user) {
+       if (err) return res.status(500).send("There was a problem finding the user.");
+       if (!user) return res.status(404).send("No user found.");
+
+       req.user.role = user.role;
+       next();
+     });
   });
 }
 module.exports = verifyToken;

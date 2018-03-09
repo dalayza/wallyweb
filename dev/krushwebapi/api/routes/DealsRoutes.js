@@ -20,8 +20,8 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Deal created.
  */
-  app.get('/deals',deals_controller.list_all_deals);
-  app.post('/deals',deals_controller.create_a_deal);
+  app.get('/deals',VerifyToken,deals_controller.list_all_deals);
+  app.post('/deals',VerifyToken,deals_controller.create_a_deal);
 
 /**
  * @api {get} /deals/:id Request a Deal
@@ -52,7 +52,7 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Deal unique ID confirmation.
  */
-  app.get('/deals/:dealId',deals_controller.read_a_deal);
-  app.put('/deals/:dealId',deals_controller.update_a_deal);
-  app.delete('/deals/:dealId',deals_controller.delete_a_deal);
+  app.get('/deals/:dealId',VerifyToken,deals_controller.read_a_deal);
+  app.put('/deals/:dealId',VerifyToken,deals_controller.update_a_deal);
+  app.delete('/deals/:dealId',VerifyToken,deals_controller.delete_a_deal);
 };

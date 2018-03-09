@@ -18,8 +18,8 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Client created.
  */
-  app.get('/clients',clients_controller.list_all_clients);
-  app.post('/clients',clients_controller.create_a_client);
+  app.get('/clients',VerifyToken,clients_controller.list_all_clients);
+  app.post('/clients',VerifyToken,clients_controller.create_a_client);
 
 /**
  * @api {get} /clients/:id Request a Client
@@ -50,7 +50,7 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Client unique ID confirmation.
  */
-  app.get('/clients/:clientId',clients_controller.read_a_client);
-  app.put('/clients/:clientId',clients_controller.update_a_client);
-  app.delete('/clients/:clientId',clients_controller.delete_a_client);
+  app.get('/clients/:clientId',VerifyToken,clients_controller.read_a_client);
+  app.put('/clients/:clientId',VerifyToken,clients_controller.update_a_client);
+  app.delete('/clients/:clientId',VerifyToken,clients_controller.delete_a_client);
 };

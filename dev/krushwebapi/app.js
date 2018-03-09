@@ -22,6 +22,21 @@ app.use(bodyParser.json());
 var AuthController = require('./auth/AuthController');
 app.use('/auth', AuthController);
 
+// the user authorization
+var auth = require('authorized');
+auth.role('admin', function(req, done) {
+  done(null, req.user.role === "admin");
+});
+auth.action('list deals', ['admin']);
+var middleware = auth.can('list deals');
+app.use(function(err, req, res, next) {
+  if (err instanceof auth.UnauthorizedError) {
+    res.send(401, 'Unauthorized');
+  } else {
+    next(err);
+  }
+});
+
 var users_routes = require('./api/routes/UsersRoutes');
 var metaclients_routes = require('./api/routes/MetaclientsRoutes');
 var events_routes = require('./api/routes/EventsRoutes');
@@ -30,7 +45,7 @@ var clients_routes = require('./api/routes/ClientsRoutes');
 var sessions_routes = require('./api/routes/SessionsRoutes');
 deals_routes(app);
 clients_routes(app); 
-users_routes(app); 
+users_routes(app,auth); 
 events_routes(app); 
 metaclients_routes(app); 
 sessions_routes(app); 
