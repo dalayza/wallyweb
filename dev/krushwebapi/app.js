@@ -18,6 +18,10 @@ mongoose.connect('mongodb://admin:admin123@ds259865.mlab.com:59865/krushwebdb');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// the user authentication
+var AuthController = require('./auth/AuthController');
+app.use('/auth', AuthController);
+
 var users_routes = require('./api/routes/UsersRoutes');
 var metaclients_routes = require('./api/routes/MetaclientsRoutes');
 var events_routes = require('./api/routes/EventsRoutes');

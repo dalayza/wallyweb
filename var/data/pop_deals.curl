@@ -1,1 +1,14 @@
-curl -H "Content-Type: application/json" -X POST -d '{"product":"teste 7","metaclient_name":"Bjd","metaclient_phone":"735","metaclient_email":"sd@gmail.com","client_name":"NET","owner_user_id":"5a9eda38a2e82d00725b5a39"}' http://localhost/deals
+#!/bin/bash
+
+
+# 
+# script for populating Deals documents.
+#
+
+target=http://localhost/deals
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/deals
+fi
+
+curl -H "Content-Type: application/json" -X POST --header "x-access-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTI4ZjBmOWVhZTkyMDAwZDBjYzc3NCIsImlhdCI6MTUyMDYwMjg5NSwiZXhwIjoxNTIwNjg5Mjk1fQ.NVqKXDtDEILcwdul_SI1mXbJBeZ7loul4CpMJO2OL5k" -d '{"product":"teste 9","metaclient_name":"Bd","metaclient_phone":"75","metaclient_email":"sd@gmail.com","client_name":"Puri Academia","owner_user_id":"5aa00ff659727b0019e0d433","metaclient_org_name":"souza cruz"}' $target
