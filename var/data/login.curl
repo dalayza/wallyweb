@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+# 
+# script for registering a user.
+#
+
+target=http://localhost/sessions
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/sessions
+fi
+
+curl -H "Content-Type: application/json" -X POST -d '{"email":"desavera@gmail.com","passwd":"xyz"}' $target
+

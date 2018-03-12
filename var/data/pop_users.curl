@@ -1,2 +1,16 @@
-curl --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTJlNzNhMWQ0OTZlMDBhMWZkNjczMyIsImlhdCI6MTUyMDYyNTQ2NiwiZXhwIjoxNTIwNzExODY2fQ.NS95_n-el1gJV8r3pRGXXG7ZkdiZywcIlLVhnnwItiw" -H "Content-Type: application/json" -X POST -d '{"name":"desavera","email":"desavera@gmail.com","phone":"123431","passwd":"xyz","role":"admin"}' http://localhost/users
-curl --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTJlNzNhMWQ0OTZlMDBhMWZkNjczMyIsImlhdCI6MTUyMDYyNTQ2NiwiZXhwIjoxNTIwNzExODY2fQ.NS95_n-el1gJV8r3pRGXXG7ZkdiZywcIlLVhnnwItiw" -H "Content-Type: application/json" -X POST -d '{"name":"pablo","email":"pablo@gmail.com","phone":"1234-321","passwd":"xyz","role":"designer"}' http://localhost/users
+#!/bin/bash
+
+
+# 
+# script for populating Deals documents.
+#
+
+target=http://localhost/users
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/users
+fi
+
+curl --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTY3NjRiODViZmIzMDA1ZDcxMmE3ZCIsImlhdCI6MTUyMDg1ODY5OSwiZXhwIjoxNTIwOTQ1MDk5fQ.NObraIbPa3rvVfTBcZEecPa1npQSbpHBi2G2XSEQLEA" -H "Content-Type: application/json" -X POST -d '{"name":"desavera","email":"desavera@gmail.com","phone":"123431","passwd":"xyz","role":"admin"}' $target
+curl --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTY3NjRiODViZmIzMDA1ZDcxMmE3ZCIsImlhdCI6MTUyMDg1ODY5OSwiZXhwIjoxNTIwOTQ1MDk5fQ.NObraIbPa3rvVfTBcZEecPa1npQSbpHBi2G2XSEQLEA" -H "Content-Type: application/json" -X POST -d '{"name":"pablo","email":"pablo@gmail.com","phone":"1234-321","passwd":"xyz","role":"manager"}' $target
+curl --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTY3NjRiODViZmIzMDA1ZDcxMmE3ZCIsImlhdCI6MTUyMDg1ODY5OSwiZXhwIjoxNTIwOTQ1MDk5fQ.NObraIbPa3rvVfTBcZEecPa1npQSbpHBi2G2XSEQLEA" -H "Content-Type: application/json" -X POST -d '{"name":"segundo","email":"segundo@gmail.com","phone":"1234-31","passwd":"xyz","role":"cs"}' $target

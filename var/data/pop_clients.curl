@@ -1,2 +1,14 @@
-curl -H "Content-Type: application/json" -X POST -d '{"name":"NET","phone":"000000","email":"net@net.com","owner_user_id":"5a9f2af525ed5d02b564d98d"}' http://localhost/clients
+#!/bin/bash
 
+
+# 
+# script for populating Deals documents.
+#
+
+target=http://localhost/clients
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/clients
+fi
+
+curl -H "Content-Type: application/json" -X POST --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTY3NjRiODViZmIzMDA1ZDcxMmE3ZCIsImlhdCI6MTUyMDg1ODY5OSwiZXhwIjoxNTIwOTQ1MDk5fQ.NObraIbPa3rvVfTBcZEecPa1npQSbpHBi2G2XSEQLEA" -d '{"name":"NET","phone":"000000","email":"net@net.com","owner_user_id":"5aa6764b85bfb3005d712a7d"}' $target

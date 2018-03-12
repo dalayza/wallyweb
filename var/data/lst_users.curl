@@ -11,4 +11,4 @@ if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/users
 fi
 
-curl -X GET --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTJmYmE0MzZkM2NmMDAxNTAwNmQyYyIsImlhdCI6MTUyMDYzMDY5MiwiZXhwIjoxNTIwNzE3MDkyfQ.rtYhu7F_KnyrvyVv3un0a6K_DAQrdwdKTIhv_XEGOdA" $target
+curl -X GET --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTY3NjRiODViZmIzMDA1ZDcxMmE3ZCIsImlhdCI6MTUyMDg1ODY5OSwiZXhwIjoxNTIwOTQ1MDk5fQ.NObraIbPa3rvVfTBcZEecPa1npQSbpHBi2G2XSEQLEA" $target

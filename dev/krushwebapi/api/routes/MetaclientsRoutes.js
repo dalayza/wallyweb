@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(app) {
+module.exports = function(app,auth) {
   var metaclients_controller = require('../controllers/MetaclientsController');
   var VerifyToken = require('../../auth/VerifyToken');
 

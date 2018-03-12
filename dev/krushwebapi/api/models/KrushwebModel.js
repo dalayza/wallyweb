@@ -20,7 +20,7 @@ var EventSchema = new Schema({
   status: {
     type: String,
     enum: ['done','open'],
-    required:true,
+    required:'event status is required',
     default:'open'
   },
   owner_user_id: {type : Schema.ObjectId, ref : 'User'},
@@ -31,13 +31,13 @@ var EventSchema = new Schema({
     service: {
       type:String,
       enum:['totalvoice'],
-      required:true},
+      required:'event service is required'},
     user_id: {
       type: Number,
-      required: true},
+      required: 'event service user_id is required'},
     token_id: {
       type: String,
-      required: true}
+      required: 'event service token_id is required'}
     }],
   address: {
     type: String
@@ -83,7 +83,7 @@ var MetaclientSchema = new Schema({
 
   name: {
     type: String,
-    required:true,
+    required:'Metaclient name is required',
     default:'SEM NOME'
   },
   email: {
@@ -129,8 +129,8 @@ var DealSchema = new Schema({
   },
   product: {
     type: [String],
-    required:true,
-    default:["não especificado"]
+    required:'deal product is required',
+    default:["nao especificado"]
   },
   owner_user_id: {type : Schema.ObjectId, ref : 'User'},
   tags: [String],
@@ -162,7 +162,7 @@ var ClientSchema = new Schema({
     required: 'client name is required',
     unique: true
   },
-  owner_user_id: {type : Schema.ObjectId, ref : 'User',required : true},
+  owner_user_id: {type : Schema.ObjectId, ref : 'User',required:'Client owner is required'},
   address: {
     type: String
   },
@@ -181,12 +181,18 @@ var ClientSchema = new Schema({
 var UserSchema = new Schema({
 
   name: {
-    type: String
+    type: String,
+    required: 'user name is required',
+    default:'nao especificado'
   },
   email: {
     type: String,
     required: 'user email is required',
     unique: true
+  },
+  passwd: {
+    type: String,
+    required: 'user password is required'
   },
   phone: {
     type: String
@@ -199,10 +205,6 @@ var UserSchema = new Schema({
   },
   role: {
     type: String
-  },
-  passwd: {
-    type: String,
-    required: 'user password is required'
   },
   services_credentials: [{
     service: {

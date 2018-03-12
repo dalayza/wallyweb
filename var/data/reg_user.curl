@@ -11,5 +11,5 @@ if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/auth/register
 fi
 
-curl -H "Content-Type: application/json" -X POST -d '{"email":"zapier@zapier.com","passwd":"admin123","role":"admin"}' $target
+curl -H "Content-Type: application/json" -X POST -d '{"email":"desavera@gmail.com","passwd":"admin123","role":"admin"}' $target
 
