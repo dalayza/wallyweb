@@ -13,7 +13,10 @@ var express = require('express'),
 
 //mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://admin:admin123@ds259865.mlab.com:59865/krushwebdb');
+if (process.env.WALLY_ENV === 'dev')
+  mongoose.connect('mongodb://admin:admin123@ds253918.mlab.com:53918/wallytmpdb');
+else
+  mongoose.connect('mongodb://admin:admin123@ds259865.mlab.com:59865/krushwebdb');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -42,3 +45,28 @@ console.log('Krushweb RESTful API server started on: ' + port);
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
+
+if (process.env.WALLY_ENV === 'dev') {
+
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    //res.render('error', {
+    res.send('error', {
+        message: err.message,
+        error: err
+    });
+  });
+
+} else {
+
+  // production error handler
+  // no stacktraces leaked to user
+  app.use(function(err, req, res, next) {
+      res.status(err.status || 500);
+      //res.render('error', {
+      res.send('error', {
+          message: err.message,
+          error: {}
+      });
+  });
+}
