@@ -61,7 +61,8 @@ auth.action('update a event', ['admin','manager','cs']);
 auth.action('delete a event', ['admin','manager','cs']);
 
 auth.action('list all sessions', ['admin']);
-auth.action('logout', ['admin','manager','cs']);
+auth.action('login', ['admin']);
+auth.action('logout', ['admin']);
 
 var middleware = auth.can('list all users');
 app.use(function(err, req, res, next) {

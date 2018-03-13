@@ -46,16 +46,10 @@ exports.login = function(req, res) {
 exports.logout = function(req, res) {
 
   Session.findOne({'email':req.body.email}, function(err, session) {
-    if (err) {
-      console.log("logout failed for : " + req.body.email);
+    if (err) 
       res.send(err);
-    }
 
-    console.log("logout for : " + req.body.email);
-
-    Session.remove({
-      _id: session._id
-    }, function(err, session) {
+    Session.update({ _id: session._id }, { $set: { status: 'inactive' }}, function(err, session) {
       if (err)
         res.send(err);
       res.json({ message: 'Session successfully logout' });

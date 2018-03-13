@@ -224,8 +224,8 @@ var UserSchema = new Schema({
 var SessionsSchema = new Schema({
   email: {
     type: String,
-    required: 'session user email identification is required',
-    unique: true
+    required: 'session user email identification is required'
+    //unique: true TODO : unique sessions...
   },
   created_date: {
     type: Date,

@@ -11,5 +11,5 @@ if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/sessions
 fi
 
-curl -H "Content-Type: application/json" -X DELETE --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTY5ZDY3NTM3YjZjMDFmMjUzZTA5NSIsImlhdCI6MTUyMDg2OTAzMCwiZXhwIjoxNTIxMzAxMDMwfQ.Bf6vR5rl2Exj-UnyqDTk9XNG1wHBJkbfVOJM5IZV9_A" -d '{"email":"desavera@gmail.com"}' $target
+curl -H "Content-Type: application/json" -X DELETE --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTZkMDhjMmY2M2RkMDAxNTdjNWNhNSIsImlhdCI6MTUyMDg4MTgwNCwiZXhwIjoxNTIxMzEzODA0fQ.C2qZlDrwEiKv9zui5TknSvZgVDhGS6Csg7ldmuufx-I" -d '{"email":"desavera@gmail.com"}' $target
 

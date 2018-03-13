@@ -29,6 +29,6 @@ module.exports = function(app,auth) {
  * @apiSuccess {String} JSON string with Session unique ID confirmation.
  */
   app.get('/sessions',VerifyToken,auth.can('list all sessions'),session_controller.list_all_sessions);
-  app.post('/sessions',session_controller.login);
+  app.post('/sessions',VerifyToken,auth.can('login'),session_controller.login);
   app.delete('/sessions',VerifyToken,auth.can('logout'),session_controller.logout);
 };
