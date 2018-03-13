@@ -11,4 +11,4 @@ if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/deals
 fi
 
-curl -H "Content-Type: application/json" -X POST --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTY3NjRiODViZmIzMDA1ZDcxMmE3ZCIsImlhdCI6MTUyMDg1ODY5OSwiZXhwIjoxNTIwOTQ1MDk5fQ.NObraIbPa3rvVfTBcZEecPa1npQSbpHBi2G2XSEQLEA" -d '{"product":"teste 9","metaclient_name":"Bd","metaclient_phone":"75","metaclient_email":"sd@gmail.com","client_id":"5aa0105159727b0019e0d434","owner_user_id":"5aa6764b85bfb3005d712a7d","metaclient_org_name":"souza cruz"}' $target
+curl -H "Content-Type: application/json" -X POST --header "x-access-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTI4ZjBmOWVhZTkyMDAwZDBjYzc3NCIsImlhdCI6MTUyMDYwMjg5NSwiZXhwIjoxNTIwNjg5Mjk1fQ.NVqKXDtDEILcwdul_SI1mXbJBeZ7loul4CpMJO2OL5k" -d '{"product":"teste 8","metaclient_name":"Brerwtertetd","metaclient_phone":"75","metaclient_email":"sd@gmail.com","client_id":"5aa839b4250be200788be39c","owner_user_id":"5aa83913250be200788be397","metaclient_org_name":"NET","status":"current"}' $target

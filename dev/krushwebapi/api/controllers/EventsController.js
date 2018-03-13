@@ -117,18 +117,46 @@ exports.list_all_events = function(req, res,next) {
       } else
         res.json(deals);
     });
+  } else if (req.param('status') !== undefined) {
+
+    var cronos = req.param('cronoOrder');
+
+    if (cronos !== undefined && cronos === '-1')
+      Event.find({'status':req.param('status')},null, {sort: '-start_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.json(sorted.slice(0,max));
+        } else
+          res.json(sorted);
+      });
+    else 
+      Event.find({'status':req.param('status')},null, {sort: 'start_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.json(sorted.slice(0,max));
+        } else
+          res.json(sorted);
+      });
   } else {
 
-    // A full list of ALL...
-    Event.find({}, function(err, events) {
-      if (err)
-          return next(err);
-      var max = req.param('max');
-      if (max !== undefined) {
-        res.json(events.slice(0,max));
-      } else
-        res.json(events);
-    });
+    // A full list of ALL... MUST BE ADMIN role...
+    //if (req.user.role === 'admin') {
+      Event.find({}, function(err, events) {
+        if (err)
+            return next(err);
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.json(events.slice(0,max));
+        } else
+          res.json(events);
+      });
+//    } else return next(new Error('Unauthorized'));
   }
 };
 

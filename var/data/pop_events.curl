@@ -1,11 +1,1 @@
-#deal_id=`curl -H \"Content-Type: application/json\" -X GET http://localhost/deals | awk -F"," '{print $1}' | awk -F":" '{print $2}' | sed -e s/\"//g`
-
-#prefix="'{\"title\":\"event 1\",\"etype\":\"note\",\"description\":\"integrated test for events\",\"deal_id\":\""
-
-#curl_data=`echo $prefix$deal_id"\"}'"`
-
-#curl_command="curl -H \"Content-Type: application/json\" -X POST -d $curl_data http://localhost/events"
-
-#$curl_command
-
-curl -H "Content-Type: application/json" -X POST -d '{"title":"event 1","etype":"note","description":"integrated test for events","deal_id":"5a9d564e0c4e5300158c4cb4"}' http://api.agenciamacro.com/events
+curl -H "Content-Type: application/json" -X POST -d '{"title":"event 1","etype":"note","description":"integrated test for events","status":"done"}' http://localhost/events
