@@ -1,2 +1,15 @@
-curl -H "Content-Type: application/json" -X POST -d '{"name":"VIVO","phone":"000000","email":"net@net.com","owner_user_id":"5aa6ceda69e28902c526ae08"}' http://localhost/clients
+#!/bin/bash
+
+
+# 
+# script for populating Deals documents.
+#
+
+target=http://localhost/clients
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/clients
+fi
+
+curl -H "Content-Type: application/json" -X POST -d '{"name":"VIVO","phone":"000000","email":"net@net.com","owner_user_id":"5aa83913250be200788be397"}' $target
 
