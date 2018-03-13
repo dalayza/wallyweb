@@ -6,15 +6,15 @@ var mongoose = require('mongoose'),
 var bcrypt = require('bcryptjs');
 
 
-exports.list_all_users = function(req, res) {
+exports.list_all_users = function(req, res,next) {
   User.find({}, function(err, user) {
     if (err)
-      res.send(err);
+      return next(err);
     res.json(user);
   });
 };
 
-exports.create_a_user = function(req, res) {
+exports.create_a_user = function(req, res,next) {
   var new_user = new User(req.body);
 
   // basic encryption...
@@ -23,34 +23,34 @@ exports.create_a_user = function(req, res) {
 
   new_user.save(function(err, user) {
     if (err)
-      res.send(err);
+      return next(err);
     res.json(user);
   });
 };
 
-exports.read_a_user = function(req, res) {
+exports.read_a_user = function(req, res,next) {
   User.findById(req.params.userId, function(err, user) {
     if (err)
-      res.send(err);
+      return next(err);
     res.json(user);
   });
 };
 
-exports.update_a_user = function(req, res) {
+exports.update_a_user = function(req, res,next) {
   User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, function(err, user) {
     if (err)
-      res.send(err);
+      return next(err);
     res.json(user);
   });
 };
 
-exports.delete_a_user = function(req, res) {
+exports.delete_a_user = function(req, res,next) {
 
   User.remove({
     _id: req.params.userId
   }, function(err, user) {
     if (err)
-      res.send(err);
+      return next(err);
     res.json({ message: 'User successfully deleted' });
   });
 };

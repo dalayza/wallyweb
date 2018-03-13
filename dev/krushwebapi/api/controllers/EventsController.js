@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
   Event = mongoose.model('Events');
 
-exports.list_all_events = function(req, res) {
+exports.list_all_events = function(req, res,next) {
  
   if (req.param('ownerUserId') !== undefined) {
 
@@ -12,7 +12,7 @@ exports.list_all_events = function(req, res) {
     if (cronos !== undefined && cronos === '-1')
       Event.find({owner_user_id:req.param('ownerUserId')},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
-          res.send(err);
+          return next(err);
 
         var max = req.param('max');
         if (max !== undefined) {
@@ -23,7 +23,7 @@ exports.list_all_events = function(req, res) {
     else 
       Event.find({owner_user_id:req.param('ownerUserId')},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
-          res.send(err);
+          return next(err);
 
         var max = req.param('max');
         if (max !== undefined) {
@@ -37,7 +37,7 @@ exports.list_all_events = function(req, res) {
     if (cronos !== undefined && cronos === '-1')
       Event.find({deal_id:req.param('dealId')},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
-          res.send(err);
+          return next(err);
 
         var max = req.param('max');
         if (max !== undefined) {
@@ -48,7 +48,7 @@ exports.list_all_events = function(req, res) {
     else 
       Event.find({deal_id:req.param('dealId')},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
-          res.send(err);
+          return next(err);
 
         var max = req.param('max');
         if (max !== undefined) {
@@ -62,7 +62,7 @@ exports.list_all_events = function(req, res) {
     if (cronos !== undefined && cronos === '-1')
       Event.find({client_id:req.param('clientId')},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
-          res.send(err);
+          return next(err);
 
         var max = req.param('max');
         if (max !== undefined) {
@@ -73,7 +73,7 @@ exports.list_all_events = function(req, res) {
     else 
       Event.find({client_id:req.param('clientId')},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
-          res.send(err);
+          return next(err);
 
         var max = req.param('max');
         if (max !== undefined) {
@@ -87,7 +87,7 @@ exports.list_all_events = function(req, res) {
     if (cronos !== undefined && cronos === '-1')
       Event.find({event_type:req.param('eventType')},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
-          res.send(err);
+          return next(err);
 
         var max = req.param('max');
         if (max !== undefined) {
@@ -98,7 +98,7 @@ exports.list_all_events = function(req, res) {
     else 
       Event.find({event_type:req.param('eventType')},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
-          res.send(err);
+          return next(err);
 
         var max = req.param('max');
         if (max !== undefined) {
@@ -109,7 +109,7 @@ exports.list_all_events = function(req, res) {
   } else if (req.param('startDate') !== undefined) {
     Event.find({start_date:{$gt:new Date(req.param('startDate')).getTime(),$lt:new Date(req.param('endDate')).getTime()}},function(err, deals) {
       if (err)
-        res.send(err);
+          return next(err);
       
       var max = req.param('max');
       if (max !== undefined) {
@@ -122,7 +122,7 @@ exports.list_all_events = function(req, res) {
     // A full list of ALL...
     Event.find({}, function(err, events) {
       if (err)
-        res.send(err);
+          return next(err);
       var max = req.param('max');
       if (max !== undefined) {
         res.json(events.slice(0,max));
@@ -132,11 +132,11 @@ exports.list_all_events = function(req, res) {
   }
 };
 
-exports.create_a_event = function(req, res) {
+exports.create_a_event = function(req, res,next) {
   var new_event = new Event(req.body);
   new_event.save(function(err, aevent) {
     if (err)
-      res.send(err);
+          return next(err);
     res.json(aevent);
   });
 };
@@ -173,30 +173,30 @@ exports.create_first_call_event = function(deal) {
 };
 
 
-exports.read_a_event = function(req, res) {
+exports.read_a_event = function(req, res,next) {
   Event.findById(req.params.eventId, function(err, aevent) {
     if (err)
-      res.send(err);
+          return next(err);
     
     res.json(aevent);
   });
 };
 
-exports.update_a_event = function(req, res) {
+exports.update_a_event = function(req, res,next) {
   Event.findOneAndUpdate({_id: req.params.eventId}, req.body, {new: true}, function(err, aevent) {
     if (err)
-      res.send(err);
+          return next(err);
     res.json(aevent);
   });
 };
 
-exports.delete_a_event = function(req, res) {
+exports.delete_a_event = function(req, res,next) {
 
   Event.remove({
     _id: req.params.eventId
   }, function(err, aevent) {
     if (err)
-      res.send(err);
+          return next(err);
     res.json({ message: 'Event successfully deleted' });
   });
 };
