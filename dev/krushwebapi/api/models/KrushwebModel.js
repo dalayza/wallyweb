@@ -164,6 +164,12 @@ var ClientSchema = new Schema({
     unique: true
   },
   owner_user_id: {type : Schema.ObjectId, ref : 'User',required : true},
+  status: {
+    type: String,
+    enum:['active','inactive'],
+    required: 'client status is required',
+    default: 'active'
+  },
   address: {
     type: String
   },
