@@ -7,10 +7,10 @@ var mongoose = require('mongoose'),
   Client = mongoose.model('Clients'),
   Deal = mongoose.model('Deals');
 
-exports.list_all_deals = function(req, res) {
+exports.list_all_deals = function(req, res,next) {
   Deal.find().sort("-_id").exec(function(err, deals) {
     if (err)
-      res.send(err);
+      return next(err);
     res.json(deals);
   });
 };
@@ -18,7 +18,7 @@ exports.list_all_deals = function(req, res) {
 /*
  * basically consider a deal from either a Metaclient OR a MetaclientOrganization...
  */
-exports.create_a_deal = function(req, res) {
+exports.create_a_deal = function(req, res,next) {
   
   var new_deal = new Deal(req.body);
 
@@ -51,12 +51,12 @@ exports.create_a_deal = function(req, res) {
 
         new_metaclient_org.save(function(err, metaclient_org) {
           if (err)
-            res.send(err);
+            return next(err);
 
           new_deal.metaclient_org_id = metaclient_org._id;
           new_metaclient.save(function(err, metaclient) {
             if (err)
-              res.send(err);
+              return next(err);
 
             new_deal.metaclient_id = metaclient._id;
    
@@ -69,7 +69,7 @@ exports.create_a_deal = function(req, res) {
             // finally saves the deal...
             new_deal.save(function(err, deal) {
                if (err)
-                 res.send(err);
+                 return next(err);
 
                events.create_first_call_event(deal);
 
@@ -81,7 +81,7 @@ exports.create_a_deal = function(req, res) {
 
       new_metaclient.save(function(err, metaclient) {
           if (err)
-            res.send(err);
+            return next(err);
 
           new_deal.metaclient_id = metaclient._id;
    
@@ -94,7 +94,7 @@ exports.create_a_deal = function(req, res) {
           // finally saves the deal...
           new_deal.save(function(err, deal) {
              if (err)
-               res.send(err);
+               return next(err);
 
              events.create_first_call_event(deal);
 
@@ -118,7 +118,7 @@ exports.create_a_deal = function(req, res) {
 
       new_metaclient_org.save(function(err, metaclient_org) {
           if (err)
-            res.send(err);
+            return next(err);
 
           new_deal.metaclient_org_id = metaclient_org._id;
 
@@ -132,7 +132,7 @@ exports.create_a_deal = function(req, res) {
           // finally saves the deal...
           new_deal.save(function(err, deal) {
              if (err)
-               res.send(err);
+               return next(err);
 
              events.create_first_call_event(deal);
 
@@ -142,29 +142,29 @@ exports.create_a_deal = function(req, res) {
   }
 };
 
-exports.read_a_deal = function(req, res) {
+exports.read_a_deal = function(req, res,next) {
   Deal.findById(req.params.dealId, function(err, deal) {
     if (err)
-      res.send(err);
+      return next(err);
     res.json(deal);
   });
 };
 
-exports.update_a_deal = function(req, res) {
+exports.update_a_deal = function(req, res,next) {
   Deal.findOneAndUpdate({_id: req.params.dealId}, req.body, {new: true}, function(err, deal) {
     if (err)
-      res.send(err);
+      return next(err);
     res.json(deal);
   });
 };
 
-exports.delete_a_deal = function(req, res) {
+exports.delete_a_deal = function(req, res,next) {
 
   Deal.remove({
     _id: req.params.dealId
   }, function(err, deal) {
     if (err)
-      res.send(err);
+      return next(err);
     res.json({ message: 'Deal successfully deleted' });
   });
 };
