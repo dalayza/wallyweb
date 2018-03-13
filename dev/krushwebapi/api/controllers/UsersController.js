@@ -7,7 +7,7 @@ exports.list_all_users = function(req, res,next) {
   User.find({}, function(err, user) {
     if (err)
       return next(err);
-    res.json(user);
+    res.status(200).json({data:user});
   });
 };
 
@@ -16,7 +16,7 @@ exports.create_a_user = function(req, res,next) {
   new_user.save(function(err, user) {
     if (err)
       return next(err);
-    res.json(user);
+    res.status(200).json({data:user});
   });
 };
 
@@ -24,7 +24,7 @@ exports.read_a_user = function(req, res,next) {
   User.findById(req.params.userId, function(err, user) {
     if (err)
       return next(err);
-    res.json(user);
+    res.status(200).json({data:user});
   });
 };
 
@@ -32,7 +32,7 @@ exports.update_a_user = function(req, res,next) {
   User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, function(err, user) {
     if (err)
       return next(err);
-    res.json(user);
+    res.status(200).json({data:user});
   });
 };
 
@@ -43,6 +43,6 @@ exports.delete_a_user = function(req, res,next) {
   }, function(err, user) {
     if (err)
       return next(err);
-    res.json({ message: 'User successfully deleted' });
+    res.status(200).json({ message: 'User successfully deleted' });
   });
 };

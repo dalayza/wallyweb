@@ -8,7 +8,7 @@ exports.list_all_sessions = function(req, res) {
   Session.find({}, function(err, session) {
     if (err)
       res.send(err);
-    res.json(session);
+    res.status(200).json(data{session});
   });
 };
 
@@ -25,10 +25,10 @@ exports.login = function(req, res) {
       new_session.save(function(err, session) {
         if (err)
           res.send(err);
-        res.json(session);
+        res.status(200).json({data:session});
       });
     } else
-      res.json({ message: 'Please check email and password...' });
+      res.status(200).json({ message: 'Please check email and password...' });
   });
 };
 
@@ -43,7 +43,7 @@ exports.logout = function(req, res) {
     }, function(err, session) {
       if (err)
         res.send(err);
-      res.json({ message: 'Session successfully logout' });
+      res.status(200).json({ message: 'Session successfully logout' });
     });
   });
 };

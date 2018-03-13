@@ -16,9 +16,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
     else 
       Event.find({owner_user_id:req.param('ownerUserId')},null, {sort: 'start_date'},function(err, sorted) {
@@ -27,9 +27,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
   } else if (req.param('dealId') !== undefined) {
     var cronos = req.param('cronoOrder');
@@ -41,9 +41,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
     else 
       Event.find({deal_id:req.param('dealId')},null, {sort: 'start_date'},function(err, sorted) {
@@ -52,9 +52,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
   } else if (req.param('clientId') !== undefined) {
     var cronos = req.param('cronoOrder');
@@ -66,9 +66,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
     else 
       Event.find({client_id:req.param('clientId')},null, {sort: 'start_date'},function(err, sorted) {
@@ -77,9 +77,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
   } else if (req.param('eventType') !== undefined) {
     var cronos = req.param('cronoOrder');
@@ -91,9 +91,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
     else 
       Event.find({event_type:req.param('eventType')},null, {sort: 'start_date'},function(err, sorted) {
@@ -102,9 +102,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
   } else if (req.param('startDate') !== undefined) {
     Event.find({start_date:{$gt:new Date(req.param('startDate')).getTime(),$lt:new Date(req.param('endDate')).getTime()}},function(err, deals) {
@@ -113,9 +113,9 @@ exports.list_all_events = function(req, res,next) {
       
       var max = req.param('max');
       if (max !== undefined) {
-        res.json(deals.slice(0,max));
+        res.status(200).json({data:deals.slice(0,max)});
       } else
-        res.json(deals);
+        res.status(200).json({data:deals);
     });
   } else if (req.param('status') !== undefined) {
 
@@ -128,9 +128,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
     else 
       Event.find({'status':req.param('status')},null, {sort: 'start_date'},function(err, sorted) {
@@ -139,9 +139,9 @@ exports.list_all_events = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted);
       });
   } else {
 
@@ -152,9 +152,9 @@ exports.list_all_events = function(req, res,next) {
             return next(err);
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(events.slice(0,max));
+          res.status(200).json({data:events.slice(0,max)});
         } else
-          res.json(events);
+          res.status(200).json({data:events);
       });
 //    } else return next(new Error('Unauthorized'));
   }
@@ -165,7 +165,7 @@ exports.create_a_event = function(req, res,next) {
   new_event.save(function(err, aevent) {
     if (err)
           return next(err);
-    res.json(aevent);
+    res.status(200).({data:aevent);
   });
 };
 
@@ -206,7 +206,7 @@ exports.read_a_event = function(req, res,next) {
     if (err)
           return next(err);
     
-    res.json(aevent);
+    res.status(200).json({data:aevent);
   });
 };
 
@@ -214,7 +214,7 @@ exports.update_a_event = function(req, res,next) {
   Event.findOneAndUpdate({_id: req.params.eventId}, req.body, {new: true}, function(err, aevent) {
     if (err)
           return next(err);
-    res.json(aevent);
+    res.status(200).json({data:aevent);
   });
 };
 
@@ -225,6 +225,6 @@ exports.delete_a_event = function(req, res,next) {
   }, function(err, aevent) {
     if (err)
           return next(err);
-    res.json({ message: 'Event successfully deleted' });
+    res.status(200).json({ message: 'Event successfully deleted' });
   });
 };

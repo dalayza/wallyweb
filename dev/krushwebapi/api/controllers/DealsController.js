@@ -20,9 +20,9 @@ exports.list_all_deals = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted});
       });
     else 
       Deal.find({'status':req.param('status')},null, {sort: 'create_date'},function(err, sorted) {
@@ -31,9 +31,9 @@ exports.list_all_deals = function(req, res,next) {
 
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(sorted.slice(0,max));
+          res.status(200).json({data:sorted.slice(0,max)});
         } else
-          res.json(sorted);
+          res.status(200).json({data:sorted});
       });
   } else {
 
@@ -44,9 +44,9 @@ exports.list_all_deals = function(req, res,next) {
             return next(err);
         var max = req.param('max');
         if (max !== undefined) {
-          res.json(deals.slice(0,max));
+          res.status(200).json({data:deals.slice(0,max)});
         } else
-          res.json(deals);
+          res.status(200).json({data:deals});
       });
    // } else return next(new Error('Unauthorized'));
   }
@@ -110,7 +110,7 @@ exports.create_a_deal = function(req, res,next) {
 
                events.create_first_call_event(deal);
 
-               res.json(deal);
+               res.status(200).json({data:deal});
             });
           });
         });
@@ -135,7 +135,7 @@ exports.create_a_deal = function(req, res,next) {
 
              events.create_first_call_event(deal);
 
-             res.json(deal);
+             res.status(200).json({data:deal});
           });
       });
 
@@ -173,7 +173,7 @@ exports.create_a_deal = function(req, res,next) {
 
              events.create_first_call_event(deal);
 
-             res.json(deal);
+             res.status(200).json({data:deal});
           });
       });
   }
@@ -183,7 +183,7 @@ exports.read_a_deal = function(req, res,next) {
   Deal.findById(req.params.dealId, function(err, deal) {
     if (err)
       return next(err);
-    res.json(deal);
+    res.status(200).json({data:deal});
   });
 };
 
@@ -191,7 +191,7 @@ exports.update_a_deal = function(req, res,next) {
   Deal.findOneAndUpdate({_id: req.params.dealId}, req.body, {new: true}, function(err, deal) {
     if (err)
       return next(err);
-    res.json(deal);
+    res.status(200).json({data:deal});
   });
 };
 
@@ -202,7 +202,7 @@ exports.delete_a_deal = function(req, res,next) {
   }, function(err, deal) {
     if (err)
       return next(err);
-    res.json({ message: 'Deal successfully deleted' });
+    res.status(200).json({ message: 'Deal successfully deleted' });
   });
 };
 
