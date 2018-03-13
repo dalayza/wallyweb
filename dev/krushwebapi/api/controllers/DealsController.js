@@ -8,11 +8,48 @@ var mongoose = require('mongoose'),
   Deal = mongoose.model('Deals');
 
 exports.list_all_deals = function(req, res,next) {
-  Deal.find().sort("-_id").exec(function(err, deals) {
-    if (err)
-      return next(err);
-    res.json(deals);
-  });
+
+  if (req.param('status') !== undefined) {
+
+    var cronos = req.param('cronoOrder');
+
+    if (cronos !== undefined && cronos === '-1')
+      Deal.find({'status':req.param('status')},null, {sort: '-create_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.json(sorted.slice(0,max));
+        } else
+          res.json(sorted);
+      });
+    else 
+      Deal.find({'status':req.param('status')},null, {sort: 'create_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.json(sorted.slice(0,max));
+        } else
+          res.json(sorted);
+      });
+  } else {
+
+    // A full list of ALL... MUST BE ADMIN role...
+   // if (req.user.role === 'admin') {
+      Deal.find({}, function(err, deals) {
+        if (err)
+            return next(err);
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.json(deals.slice(0,max));
+        } else
+          res.json(deals);
+      });
+   // } else return next(new Error('Unauthorized'));
+  }
 };
 
 /*

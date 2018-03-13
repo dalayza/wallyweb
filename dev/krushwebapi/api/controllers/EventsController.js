@@ -119,16 +119,18 @@ exports.list_all_events = function(req, res,next) {
     });
   } else {
 
-    // A full list of ALL...
-    Event.find({}, function(err, events) {
-      if (err)
-          return next(err);
-      var max = req.param('max');
-      if (max !== undefined) {
-        res.json(events.slice(0,max));
-      } else
-        res.json(events);
-    });
+    // A full list of ALL... MUST BE ADMIN role...
+    //if (req.user.role === 'admin') {
+      Event.find({}, function(err, events) {
+        if (err)
+            return next(err);
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.json(events.slice(0,max));
+        } else
+          res.json(events);
+      });
+//    } else return next(new Error('Unauthorized'));
   }
 };
 

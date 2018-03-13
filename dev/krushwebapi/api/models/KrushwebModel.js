@@ -9,7 +9,7 @@ var EventSchema = new Schema({
   },
   event_type: {
     type: String,
-    enum : ['call','meeting','note','e-mail'],
+    enum : ['call','meeting','note','e-mail','wally_call'],
     required: 'event etype is required'
   },
   start_date: {
@@ -115,8 +115,9 @@ var DealSchema = new Schema({
   },
   status: {
     type: String,
+    enum: ['lost','lead','contacted','current','won'],
     required: 'deal status is required',
-    default: 'LEAD'
+    default: 'lead'
   },
   currency: {
     type: String,
