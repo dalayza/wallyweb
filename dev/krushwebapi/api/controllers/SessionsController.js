@@ -8,7 +8,7 @@ exports.list_all_sessions = function(req, res) {
   Session.find({}, function(err, session) {
     if (err)
       res.send(err);
-    res.status(200).json(data{session});
+    res.status(200).json({data:session});
   });
 };
 
