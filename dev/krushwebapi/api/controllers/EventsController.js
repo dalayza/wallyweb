@@ -146,7 +146,7 @@ exports.list_all_events = function(req, res,next) {
   } else {
 
     // A full list of ALL... MUST BE ADMIN role...
-    //if (req.user.role === 'admin') {
+    if (req.user.role === 'admin') {
       Event.find({}, function(err, events) {
         if (err)
             return next(err);
@@ -156,7 +156,7 @@ exports.list_all_events = function(req, res,next) {
         } else
           res.json(events);
       });
-//    } else return next(new Error('Unauthorized'));
+    } else return next(new Error('Unauthorized'));
   }
 };
 
