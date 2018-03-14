@@ -11,5 +11,5 @@ if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/users
 fi
 
-curl --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTZkMDhjMmY2M2RkMDAxNTdjNWNhNSIsImlhdCI6MTUyMDg4MTgwNCwiZXhwIjoxNTIxMzEzODA0fQ.C2qZlDrwEiKv9zui5TknSvZgVDhGS6Csg7ldmuufx-I" -H "Content-Type: application/json" -X POST -d '{"name":"pablo","email":"pablo@gmail.com","phone":"1234-321","passwd":"admin123","role":"manager"}' $target
-curl --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTZkMDhjMmY2M2RkMDAxNTdjNWNhNSIsImlhdCI6MTUyMDg4MTgwNCwiZXhwIjoxNTIxMzEzODA0fQ.C2qZlDrwEiKv9zui5TknSvZgVDhGS6Csg7ldmuufx-I" -H "Content-Type: application/json" -X POST -d '{"name":"segundo","email":"segundo@gmail.com","phone":"1234-31","passwd":"admin123","role":"cs"}' $target
+curl --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTk2YWE0ZjdkYWRkMDA3ZDI1MDhjYyIsImlhdCI6MTUyMTA1MjMyNCwiZXhwIjoxNTIxNDg0MzI0fQ.RxiT4twpC2a0rTwTRYsmvLUeThbujAC9A3mFoQ5J2Zk" -H "Content-Type: application/json" -X POST -d '{"name":"zezinho","email":"zezinho@gmail.com","phone":"1234","passwd":"admin123","role":"cs"}' $target
+curl --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTk2YWE0ZjdkYWRkMDA3ZDI1MDhjYyIsImlhdCI6MTUyMTA1MjMyNCwiZXhwIjoxNTIxNDg0MzI0fQ.RxiT4twpC2a0rTwTRYsmvLUeThbujAC9A3mFoQ5J2Zk" -H "Content-Type: application/json" -X POST -d '{"name":"luizinho","email":"luizinho@gmail.com","phone":"12345","passwd":"admin123","role":"manager"}' $target

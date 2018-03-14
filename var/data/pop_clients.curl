@@ -11,5 +11,5 @@ if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/clients
 fi
 
-curl -H "Content-Type: application/json" -X POST -d '{"name":"VIVO","phone":"000000","email":"net@net.com","owner_user_id":"5aa83913250be200788be397"}' $target
+curl -H "Content-Type: application/json" -X POST --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTk2YWE0ZjdkYWRkMDA3ZDI1MDhjYyIsImlhdCI6MTUyMTA1MjMyNCwiZXhwIjoxNTIxNDg0MzI0fQ.RxiT4twpC2a0rTwTRYsmvLUeThbujAC9A3mFoQ5J2Zk" -d '{"name":"NET","phone":"000000","email":"net@net.com","owner_user_id":"5aa96b42f7dadd007d2508ce"}' $target
 

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # 
 # script for registering a user.
 #
@@ -11,5 +10,8 @@ if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/auth/register
 fi
 
-curl -H "Content-Type: application/json" -X POST -d '{"email":"desavera@gmail.com","passwd":"admin123","role":"admin"}' $target
+curl -H "Content-Type: application/json" -X POST -d '{"email":"mario@agenciamacro.com.br","passwd":"admin123","role":"admin"}' $target
+curl -H "Content-Type: application/json" -X POST -d '{"email":"pablo@agenciamacro.com.br","passwd":"admin123","role":"admin"}' $target
+curl -H "Content-Type: application/json" -X POST -d '{"email":"wallyapp@agenciamacro.com.br","passwd":"admin123","role":"admin"}' $target
+curl -H "Content-Type: application/json" -X POST -d '{"email":"zapier@agenciamacro.com.br","passwd":"admin123","role":"admin"}' $target
 

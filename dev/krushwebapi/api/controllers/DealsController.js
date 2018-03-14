@@ -35,9 +35,10 @@ exports.list_all_deals = function(req, res,next) {
         } else
           res.json(sorted);
       });
+
   } else {
 
-    // A full list of ALL... MUST BE ADMIN role...
+    // A full list of ALL WITH NO RESTRICTION... MUST BE ADMIN role...
     if (req.user.role === 'admin') {
       Deal.find({}, function(err, deals) {
         if (err)
@@ -48,7 +49,32 @@ exports.list_all_deals = function(req, res,next) {
         } else
           res.json(deals);
       });
-    } else return next(new Error('Unauthorized'));
+
+    } else {
+
+        var cronos = req.param('cronoOrder');
+
+        if (cronos !== undefined && cronos === '-1')
+          Deal.find({'owner_user_id':req.userId},null,{sort:'-create_date'}, function(err, deals) {
+            if (err)
+                return next(err);
+            var max = req.param('max');
+            if (max !== undefined) {
+              res.json(deals.slice(0,max));
+            } else
+              res.json(deals);
+          });
+        else
+          Deal.find({'owner_user_id':req.userId},null,{sort:'create_date'}, function(err, deals) {
+            if (err)
+                return next(err);
+            var max = req.param('max');
+            if (max !== undefined) {
+              res.json(deals.slice(0,max));
+            } else
+              res.json(deals);
+          });
+    }
   }
 };
 

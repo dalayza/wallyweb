@@ -5,33 +5,7 @@ var mongoose = require('mongoose'),
 
 exports.list_all_events = function(req, res,next) {
  
-  if (req.param('ownerUserId') !== undefined) {
-
-    var cronos = req.param('cronoOrder');
-
-    if (cronos !== undefined && cronos === '-1')
-      Event.find({owner_user_id:req.param('ownerUserId')},null, {sort: '-start_date'},function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.json(sorted.slice(0,max));
-        } else
-          res.json(sorted);
-      });
-    else 
-      Event.find({owner_user_id:req.param('ownerUserId')},null, {sort: 'start_date'},function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.json(sorted.slice(0,max));
-        } else
-          res.json(sorted);
-      });
-  } else if (req.param('dealId') !== undefined) {
+  if (req.param('dealId') !== undefined) {
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
@@ -107,15 +81,15 @@ exports.list_all_events = function(req, res,next) {
           res.json(sorted);
       });
   } else if (req.param('startDate') !== undefined) {
-    Event.find({start_date:{$gt:new Date(req.param('startDate')).getTime(),$lt:new Date(req.param('endDate')).getTime()}},function(err, deals) {
+    Event.find({start_date:{$gt:new Date(req.param('startDate')).getTime(),$lt:new Date(req.param('endDate')).getTime()}},function(err, events) {
       if (err)
           return next(err);
       
       var max = req.param('max');
       if (max !== undefined) {
-        res.json(deals.slice(0,max));
+        res.json(events.slice(0,max));
       } else
-        res.json(deals);
+        res.json(events);
     });
   } else if (req.param('status') !== undefined) {
 
@@ -145,7 +119,7 @@ exports.list_all_events = function(req, res,next) {
       });
   } else {
 
-    // A full list of ALL... MUST BE ADMIN role...
+    // A full list of ALL WITH NO RESTRICTION... MUST BE ADMIN role...
     if (req.user.role === 'admin') {
       Event.find({}, function(err, events) {
         if (err)
@@ -156,7 +130,31 @@ exports.list_all_events = function(req, res,next) {
         } else
           res.json(events);
       });
-    } else return next(new Error('Unauthorized'));
+    } else {
+
+        var cronos = req.param('cronoOrder');
+
+        if (cronos !== undefined && cronos === '-1')
+          Deal.find({'owner_user_id':req.userId},null,{sort:'-create_date'}, function(err, events) {
+            if (err)
+                return next(err);
+            var max = req.param('max');
+            if (max !== undefined) {
+              res.json(events.slice(0,max));
+            } else
+              res.json(events);
+          });
+        else
+          Deal.find({'owner_user_id':req.userId},null,{sort:'create_date'}, function(err, events) {
+            if (err)
+                return next(err);
+            var max = req.param('max');
+            if (max !== undefined) {
+              res.json(events.slice(0,max));
+            } else
+              res.json(events);
+          });
+    }
   }
 };
 
