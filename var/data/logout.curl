@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+# 
+# script for registering a user.
+#
+
+target=http://localhost/sessions
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/sessions
+fi
+
+curl -H "Content-Type: application/json" -X DELETE --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTZkMDhjMmY2M2RkMDAxNTdjNWNhNSIsImlhdCI6MTUyMDg4MTgwNCwiZXhwIjoxNTIxMzEzODA0fQ.C2qZlDrwEiKv9zui5TknSvZgVDhGS6Csg7ldmuufx-I" -d '{"email":"desavera@gmail.com"}' $target
+

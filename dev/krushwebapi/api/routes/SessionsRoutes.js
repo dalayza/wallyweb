@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(app) {
+module.exports = function(app,auth) {
   var session_controller = require('../controllers/SessionsController');
   var VerifyToken = require('../../auth/VerifyToken');
 
@@ -28,7 +28,7 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Session unique ID confirmation.
  */
-  app.get('/sessions',VerifyToken,session_controller.list_all_sessions);
-  app.post('/sessions',VerifyToken,session_controller.login);
-  app.delete('/sessions',VerifyToken,session_controller.logout);
+  app.get('/sessions',VerifyToken,auth.can('list all sessions'),session_controller.list_all_sessions);
+  app.post('/sessions',VerifyToken,auth.can('login'),session_controller.login);
+  app.delete('/sessions',VerifyToken,auth.can('logout'),session_controller.logout);
 };

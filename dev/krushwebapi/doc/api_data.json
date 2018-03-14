@@ -115,6 +115,29 @@
     "groupTitle": "api"
   },
   {
+    "type": "post",
+    "url": "/users",
+    "title": "Creates a User",
+    "name": "CreateUser",
+    "group": "api",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "JSON",
+            "description": "<p>string with User created.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/UsersRoutes.js",
+    "groupTitle": "api"
+  },
+  {
     "type": "delete",
     "url": "/clients/:id",
     "title": "Delete a Client",
@@ -295,6 +318,42 @@
     "groupTitle": "api"
   },
   {
+    "type": "delete",
+    "url": "/users/:id",
+    "title": "Delete a User",
+    "name": "DeleteUser",
+    "group": "api",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "JSON",
+            "description": "<p>string with User unique ID confirmation.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/UsersRoutes.js",
+    "groupTitle": "api"
+  },
+  {
     "type": "get",
     "url": "/clients",
     "title": "Request All Clients",
@@ -407,6 +466,29 @@
     },
     "version": "0.0.0",
     "filename": "api/routes/SessionsRoutes.js",
+    "groupTitle": "api"
+  },
+  {
+    "type": "get",
+    "url": "/users",
+    "title": "Request All Users",
+    "name": "ListAllUsers",
+    "group": "api",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "JSON",
+            "description": "<p>string with all Users.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/UsersRoutes.js",
     "groupTitle": "api"
   },
   {
@@ -554,6 +636,42 @@
     "groupTitle": "api"
   },
   {
+    "type": "get",
+    "url": "/users/:id",
+    "title": "Request a User",
+    "name": "ReadUser",
+    "group": "api",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "JSON",
+            "description": "<p>string with User.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/UsersRoutes.js",
+    "groupTitle": "api"
+  },
+  {
     "type": "put",
     "url": "/clients/:id",
     "title": "Update a Client",
@@ -695,6 +813,42 @@
     },
     "version": "0.0.0",
     "filename": "api/routes/MetaclientsRoutes.js",
+    "groupTitle": "api"
+  },
+  {
+    "type": "put",
+    "url": "/users/:id",
+    "title": "Update a User",
+    "name": "UpdateUser",
+    "group": "api",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "JSON",
+            "description": "<p>string with User unique ID confirmation.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "api/routes/UsersRoutes.js",
     "groupTitle": "api"
   }
 ]

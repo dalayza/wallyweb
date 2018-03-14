@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(app) {
+module.exports = function(app,auth) {
 
   var events_controller = require('../controllers/EventsController');
   var VerifyToken = require('../../auth/VerifyToken');
@@ -19,8 +19,8 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Event created.
  */
-  app.get('/events',events_controller.list_all_events);
-  app.put('/events',events_controller.create_a_event);
+  app.get('/events',VerifyToken,auth.can('list all events'),events_controller.list_all_events);
+  app.put('/events',VerifyToken,auth.can('create a event'),events_controller.create_a_event);
 
 /**
  * @api {get} /events/:id Request a Event
@@ -51,8 +51,8 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Event unique ID confirmation.
  */
-  app.get('/events/:eventId',events_controller.read_a_event);
-  app.put('/events/:eventId',events_controller.update_a_event)
-  app.delete('/events/:eventId',events_controller.delete_a_event);
+  app.get('/events/:eventId',VerifyToken,auth.can('read a event'),events_controller.read_a_event);
+  app.put('/events/:eventId',VerifyToken,auth.can('update a event'),events_controller.update_a_event)
+  app.delete('/events/:eventId',VerifyToken,auth.can('delete a event'),events_controller.delete_a_event);
 
 };

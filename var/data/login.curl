@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+# 
+# script for login in a user.
+#
+
+target=http://localhost/sessions
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com/sessions
+fi
+
+curl -H "Content-Type: application/json" -X POST --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTk2YWE0ZjdkYWRkMDA3ZDI1MDhjYyIsImlhdCI6MTUyMTA1MjMyNCwiZXhwIjoxNTIxNDg0MzI0fQ.RxiT4twpC2a0rTwTRYsmvLUeThbujAC9A3mFoQ5J2Zk" -d '{"email":"zezinho@gmail.com","passwd":"admin123"}' $target
+

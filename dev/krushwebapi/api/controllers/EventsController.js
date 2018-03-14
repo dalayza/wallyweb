@@ -5,33 +5,8 @@ var mongoose = require('mongoose'),
 
 exports.list_all_events = function(req, res,next) {
  
-  if (req.param('ownerUserId') !== undefined) {
+  if (req.param('dealId') !== undefined) {
 
-    var cronos = req.param('cronoOrder');
-
-    if (cronos !== undefined && cronos === '-1')
-      Event.find({owner_user_id:req.param('ownerUserId')},null, {sort: '-start_date'},function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
-    else 
-      Event.find({owner_user_id:req.param('ownerUserId')},null, {sort: 'start_date'},function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
-  } else if (req.param('dealId') !== undefined) {
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
@@ -145,8 +120,8 @@ exports.list_all_events = function(req, res,next) {
       });
   } else {
 
-    // A full list of ALL... MUST BE ADMIN role...
-    //if (req.user.role === 'admin') {
+    // A full list of ALL WITH NO RESTRICTION... MUST BE ADMIN role...
+    if (req.user.role === 'admin') {
       Event.find({}, function(err, events) {
         if (err)
             return next(err);
@@ -156,7 +131,31 @@ exports.list_all_events = function(req, res,next) {
         } else
           res.status(200).json({data:events});
       });
-//    } else return next(new Error('Unauthorized'));
+    } else {
+
+        var cronos = req.param('cronoOrder');
+
+        if (cronos !== undefined && cronos === '-1')
+          Deal.find({'owner_user_id':req.userId},null,{sort:'-create_date'}, function(err, events) {
+            if (err)
+                return next(err);
+            var max = req.param('max');
+            if (max !== undefined) {
+              res.json(events.slice(0,max));
+            } else
+              res.json(events);
+          });
+        else
+          Deal.find({'owner_user_id':req.userId},null,{sort:'create_date'}, function(err, events) {
+            if (err)
+                return next(err);
+            var max = req.param('max');
+            if (max !== undefined) {
+              res.json(events.slice(0,max));
+            } else
+              res.json(events);
+          });
+    }
   }
 };
 

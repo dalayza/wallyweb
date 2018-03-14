@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(app) {
+module.exports = function(app,auth) {
   var metaclients_controller = require('../controllers/MetaclientsController');
   var VerifyToken = require('../../auth/VerifyToken');
 
@@ -18,8 +18,8 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Metaclient created.
  */
-  app.get('/metaclients',metaclients_controller.list_all_metaclients);
-  app.post('/metaclients',metaclients_controller.create_a_metaclient);
+  app.get('/metaclients',VerifyToken,metaclients_controller.list_all_metaclients);
+  app.post('/metaclients',VerifyToken,metaclients_controller.create_a_metaclient);
 
 /**
  * @api {get} /metaclients/:id Request a Metaclient
@@ -50,7 +50,7 @@ module.exports = function(app) {
  *
  * @apiSuccess {String} JSON string with Metaclient unique ID confirmation.
  */
-  app.get('/metaclients/:metaclientId',metaclients_controller.read_a_metaclient);
-  app.put('/metaclients/:metaclientId',metaclients_controller.update_a_metaclient);
-  app.delete('/metaclients/:metaclientId',metaclients_controller.delete_a_metaclient);
+  app.get('/metaclients/:metaclientId',VerifyToken,metaclients_controller.read_a_metaclient);
+  app.put('/metaclients/:metaclientId',VerifyToken,metaclients_controller.update_a_metaclient);
+  app.delete('/metaclients/:metaclientId',VerifyToken,metaclients_controller.delete_a_metaclient);
 };

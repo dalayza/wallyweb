@@ -3,6 +3,9 @@
 var mongoose = require('mongoose'),
   User = mongoose.model('Users');
 
+var bcrypt = require('bcryptjs');
+
+
 exports.list_all_users = function(req, res,next) {
   User.find({}, function(err, user) {
     if (err)
@@ -13,6 +16,11 @@ exports.list_all_users = function(req, res,next) {
 
 exports.create_a_user = function(req, res,next) {
   var new_user = new User(req.body);
+
+  // basic encryption...
+  var hashedPassword = bcrypt.hashSync(req.body.passwd, 8);
+  new_user.passwd = hashedPassword;
+
   new_user.save(function(err, user) {
     if (err)
       return next(err);
