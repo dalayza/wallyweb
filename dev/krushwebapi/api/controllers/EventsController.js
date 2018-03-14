@@ -179,7 +179,7 @@ exports.create_first_call_event = function(deal) {
                                "event_type":"call",
                                "owner_user_id":deal.owner_user_id,
                                "client_id":deal.client_id,
-                               "deal_id":deal.deal_id});
+                               "deal_id":deal._id});
 
     new_event.save(function(err, aevent) {
       if (err)
@@ -190,7 +190,7 @@ exports.create_first_call_event = function(deal) {
     var new_event = new Event({"title":"FIRST CALL",
                                "event_type":"call",
                                "client_id":deal.client_id,
-                               "deal_id":deal.deal_id});
+                               "deal_id":deal._id});
 
     new_event.save(function(err, aevent) {
       if (err)
