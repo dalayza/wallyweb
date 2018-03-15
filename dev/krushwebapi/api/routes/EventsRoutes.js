@@ -20,7 +20,7 @@ module.exports = function(app) {
  * @apiSuccess {String} JSON string with Event created.
  */
   app.get('/events',events_controller.list_all_events);
-  app.put('/events',events_controller.create_a_event);
+  app.post('/events',events_controller.create_a_event);
 
 /**
  * @api {get} /events/:id Request a Event
