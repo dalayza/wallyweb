@@ -19,8 +19,9 @@ module.exports = function(app,auth) {
  *
  * @apiSuccess {String} JSON string with Event created.
  */
+
   app.get('/events',VerifyToken,auth.can('list all events'),events_controller.list_all_events);
-  app.put('/events',VerifyToken,auth.can('create a event'),events_controller.create_a_event);
+  app.post('/events',VerifyToken,auth.can('create a event'),events_controller.create_a_event);
 
 /**
  * @api {get} /events/:id Request a Event
