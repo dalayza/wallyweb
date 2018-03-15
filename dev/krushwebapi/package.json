@@ -25,6 +25,7 @@
   "scripts": {
     "deploy": "gcloud app deploy",
     "start": "node app.js",
+    "stage": "node app.js dev",
     "test": "mocha",
     "e2e": "rm -rf node_modules/ &&  samples test build --deploy --timeout 20m --builderProject $GCLOUD_PROJECT",
     "cover": "nyc --cache npm test; nyc report --reporter=html"

@@ -211,7 +211,10 @@ var UserSchema = new Schema({
     type: String
   },
   role: {
-    type: String
+    type: String,
+    enum:['admin','manager','cs'],
+    required : 'user role is required',
+    default : 'cs'
   },
   services_credentials: [{
     service: {

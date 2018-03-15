@@ -22,7 +22,6 @@ router.post('/register', function(req, res) {
     "name" : req.body.name,
     "email" : req.body.email,
     "phone" : req.body.phone,
-    "role" : req.body.role,
     "passwd" : hashedPassword
   });
   new_user.save(function (err, user) {
@@ -31,7 +30,7 @@ router.post('/register', function(req, res) {
     // create a token
     var token = jwt.sign({ id: user._id }, config.secret, {
       //expiresIn: 86400 // expires in 24 hours
-      expiresIn: 432000 // expires in 5 days. TODO : refresh tokens
+      //expiresIn: 432000 // expires in 5 days. TODO : refresh tokens
     });
     res.status(200).send({ auth: true, token: token });
   }); 
