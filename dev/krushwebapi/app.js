@@ -13,7 +13,7 @@ var express = require('express'),
 
 //mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-if (process.env.WALLY_ENV === 'dev')
+if (process.argv[2] === 'dev')
   mongoose.connect('mongodb://admin:admin123@ds253918.mlab.com:53918/wallytmpdb');
 else
   mongoose.connect('mongodb://admin:admin123@ds259865.mlab.com:59865/krushwebdb');
@@ -99,12 +99,12 @@ app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
-if (process.env.WALLY_ENV === 'dev') {
+if (process.argv[2] === 'dev') {
 
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     //res.render('error', {
-    res.send({message: err.message,error: err});
+    res.send({message: err.message, error: err });
   });
 
 } else {
