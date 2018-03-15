@@ -10,8 +10,8 @@ var Zap = {
         api_key_request_payload = {
             method: 'POST',
             url: 'http://api.agenciamacro.com/auth/register',
-//            params: bundle.auth_fields,
-            params: {"name":"pablitosss","email":"pablitossssss@gmail.com","phone":"10985608795494586084506959","passwd":"admin123"},
+            //data: JSON.stringify(bundle.auth_fields),
+            data: '{"email":"wallyclient-zap3@agenciamacro.com","passwd":"admin123" , "role":"admin"}',
             headers: {
               'Content-Type': 'application/json',  // Could be anything.
               Accept: 'application/json'
