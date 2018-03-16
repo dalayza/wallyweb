@@ -34,6 +34,7 @@
     "apidoc": "^0.17.6",
     "chai-http": "^3.0.0",
     "ejs": "^2.5.7",
+    "express-winston": "^2.5.0",
     "json-markdown": "^1.0.5",
     "jsonschema-md": "^0.2.1",
     "mocha": "^5.0.1",
