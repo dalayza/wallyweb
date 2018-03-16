@@ -32,6 +32,7 @@ router.post('/register', function(req, res) {
       //expiresIn: 86400 // expires in 24 hours
       //expiresIn: 432000 // expires in 5 days. TODO : refresh tokens
     });
+
     res.status(200).send({ auth: true, token: token });
   }); 
 });
@@ -54,6 +55,7 @@ router.post('/login', function(req, res) {
     var token = jwt.sign({ id: user._id }, config.secret, {
       expiresIn: 86400 // expires in 24 hours
     });
+
     res.status(200).send({ auth: true, token: token });
   });
 });
