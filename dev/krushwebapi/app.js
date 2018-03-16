@@ -2,7 +2,6 @@ var express = require('express'),
   app = express(),
   port = process.env.PORT || 8080,
   mongoose = require('mongoose'),
-  morgan = require('morgan'),
   Deal = require('./api/models/KrushwebModel'),
   Client = require('./api/models/KrushwebModel'),
   Session = require('./api/models/KrushwebModel'),
@@ -10,6 +9,11 @@ var express = require('express'),
   Metaclient = require('./api/models/KrushwebModel'),
   User = require('./api/models/KrushwebModel'),
   bodyParser = require('body-parser');
+
+// the logging
+const level = process.env.LOG_LEVEL || 'info';
+var expressWinston = require('express-winston');
+var winston = require('winston');
 
 //mongoose instance connection url connection
 mongoose.Promise = global.Promise;
@@ -76,6 +80,21 @@ app.use(function(err, req, res, next) {
   }
 });
 
+// Place the express-winston logger before the router.
+app.use(expressWinston.logger({
+  transports: [
+    new winston.transports.Console({
+      json: true,
+      level: level,
+      timestamp: function () {
+         return (new Date()).toISOString();
+      },
+      colorize: true
+    })
+  ]
+}));
+
+
 // the routes
 var users_routes = require('./api/routes/UsersRoutes');
 var metaclients_routes = require('./api/routes/MetaclientsRoutes');
@@ -99,21 +118,16 @@ app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
-if (process.argv[2] === 'dev') {
-
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    //res.render('error', {
-    res.send({message: err.message, error: err });
-  });
-
-} else {
-
-  // production error handler
-  // no stacktraces leaked to user
-  app.use(function(err, req, res, next) {
-      res.status(err.status || 500);
-      //res.render('error', {
-      res.send({message: err.message});
-  });
-}
+// Place the express-winston errorLogger after the router.
+app.use(expressWinston.errorLogger({
+  transports: [
+    new winston.transports.Console({
+      json: true,
+      level: level,
+      timestamp: function () {
+         return (new Date()).toISOString();
+      },
+      colorize: true
+    })
+  ]
+}));
