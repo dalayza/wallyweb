@@ -33,8 +33,22 @@ exports.list_all_events = function(req, res,next) {
       });
   } else if (req.param('clientId') !== undefined) {
     var cronos = req.param('cronoOrder');
+    var astatus = req.param('status');
 
     if (cronos !== undefined && cronos === '-1')
+
+     if (astatus !== undefined)
+      Event.find({client_id:req.param('clientId'),'status':astatus},null, {sort: '-start_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.status(200).json({data:sorted.slice(0,max)});
+        } else
+          res.status(200).json({data:sorted});
+      });
+     else {
       Event.find({client_id:req.param('clientId')},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
           return next(err);
@@ -45,7 +59,20 @@ exports.list_all_events = function(req, res,next) {
         } else
           res.status(200).json({data:sorted});
       });
+     }
     else 
+     if (astatus !== undefined)
+      Event.find({client_id:req.param('clientId'),'status':astatus},null, {sort: 'start_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.status(200).json({data:sorted.slice(0,max)});
+        } else
+          res.status(200).json({data:sorted});
+      });
+     else
       Event.find({client_id:req.param('clientId')},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
           return next(err);
@@ -136,7 +163,7 @@ exports.list_all_events = function(req, res,next) {
         var cronos = req.param('cronoOrder');
 
         if (cronos !== undefined && cronos === '-1')
-          Deal.find({'owner_user_id':req.userId},null,{sort:'-create_date'}, function(err, events) {
+          Event.find({'owner_user_id':req.userId},null,{sort:'-create_date'}, function(err, events) {
             if (err)
                 return next(err);
             var max = req.param('max');
@@ -146,7 +173,7 @@ exports.list_all_events = function(req, res,next) {
               res.json(events);
           });
         else
-          Deal.find({'owner_user_id':req.userId},null,{sort:'create_date'}, function(err, events) {
+          Event.find({'owner_user_id':req.userId},null,{sort:'create_date'}, function(err, events) {
             if (err)
                 return next(err);
             var max = req.param('max');
