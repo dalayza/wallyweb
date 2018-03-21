@@ -1,1 +1,18 @@
-curl -X GET http://api.agenciamacro.com.br/clients
+#!/bin/bash
+
+
+# 
+# script for listing Deals documents.
+#
+
+target=http://localhost/clients
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/clients/5aa093191fcfc800199c7628
+fi
+if [[ $1 == "-s" ]]; then
+  target=http://http://209.177.93.246/clients
+fi
+
+curl -H "Content-Type: application/json" -X GET --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWZjY2Q2M2QxMTllMDAxNTQwZWJhYyIsImlhdCI6MTUyMTQ3MDY3OH0.803kS6Srh5mV8yzDyxDbC54keSR05I1WkbZ9GWF_EC8" $target
+

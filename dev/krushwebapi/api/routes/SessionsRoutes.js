@@ -7,6 +7,7 @@ module.exports = function(app,auth) {
  * @api {get} /sessions Request All Sessions
  * @apiName ListAllSessions
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with all Sessions.
  */
@@ -15,6 +16,7 @@ module.exports = function(app,auth) {
  * @api {post} /sessions Creates a Session
  * @apiName CreateSession
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with Session created.
  */
@@ -23,6 +25,7 @@ module.exports = function(app,auth) {
  * @api {delete} /sessions/:id Delete a Session
  * @apiName DeleteSession
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Session unique ID.
  *

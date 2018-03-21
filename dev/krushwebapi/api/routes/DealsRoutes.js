@@ -9,6 +9,7 @@ module.exports = function(app,auth) {
  * @api {get} /deals Request All Deals
  * @apiName ListAllDeals
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with all Deals.
  */
@@ -17,6 +18,7 @@ module.exports = function(app,auth) {
  * @api {post} /deals Creates a Deal
  * @apiName CreateDeal
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with Deal created.
  */
@@ -27,6 +29,7 @@ module.exports = function(app,auth) {
  * @api {get} /deals/:id Request a Deal
  * @apiName ReadDeal 
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Deal unique ID.
  *
@@ -37,6 +40,7 @@ module.exports = function(app,auth) {
  * @api {put} /deals/:id Update a Deal
  * @apiName UpdateDeal
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Deal unique ID.
  *
@@ -47,6 +51,7 @@ module.exports = function(app,auth) {
  * @api {delete} /deals/:id Delete a Deal
  * @apiName DeleteDeal
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Deal unique ID.
  *

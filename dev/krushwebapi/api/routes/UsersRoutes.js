@@ -8,6 +8,7 @@ module.exports = function(app,auth) {
  * @api {get} /users Request All Users
  * @apiName ListAllUsers
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with all Users.
  */
@@ -16,6 +17,7 @@ module.exports = function(app,auth) {
  * @api {post} /users Creates a User
  * @apiName CreateUser
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with User created.
  */
@@ -26,6 +28,7 @@ module.exports = function(app,auth) {
  * @api {get} /users/:id Request a User
  * @apiName ReadUser 
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id User unique ID.
  *
@@ -36,6 +39,7 @@ module.exports = function(app,auth) {
  * @api {put} /users/:id Update a User
  * @apiName UpdateUser
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id User unique ID.
  *
@@ -46,6 +50,7 @@ module.exports = function(app,auth) {
  * @api {delete} /users/:id Delete a User
  * @apiName DeleteUser
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id User unique ID.
  *

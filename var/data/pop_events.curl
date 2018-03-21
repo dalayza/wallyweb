@@ -1,1 +1,21 @@
-curl -H "Content-Type: application/json" -X POST -d '{"title":"event 1","etype":"note","description":"integrated test for events","status":"done"}' http://api.agenciamacro.com/events
+#!/bin/bash
+
+
+# 
+# script for populating Deals documents.
+#
+
+target=http://localhost/events
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/events
+fi
+
+if [[ $1 == "-s" ]]; then
+  target=http://209.177.93.246/events
+fi
+
+token_header_param="x-access-token:"
+token_param=$token_header_param${WALLY_TOKEN}
+
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"title":"event 1","event_type":"note","description":"integrated test for events"}' $target

@@ -7,6 +7,7 @@ module.exports = function(app,auth) {
  * @api {get} /metaclients Request All Metaclients
  * @apiName ListAllMetaclients
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with all Metaclients.
  */
@@ -15,6 +16,7 @@ module.exports = function(app,auth) {
  * @api {post} /metaclients Creates a Metaclient
  * @apiName CreateMetaclient
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with Metaclient created.
  */
@@ -25,6 +27,7 @@ module.exports = function(app,auth) {
  * @api {get} /metaclients/:id Request a Metaclient
  * @apiName ReadMetaclient 
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Metaclient unique ID.
  *
@@ -35,6 +38,7 @@ module.exports = function(app,auth) {
  * @api {put} /metaclients/:id Update a Metaclient
  * @apiName UpdateMetaclient
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Metaclient unique ID.
  *
@@ -45,6 +49,7 @@ module.exports = function(app,auth) {
  * @api {delete} /metaclients/:id Delete a Metaclient
  * @apiName DeleteMetaclient
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Metaclient unique ID.
  *

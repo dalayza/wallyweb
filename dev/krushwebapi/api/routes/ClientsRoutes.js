@@ -7,6 +7,7 @@ module.exports = function(app,auth) {
  * @api {get} /clients Request All Clients
  * @apiName ListAllClients
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with all Clients.
  */
@@ -15,16 +16,18 @@ module.exports = function(app,auth) {
  * @api {post} /clients Creates a Client
  * @apiName CreateClient
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with Client created.
  */
-  app.get('/clients',auth.can('list all clients'),VerifyToken,clients_controller.list_all_clients);
+  app.get('/clients',VerifyToken,auth.can('list all clients'),clients_controller.list_all_clients);
   app.post('/clients',VerifyToken,auth.can('create a client'),clients_controller.create_a_client);
 
 /**
  * @api {get} /clients/:id Request a Client
  * @apiName ReadClient 
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Client unique ID.
  *
@@ -35,6 +38,7 @@ module.exports = function(app,auth) {
  * @api {put} /clients/:id Update a Client
  * @apiName UpdateClient
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Client unique ID.
  *
@@ -45,6 +49,7 @@ module.exports = function(app,auth) {
  * @api {delete} /clients/:id Delete a Client
  * @apiName DeleteClient
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Client unique ID.
  *

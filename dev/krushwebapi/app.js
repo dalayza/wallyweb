@@ -109,6 +109,9 @@ events_routes(app,auth);
 metaclients_routes(app,auth); 
 sessions_routes(app,auth); 
 
+// the docs
+app.use('/doc', express.static('doc'));
+
 // starts the server...
 app.listen(port);
 

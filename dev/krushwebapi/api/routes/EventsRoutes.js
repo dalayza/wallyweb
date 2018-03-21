@@ -8,6 +8,7 @@ module.exports = function(app,auth) {
  * @api {get} /events Request All Events
  * @apiName ListAllEvents
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with all Events.
  */
@@ -16,6 +17,7 @@ module.exports = function(app,auth) {
  * @api {post} /events Creates a Event
  * @apiName CreateEvent
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiSuccess {String} JSON string with Event created.
  */
@@ -27,6 +29,7 @@ module.exports = function(app,auth) {
  * @api {get} /events/:id Request a Event
  * @apiName ReadEvent 
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Event unique ID.
  *
@@ -37,6 +40,7 @@ module.exports = function(app,auth) {
  * @api {put} /events/:id Update a Event
  * @apiName UpdateEvent
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Event unique ID.
  *
@@ -47,6 +51,7 @@ module.exports = function(app,auth) {
  * @api {delete} /events/:id Delete a Event
  * @apiName DeleteEvent
  * @apiGroup api
+ * @apiPermission authenticated user
  *
  * @apiParam {Number} id Event unique ID.
  *
