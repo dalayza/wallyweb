@@ -11,5 +11,13 @@ if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/clients
 fi
 
-curl -H "Content-Type: application/json" -X POST --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTk2YWE0ZjdkYWRkMDA3ZDI1MDhjYyIsImlhdCI6MTUyMTA1MjMyNCwiZXhwIjoxNTIxNDg0MzI0fQ.RxiT4twpC2a0rTwTRYsmvLUeThbujAC9A3mFoQ5J2Zk" -d '{"name":"NET","phone":"000000","email":"net@net.com","owner_user_id":"5aa96b42f7dadd007d2508ce"}' $target
+if [[ $1 == "-s" ]]; then
+  target=http://209.177.93.246/clients
+fi
+
+token_header_param="x-access-token:"
+token_param=$token_header_param${WALLY_TOKEN}
+
+#curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"NET","phone":"000000","email":"net@net.com","owner_user_id":"5ab286192b18ca0037268da7"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"VIVO","phone":"100000","email":"vivo@net.com","owner_user_id":"5ab286192b18ca0037268da7"}' $target
 

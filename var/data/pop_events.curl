@@ -18,4 +18,5 @@ fi
 token_header_param="x-access-token:"
 token_param=$token_header_param${WALLY_TOKEN}
 
-curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"title":"event 1","event_type":"note","description":"integrated test for events"}' $target
+#curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"title":"event 1","event_type":"note","description":"integrated test for events","client_id":"5ab2a3e82b18ca0037268dab","status":"done"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"title":"event 2","event_type":"call","description":"integrated test for events","client_id":"5ab2a5c62b18ca0037268dad","status":"open"}' $target
