@@ -5,7 +5,8 @@
 # script for listing Events documents.
 #
 
-target=http://localhost/events?clientId=5ab2a3e82b18ca0037268dab\&status=open
+#target=http://localhost/events?clientId=5ab2a3e82b18ca0037268dab\&status=open
+target=http://localhost/events
 
 if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/events
