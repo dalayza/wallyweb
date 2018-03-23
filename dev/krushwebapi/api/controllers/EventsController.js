@@ -4,13 +4,15 @@ var mongoose = require('mongoose'),
   Event = mongoose.model('Events');
 
 exports.list_all_events = function(req, res,next) {
+
+  var now = new Date();
  
   if (req.param('dealId') !== undefined) {
 
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Event.find({deal_id:req.param('dealId')},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({deal_id:req.param('dealId'),start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -21,7 +23,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Event.find({deal_id:req.param('dealId')},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({deal_id:req.param('dealId'),start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -32,13 +34,14 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
   } else if (req.param('clientId') !== undefined) {
+
     var cronos = req.param('cronoOrder');
     var astatus = req.param('status');
 
     if (cronos !== undefined && cronos === '-1')
 
      if (astatus !== undefined)
-      Event.find({client_id:req.param('clientId'),'status':astatus},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({client_id:req.param('clientId'),'status':astatus,start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -49,7 +52,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
      else {
-      Event.find({client_id:req.param('clientId')},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({client_id:req.param('clientId'),start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -62,7 +65,7 @@ exports.list_all_events = function(req, res,next) {
      }
     else 
      if (astatus !== undefined)
-      Event.find({client_id:req.param('clientId'),'status':astatus},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({client_id:req.param('clientId'),'status':astatus,start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -73,7 +76,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
      else
-      Event.find({client_id:req.param('clientId')},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({client_id:req.param('clientId'),start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -87,7 +90,7 @@ exports.list_all_events = function(req, res,next) {
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Event.find({event_type:req.param('eventType')},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({event_type:req.param('eventType'),start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -98,7 +101,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Event.find({event_type:req.param('eventType')},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({event_type:req.param('eventType'),start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -124,7 +127,7 @@ exports.list_all_events = function(req, res,next) {
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Event.find({'status':req.param('status')},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({'status':req.param('status'),start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -135,7 +138,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Event.find({'status':req.param('status')},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({'status':req.param('status'),start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
         if (err)
           return next(err);
 
@@ -147,23 +150,21 @@ exports.list_all_events = function(req, res,next) {
       });
   } else {
 
+
     // A full list of ALL WITH NO RESTRICTION... MUST BE ADMIN role...
     if (req.user.role === 'admin') {
       Event.find({}, function(err, events) {
         if (err)
             return next(err);
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:events.slice(0,max)});
-        } else
-          res.status(200).json({data:events});
+
+        res.status(200).json({data:events});
       });
     } else {
 
         var cronos = req.param('cronoOrder');
 
         if (cronos !== undefined && cronos === '-1')
-          Event.find({'owner_user_id':req.userId},null,{sort:'-create_date'}, function(err, events) {
+          Event.find({'owner_user_id':req.userId,start_date:{$lte:now}},null,{sort:'-create_date'}, function(err, events) {
             if (err)
                 return next(err);
             var max = req.param('max');
@@ -173,7 +174,7 @@ exports.list_all_events = function(req, res,next) {
               res.json(events);
           });
         else
-          Event.find({'owner_user_id':req.userId},null,{sort:'create_date'}, function(err, events) {
+          Event.find({'owner_user_id':req.userId,start_date:{$lte:now}},null,{sort:'create_date'}, function(err, events) {
             if (err)
                 return next(err);
             var max = req.param('max');
