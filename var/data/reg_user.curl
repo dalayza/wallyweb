@@ -17,4 +17,4 @@ fi
 # ADMIN roles should be added manually to the database...
 # the default role should be the lowest level possible.
 #
-curl -H "Content-Type: application/json" -X POST -d '{"email":"webmaster@agenciamacro.com.br","passwd":"goiti5o6","name":"Admin Agencia Macro"}' $target
+curl -H "Content-Type: application/json" -X POST -d '{"email":"admin@agenciamacro.com.br","passwd":"goiti5o6","name":"Admin Agencia Macro"}' $target
