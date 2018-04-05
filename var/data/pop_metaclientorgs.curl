@@ -1,0 +1,21 @@
+#!/bin/bash
+
+
+# 
+# script for populating MetaclientOrganizations documents.
+#
+
+target=http://localhost/metaclientorgs
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/metaclientorgs
+fi
+
+if [[ $1 == "-s" ]]; then
+  target=http://209.177.93.246/metaclientorgs
+fi
+
+token_header_param="x-access-token:"
+token_param=$token_header_param${WALLY_TOKEN}
+
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"Banco Bradesco","regid":"168.998.876-0001/78"}' $target

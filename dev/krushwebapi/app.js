@@ -98,6 +98,7 @@ app.use(expressWinston.logger({
 // the routes
 var users_routes = require('./api/routes/UsersRoutes');
 var metaclients_routes = require('./api/routes/MetaclientsRoutes');
+var metaclient_orgs_routes = require('./api/routes/MetaclientOrgsRoutes');
 var events_routes = require('./api/routes/EventsRoutes');
 var deals_routes = require('./api/routes/DealsRoutes');
 var clients_routes = require('./api/routes/ClientsRoutes');
@@ -107,6 +108,7 @@ clients_routes(app,auth);
 users_routes(app,auth); 
 events_routes(app,auth); 
 metaclients_routes(app,auth); 
+metaclient_orgs_routes(app,auth); 
 sessions_routes(app,auth); 
 
 // the docs
