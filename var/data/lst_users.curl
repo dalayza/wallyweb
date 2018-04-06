@@ -1,8 +1,7 @@
 #!/bin/bash
 
-
 # 
-# script for listing Users documents.
+# script for listing Deals documents.
 #
 
 target=http://localhost/users
@@ -10,5 +9,13 @@ target=http://localhost/users
 if [[ $1 == "-p" ]]; then
   target=http://api.agenciamacro.com.br/users
 fi
+if [[ $1 == "-s" ]]; then
+  target=http://209.177.93.246/users
+fi
 
-curl -X GET --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTk2YWE0ZjdkYWRkMDA3ZDI1MDhjYyIsImlhdCI6MTUyMTA1MjMyNCwiZXhwIjoxNTIxNDg0MzI0fQ.RxiT4twpC2a0rTwTRYsmvLUeThbujAC9A3mFoQ5J2Zk" $target
+token_header_param="x-access-token:"
+token_param=$token_header_param${WALLY_TOKEN}
+
+curl --header "${token_param}" -H "Content-Type: application/json" -X GET $target 
+
+

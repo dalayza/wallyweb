@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+# 
+# script for listing Metaclients documents.
+#
+
+target=http://localhost/metaclients
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com.br/metaclients
+fi
+if [[ $1 == "-s" ]]; then
+  target=http://209.177.93.246/metaclients
+fi
+
+token_header_param="x-access-token:"
+token_param=$token_header_param${WALLY_TOKEN}
+
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"marcos aurelio","email":"marcosaurelio@gmail.com"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"carlos azevedo","email":"carlosazevedo@gmail.com"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"pedro angelo","email":"pedroangelo@gmail.com"}' $target

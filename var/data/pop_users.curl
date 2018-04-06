@@ -18,5 +18,5 @@ fi
 token_header_param="x-access-token:"
 token_param=$token_header_param${WALLY_TOKEN}
 
-curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"dodo","email":"dodo@gmail.com","phone":"234","passwd":"admin123","role":"cs"}' $target
-#curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"luizinho","email":"luizinho@gmail.com","phone":"12345","passwd":"admin123","role":"manager"}' $target
+#curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"dodo","email":"dodo@gmail.com","phone":"234","passwd":"admin123","role":"cs"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"luizinho","email":"luizinho@gmail.com","phone":"12345","passwd":"admin123","role":"manager"}' $target

@@ -18,4 +18,6 @@ fi
 token_header_param="x-access-token:"
 token_param=$token_header_param${WALLY_TOKEN}
 
-curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"product":"deal 2","metaclient_name":"joao almeida","metaclient_phone":"97598-4212","metaclient_email":"joaoalmeida@gmail.com","client_id":"5aa96d39f7dadd007d2508cf","owner_user_id":"5aa96b41f7dadd007d2508cd"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"product":"deal 1","metaclient_name":"mario vera","metaclient_phone":"98598-4212","metaclient_email":"desavera@gmail.com","client_id":"5ac682032eeebc00270a9ff1","owner_user_id":"5ac680232eeebc00270a9fee"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"product":"deal 2","metaclient_name":"pablo sao thiago","metaclient_phone":"98888-8888","metaclient_email":"pablosantiago@gmail.com","client_id":"5ac682032eeebc00270a9ff1","owner_user_id":"5ac680232eeebc00270a9fee"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"product":"deal 3","metaclient_name":"Leonardo Marques","metaclient_phone":"97555-5512","metaclient_email":"leomarques@gmail.com","client_id":"5aa96d39f7dadd007d2508cf","owner_user_id":"5ac680232eeebc00270a9fee"}' $target

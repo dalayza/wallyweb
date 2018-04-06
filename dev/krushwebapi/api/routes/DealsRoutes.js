@@ -10,6 +10,9 @@ module.exports = function(app,auth) {
  * @apiName ListAllDeals
  * @apiGroup api
  * @apiPermission authenticated user
+ * @apiParam {String} [status]  Optional Deal status filter sorted by date.
+ * @apiParam {String} [metaclientId]  Optional Metaclient filter sorted by date..
+ * @apiParam {String} [metaclientorgId]  Optional Metaclient Organization filter sorted by date..
  *
  * @apiSuccess {String} JSON string with all Deals.
  */

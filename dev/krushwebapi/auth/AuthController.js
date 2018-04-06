@@ -15,6 +15,21 @@ var mongoose = require('mongoose'),
   User = mongoose.model('Users');
 
 
+/**
+ * @api {post} /register Register a new user
+ * @apiName RegisterUser
+ * @apiGroup auth
+ * @apiParam {String} email Required new user unique email.
+ * @apiParam {String} passwd Required new user password.
+ * @apiParam {String} [name] Optional new user name.
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "email": "xyz@mail.com",
+ *       "passwd": "[A PASSWORD]",
+         "name":"X de Y Z"
+ *     }
+ * @apiPermission none
+ */
 router.post('/register', function(req, res) {
   
   var hashedPassword = bcrypt.hashSync(req.body.passwd, 8);
@@ -46,11 +61,23 @@ router.get('/me', VerifyToken, function(req, res, next) {
   });
 });
 
-router.post('/login', function(req, res) {
+/**
+ * @api {post} /login Login a user
+ * @apiName LoginUser
+ * @apiGroup auth
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *       "email": "xyz@mail.com",
+ *       "passwd": "[A PASSWORD]",
+ *     }
+ * @apiPermission authenticated user
+ */
+router.post('/login',VerifyToken, function(req, res) {
+  // TODO : trigger /sessions
   User.findOne({ email: req.body.email }, function (err, user) {
     if (err) return res.status(500).send('Error on the server.');
     if (!user) return res.status(404).send('No user found.');
-    var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+    var passwordIsValid = bcrypt.compareSync(req.body.passwd,user.passwd);
     if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
     var token = jwt.sign({ id: user._id }, config.secret, {
       expiresIn: 86400 // expires in 24 hours
@@ -60,8 +87,15 @@ router.post('/login', function(req, res) {
   });
 });
 
-// AuthController.js
-router.get('/logout', function(req, res) {
+/**
+ * @api {post} /logout Logout a user
+ * @apiName LogoutUser
+ * @apiGroup auth
+ * @apiPermission authenticated user
+ */
+router.get('/logout',VerifyToken, function(req, res) {
+
+  // TODO : trigger /sessions
   res.status(200).send({ auth: false, token: null });
 });
 

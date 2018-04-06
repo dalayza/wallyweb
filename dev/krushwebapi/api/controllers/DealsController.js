@@ -36,6 +36,87 @@ exports.list_all_deals = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
 
+  } else if (req.param('metaclientId') !== undefined) {
+
+    var cronos = req.param('cronoOrder');
+
+    if (cronos !== undefined && cronos === '-1')
+      Deal.find({'metaclient_id':req.param('metaclientId')},null, {sort: '-create_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.status(200).json({data:sorted.slice(0,max)});
+        } else
+          res.status(200).json({data:sorted});
+      });
+    else 
+      Deal.find({'metaclient_id':req.param('metaclientId')},null, {sort: 'create_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.status(200).json({data:sorted.slice(0,max)});
+        } else
+          res.status(200).json({data:sorted});
+      });
+
+  } else if (req.param('metaclientorgId') !== undefined) {
+
+    var cronos = req.param('cronoOrder');
+
+    if (cronos !== undefined && cronos === '-1')
+      Deal.find({'metaclient_org_id':req.param('metaclientorgId')},null, {sort: '-create_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.status(200).json({data:sorted.slice(0,max)});
+        } else
+          res.status(200).json({data:sorted});
+      });
+    else 
+      Deal.find({'metaclient_org_id':req.param('metaclientorgId')},null, {sort: 'create_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.status(200).json({data:sorted.slice(0,max)});
+        } else
+          res.status(200).json({data:sorted});
+      });
+
+  } else if (req.param('clientId') !== undefined) {
+
+    var cronos = req.param('cronoOrder');
+
+    if (cronos !== undefined && cronos === '-1')
+      Deal.find({'client_id':req.param('clientId')},null, {sort: '-create_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.status(200).json({data:sorted.slice(0,max)});
+        } else
+          res.status(200).json({data:sorted});
+      });
+    else 
+      Deal.find({'client_id':req.param('clientId')},null, {sort: 'create_date'},function(err, sorted) {
+        if (err)
+          return next(err);
+
+        var max = req.param('max');
+        if (max !== undefined) {
+          res.status(200).json({data:sorted.slice(0,max)});
+        } else
+          res.status(200).json({data:sorted});
+      });
+
   } else {
 
     // A full list of ALL WITH NO RESTRICTION... MUST BE ADMIN role...

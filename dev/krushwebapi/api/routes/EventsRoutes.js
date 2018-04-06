@@ -9,6 +9,12 @@ module.exports = function(app,auth) {
  * @apiName ListAllEvents
  * @apiGroup api
  * @apiPermission authenticated user
+ * @apiParam {String} [ownerUserId]  Optional Deal status filter sorted by date.
+ * @apiParam {String} [dealId]  Optional Deal status filter sorted by date.
+ * @apiParam {String} [clientId]  Optional Deal status filter sorted by date.
+ * @apiParam {String} [eventType]  Optional Deal status filter sorted by date.
+ * @apiParam {String} [startDate]  Optional Deal status filter sorted by date.
+ * @apiParam {String} [status]  Optional Deal status filter sorted by date.
  *
  * @apiSuccess {String} JSON string with all Events.
  */

@@ -18,6 +18,6 @@ fi
 token_header_param="x-access-token:"
 token_param=$token_header_param${WALLY_TOKEN}
 
-#curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"NET","phone":"000000","email":"net@net.com","owner_user_id":"5ab286192b18ca0037268da7"}' $target
-curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"Ouvindo Mais","phone":"21980923636","email":"jairpimentel@ouvindomais.com.br","owner_user_id":"5aa00ff659727b0019e0d433"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"NET","phone":"000000","email":"net@net.com","owner_user_id":"5ac680362eeebc00270a9fef"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"Ouvindo Mais","phone":"21980923636","email":"jairpimentel@ouvindomais.com.br","owner_user_id":"5ac680362eeebc00270a9fef"}' $target
 

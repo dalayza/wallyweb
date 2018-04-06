@@ -18,4 +18,6 @@ fi
 token_header_param="x-access-token:"
 token_param=$token_header_param${WALLY_TOKEN}
 
-curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"Banco Bradesco","regid":"168.998.876-0001/78"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"Banco Santander","regid":"165.338.376-0001/38"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"Banco Itau","regid":"169.999.896-0001/91"}' $target
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"name":"Azul","regid":"068.008.076-0001/78"}' $target
