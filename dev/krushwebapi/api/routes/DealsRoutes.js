@@ -10,9 +10,9 @@ module.exports = function(app,auth) {
  * @apiName ListAllDeals
  * @apiGroup api
  * @apiPermission authenticated user
- * @apiParam {String} [status]  Optional Deal status filter sorted by date.
- * @apiParam {String} [metaclientId]  Optional Metaclient filter sorted by date..
- * @apiParam {String} [metaclientorgId]  Optional Metaclient Organization filter sorted by date..
+ * @apiParam {String} [status] Optional Deal status filter sorted by date.
+ * @apiParam {String} [metaclientId] Optional Metaclient filter sorted by date.
+ * @apiParam {String} [metaclientorgId] Optional Metaclient Organization filter sorted by date.
  *
  * @apiSuccess {String} JSON string with all Deals.
  */
@@ -22,6 +22,20 @@ module.exports = function(app,auth) {
  * @apiName CreateDeal
  * @apiGroup api
  * @apiPermission authenticated user
+ * @apiParam {String} [product]  Deal product.
+ * @apiParam {String} [client_id] Deal Client ID.
+ * @apiParam {String} [metaclient_name] Optional  Deal Metaclient name.
+ * @apiParam {String} [metaclient_phone] Optional Deal Metaclient phone.
+ * @apiParam {String} [metaclient_email] Optional Deal Metaclient email.
+ * @apiParam {String} [metaclient_name] Optional  Deal Metaclient name.
+ * @apiParam {String} [metaclient_phone] Optional Deal Metaclient phone.
+ * @apiParam {String} [metaclient_email] Optional Deal Metaclient email.
+ * @apiParam {String} [metaclient_org_name] Optional Deal Metaclient Organization name. 
+ * @apiParam {String} [metaclient_org_regid] Optional Deal Metaclient Organization registration ID.
+ * @apiParam {String} [metaclient_org_address] Optional Deal Metaclient Organization address.
+ * @apiParam {String} [metaclient_org_phone] Optional Deal Metaclient Organization phone.
+ * @apiParam {String} [metaclient_org_email] Optional Deal Metaclient Organization email.
+ * @apiParam {String} [owner_user_id] Optional Deal client owner User ID.
  *
  * @apiSuccess {String} JSON string with Deal created.
  */

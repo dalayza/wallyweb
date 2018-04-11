@@ -24,6 +24,10 @@ module.exports = function(app,auth) {
  * @apiName CreateEvent
  * @apiGroup api
  * @apiPermission authenticated user
+ * @apiParam {String} [title] Event title.
+ * @apiParam {String} [event_type] Event type (ex:'call','meeting','note','e-mail','wally_call')
+ * @apiParam {String} [status] Event status (ex:'done','open')
+ * @apiParam {String} [description] Optional Event description.
  *
  * @apiSuccess {String} JSON string with Event created.
  */

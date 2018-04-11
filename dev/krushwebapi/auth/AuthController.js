@@ -30,7 +30,7 @@ var mongoose = require('mongoose'),
  *     }
  * @apiPermission none
  */
-router.post('/register', function(req, res) {
+router.post('/register', function(req, res , next) {
   
   var hashedPassword = bcrypt.hashSync(req.body.passwd, 8);
   var new_user = new User({
@@ -41,7 +41,8 @@ router.post('/register', function(req, res) {
   });
   new_user.save(function (err, user) {
     //if (err) return res.status(500).send("There was a problem registering the user.");
-    if (err) return res.status(500).send(err);
+    //if (err) return res.status(500).send(err);
+    if (err) return next(err);
     // create a token
     var token = jwt.sign({ id: user._id }, config.secret, {
       //expiresIn: 86400 // expires in 24 hours
@@ -53,8 +54,9 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/me', VerifyToken, function(req, res, next) {
-  User.findById(req.userId, { passwd: 0 }, function (err, user) {
-    if (err) return res.status(500).send("There was a problem finding the user.");
+  User.findById(req.userId, { passwd: 0 }, function (err, user,next) {
+    //if (err) return res.status(500).send("There was a problem finding the user.");
+    if (err) return next(err);
     if (!user) return res.status(404).send("No user found.");
     
     res.status(200).send(user);
@@ -72,10 +74,11 @@ router.get('/me', VerifyToken, function(req, res, next) {
  *     }
  * @apiPermission authenticated user
  */
-router.post('/login',VerifyToken, function(req, res) {
+router.post('/login',VerifyToken, function(req, res,next) {
   // TODO : trigger /sessions
-  User.findOne({ email: req.body.email }, function (err, user) {
-    if (err) return res.status(500).send('Error on the server.');
+  User.findOne({ email: req.body.email }, function (err, user,next) {
+    //if (err) return res.status(500).send('Error on the server.');
+    if (err) return next(err);
     if (!user) return res.status(404).send('No user found.');
     var passwordIsValid = bcrypt.compareSync(req.body.passwd,user.passwd);
     if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
@@ -93,7 +96,7 @@ router.post('/login',VerifyToken, function(req, res) {
  * @apiGroup auth
  * @apiPermission authenticated user
  */
-router.get('/logout',VerifyToken, function(req, res) {
+router.get('/logout',VerifyToken, function(req, res,next) {
 
   // TODO : trigger /sessions
   res.status(200).send({ auth: false, token: null });
