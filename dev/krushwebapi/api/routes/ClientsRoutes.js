@@ -17,9 +17,9 @@ module.exports = function(app,auth) {
  * @apiName CreateClient
  * @apiGroup api
  * @apiPermission authenticated user
- * @apiParam {String} [name]  Client name.
- * @apiParam {String} [status]  Client status (ex:['active','inactive')
- * @apiParam {String} [owner_user_id] Client owner User ID.
+ * @apiParam {String} name  Client name.
+ * @apiParam {String} status  Client status (ex:['active','inactive')
+ * @apiParam {String} owner_user_id Client owner User ID.
  *
  * @apiSuccess {String} JSON string with Client created.
  */

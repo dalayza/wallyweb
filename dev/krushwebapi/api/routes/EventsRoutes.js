@@ -9,12 +9,12 @@ module.exports = function(app,auth) {
  * @apiName ListAllEvents
  * @apiGroup api
  * @apiPermission authenticated user
- * @apiParam {String} [ownerUserId]  Optional Deal status filter sorted by date.
- * @apiParam {String} [dealId]  Optional Deal status filter sorted by date.
- * @apiParam {String} [clientId]  Optional Deal status filter sorted by date.
- * @apiParam {String} [eventType]  Optional Deal status filter sorted by date.
- * @apiParam {String} [startDate]  Optional Deal status filter sorted by date.
- * @apiParam {String} [status]  Optional Deal status filter sorted by date.
+ * @apiParam {String} [ownerUserId]  Deal status filter sorted by date.
+ * @apiParam {String} [dealId]  Deal status filter sorted by date.
+ * @apiParam {String} [clientId]  Deal status filter sorted by date.
+ * @apiParam {String} [eventType]  Deal status filter sorted by date.
+ * @apiParam {String} [startDate]  Deal status filter sorted by date.
+ * @apiParam {String} [status]  Deal status filter sorted by date.
  *
  * @apiSuccess {String} JSON string with all Events.
  */
@@ -24,10 +24,10 @@ module.exports = function(app,auth) {
  * @apiName CreateEvent
  * @apiGroup api
  * @apiPermission authenticated user
- * @apiParam {String} [title] Event title.
- * @apiParam {String} [event_type] Event type (ex:'call','meeting','note','e-mail','wally_call')
- * @apiParam {String} [status] Event status (ex:'done','open')
- * @apiParam {String} [description] Optional Event description.
+ * @apiParam {String} title Event title.
+ * @apiParam {String} event_type Event type (ex:'call','meeting','note','e-mail','wally_call')
+ * @apiParam {String} status Event status (ex:'done','open')
+ * @apiParam {String} [description] Event description.
  *
  * @apiSuccess {String} JSON string with Event created.
  */

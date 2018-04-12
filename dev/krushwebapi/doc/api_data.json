@@ -10,6 +10,33 @@
         "name": "authenticated user"
       }
     ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Client name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Client status (ex:['active','inactive')</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "owner_user_id",
+            "description": "<p>Client owner User ID.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -38,6 +65,89 @@
         "name": "authenticated user"
       }
     ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "product",
+            "description": "<p>Deal product.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "client_id",
+            "description": "<p>Deal Client ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "metaclient_name",
+            "description": "<p>Deal Metaclient name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "metaclient_phone",
+            "description": "<p>Deal Metaclient phone.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "metaclient_email",
+            "description": "<p>Deal Metaclient email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "metaclient_org_name",
+            "description": "<p>Deal Metaclient Organization name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "metaclient_org_regid",
+            "description": "<p>Deal Metaclient Organization registration ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "metaclient_org_address",
+            "description": "<p>Deal Metaclient Organization address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "metaclient_org_phone",
+            "description": "<p>Deal Metaclient Organization phone.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "metaclient_org_email",
+            "description": "<p>Deal Metaclient Organization email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "owner_user_id",
+            "description": "<p>Deal client owner User ID.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -66,6 +176,40 @@
         "name": "authenticated user"
       }
     ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Event title.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "event_type",
+            "description": "<p>Event type (ex:'call','meeting','note','e-mail','wally_call')</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Event status (ex:'done','open')</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Event description.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -529,21 +673,21 @@
             "type": "String",
             "optional": true,
             "field": "status",
-            "description": "<p>Optional Deal status filter sorted by date.</p>"
+            "description": "<p>Deal status filter sorted by date.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "metaclientId",
-            "description": "<p>Optional Metaclient filter sorted by date..</p>"
+            "description": "<p>Metaclient filter sorted by date.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "metaclientorgId",
-            "description": "<p>Optional Metaclient Organization filter sorted by date..</p>"
+            "description": "<p>Metaclient Organization filter sorted by date.</p>"
           }
         ]
       }
@@ -584,42 +728,42 @@
             "type": "String",
             "optional": true,
             "field": "ownerUserId",
-            "description": "<p>Optional Deal status filter sorted by date.</p>"
+            "description": "<p>Deal status filter sorted by date.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "dealId",
-            "description": "<p>Optional Deal status filter sorted by date.</p>"
+            "description": "<p>Deal status filter sorted by date.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "clientId",
-            "description": "<p>Optional Deal status filter sorted by date.</p>"
+            "description": "<p>Deal status filter sorted by date.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "eventType",
-            "description": "<p>Optional Deal status filter sorted by date.</p>"
+            "description": "<p>Deal status filter sorted by date.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "startDate",
-            "description": "<p>Optional Deal status filter sorted by date.</p>"
+            "description": "<p>Deal status filter sorted by date.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "status",
-            "description": "<p>Optional Deal status filter sorted by date.</p>"
+            "description": "<p>Deal status filter sorted by date.</p>"
           }
         ]
       }
