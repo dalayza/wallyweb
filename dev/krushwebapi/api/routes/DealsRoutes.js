@@ -39,7 +39,7 @@ module.exports = function(app,auth) {
  *
  * @apiSuccess {String} JSON string with Deal created.
  */
-  app.get('/deals',VerifyToken,auth.can('list all deals'),deals_controller.list_all_deals);
+  app.get('/deals:page',VerifyToken,auth.can('list all deals'),deals_controller.list_all_deals);
   app.post('/deals',VerifyToken,auth.can('create a deal'),deals_controller.create_a_deal);
 
 /**

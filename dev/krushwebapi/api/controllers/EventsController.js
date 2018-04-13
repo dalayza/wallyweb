@@ -6,13 +6,15 @@ var mongoose = require('mongoose'),
 exports.list_all_events = function(req, res,next) {
 
   var now = new Date();
+  var perPage = 10
+  var page = req.params.page || 1
  
   if (req.param('dealId') !== undefined) {
 
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Event.find({deal_id:req.param('dealId'),start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({deal_id:req.param('dealId'),start_date:{$lte:now}},null, {sort: '-start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -23,7 +25,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Event.find({deal_id:req.param('dealId'),start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({deal_id:req.param('dealId'),start_date:{$lte:now}},null, {sort: 'start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -41,7 +43,7 @@ exports.list_all_events = function(req, res,next) {
     if (cronos !== undefined && cronos === '-1')
 
      if (astatus !== undefined)
-      Event.find({client_id:req.param('clientId'),'status':astatus,start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({client_id:req.param('clientId'),'status':astatus,start_date:{$lte:now}},null, {sort: '-start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -52,7 +54,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
      else {
-      Event.find({client_id:req.param('clientId'),start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({client_id:req.param('clientId'),start_date:{$lte:now}},null, {sort: '-start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -65,7 +67,7 @@ exports.list_all_events = function(req, res,next) {
      }
     else 
      if (astatus !== undefined)
-      Event.find({client_id:req.param('clientId'),'status':astatus,start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({client_id:req.param('clientId'),'status':astatus,start_date:{$lte:now}},null, {sort: 'start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -76,7 +78,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
      else
-      Event.find({client_id:req.param('clientId'),start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({client_id:req.param('clientId'),start_date:{$lte:now}},null, {sort: 'start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -90,7 +92,7 @@ exports.list_all_events = function(req, res,next) {
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Event.find({event_type:req.param('eventType'),start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({event_type:req.param('eventType'),start_date:{$lte:now}},null, {sort: '-start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -101,7 +103,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Event.find({event_type:req.param('eventType'),start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({event_type:req.param('eventType'),start_date:{$lte:now}},null, {sort: 'start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -112,7 +114,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
   } else if (req.param('startDate') !== undefined) {
-    Event.find({start_date:{$gt:new Date(req.param('startDate')).getTime(),$lt:new Date(req.param('endDate')).getTime()}},function(err, events) {
+    Event.find({start_date:{$gt:new Date(req.param('startDate')).getTime(),$lt:new Date(req.param('endDate')).getTime()}}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, events) {
       if (err)
           return next(err);
       
@@ -127,7 +129,7 @@ exports.list_all_events = function(req, res,next) {
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Event.find({'status':req.param('status'),start_date:{$lte:now}},null, {sort: '-start_date'},function(err, sorted) {
+      Event.find({'status':req.param('status'),start_date:{$lte:now}},null, {sort: '-start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -138,7 +140,7 @@ exports.list_all_events = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Event.find({'status':req.param('status'),start_date:{$lte:now}},null, {sort: 'start_date'},function(err, sorted) {
+      Event.find({'status':req.param('status'),start_date:{$lte:now}},null, {sort: 'start_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -164,7 +166,7 @@ exports.list_all_events = function(req, res,next) {
         var cronos = req.param('cronoOrder');
 
         if (cronos !== undefined && cronos === '-1')
-          Event.find({'owner_user_id':req.userId,start_date:{$lte:now}},null,{sort:'-create_date'}, function(err, events) {
+          Event.find({'owner_user_id':req.userId,start_date:{$lte:now}},null,{sort:'-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, events) {
             if (err)
                 return next(err);
             var max = req.param('max');
@@ -174,7 +176,7 @@ exports.list_all_events = function(req, res,next) {
               res.json(events);
           });
         else
-          Event.find({'owner_user_id':req.userId,start_date:{$lte:now}},null,{sort:'create_date'}, function(err, events) {
+          Event.find({'owner_user_id':req.userId,start_date:{$lte:now}},null,{sort:'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, events) {
             if (err)
                 return next(err);
             var max = req.param('max');

@@ -9,12 +9,15 @@ var mongoose = require('mongoose'),
 
 exports.list_all_deals = function(req, res,next) {
 
+  var perPage = 10
+  var page = req.params.page || 1
+
   if (req.param('status') !== undefined) {
 
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Deal.find({'status':req.param('status')},null, {sort: '-create_date'},function(err, sorted) {
+      Deal.find({'status':req.param('status')},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -25,7 +28,7 @@ exports.list_all_deals = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Deal.find({'status':req.param('status')},null, {sort: 'create_date'},function(err, sorted) {
+      Deal.find({'status':req.param('status')},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -41,7 +44,7 @@ exports.list_all_deals = function(req, res,next) {
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Deal.find({'metaclient_id':req.param('metaclientId')},null, {sort: '-create_date'},function(err, sorted) {
+      Deal.find({'metaclient_id':req.param('metaclientId')},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -52,7 +55,7 @@ exports.list_all_deals = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Deal.find({'metaclient_id':req.param('metaclientId')},null, {sort: 'create_date'},function(err, sorted) {
+      Deal.find({'metaclient_id':req.param('metaclientId')},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -68,7 +71,7 @@ exports.list_all_deals = function(req, res,next) {
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Deal.find({'metaclient_org_id':req.param('metaclientorgId')},null, {sort: '-create_date'},function(err, sorted) {
+      Deal.find({'metaclient_org_id':req.param('metaclientorgId')},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -79,7 +82,7 @@ exports.list_all_deals = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Deal.find({'metaclient_org_id':req.param('metaclientorgId')},null, {sort: 'create_date'},function(err, sorted) {
+      Deal.find({'metaclient_org_id':req.param('metaclientorgId')},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -95,7 +98,7 @@ exports.list_all_deals = function(req, res,next) {
     var cronos = req.param('cronoOrder');
 
     if (cronos !== undefined && cronos === '-1')
-      Deal.find({'client_id':req.param('clientId')},null, {sort: '-create_date'},function(err, sorted) {
+      Deal.find({'client_id':req.param('clientId')},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -106,7 +109,7 @@ exports.list_all_deals = function(req, res,next) {
           res.status(200).json({data:sorted});
       });
     else 
-      Deal.find({'client_id':req.param('clientId')},null, {sort: 'create_date'},function(err, sorted) {
+      Deal.find({'client_id':req.param('clientId')},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
         if (err)
           return next(err);
 
@@ -136,7 +139,7 @@ exports.list_all_deals = function(req, res,next) {
         var cronos = req.param('cronoOrder');
 
         if (cronos !== undefined && cronos === '-1')
-          Deal.find({'owner_user_id':req.userId},null,{sort:'-create_date'}, function(err, deals) {
+          Deal.find({'owner_user_id':req.userId},null,{sort:'-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, deals) {
             if (err)
                 return next(err);
             var max = req.param('max');
@@ -146,7 +149,7 @@ exports.list_all_deals = function(req, res,next) {
               res.json(deals);
           });
         else
-          Deal.find({'owner_user_id':req.userId},null,{sort:'create_date'}, function(err, deals) {
+          Deal.find({'owner_user_id':req.userId},null,{sort:'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, deals) {
             if (err)
                 return next(err);
             var max = req.param('max');
