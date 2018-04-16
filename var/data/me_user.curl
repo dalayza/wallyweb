@@ -1,1 +1,20 @@
-curl -X GET --header "x-access-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYTEyZWYzZDIxYmZiMDAxOWZhNzA5MiIsImlhdCI6MTUyMDUxMjc1NiwiZXhwIjoxNTIwNTk5MTU2fQ.O38JeS-OuZu9XIckyd_EXa7R5Ca8xcw_dEIPf7Bdcek" http://api.agenciamacro.com/auth/me
+#!/bin/bash
+
+# 
+# script for identifying a user.
+#
+
+target=http://localhost/auth/me
+
+if [[ $1 == "-p" ]]; then
+  target=http://api.agenciamacro.com/auth/me
+fi
+
+if [[ $1 == "-s" ]]; then
+  target=http://209.177.93.246/auth/me
+fi
+
+token_header_param="x-access-token:"
+token_param=$token_header_param${WALLY_TOKEN}
+
+curl --header "${token_param}" -H "Content-Type: application/json" -X GET $target 

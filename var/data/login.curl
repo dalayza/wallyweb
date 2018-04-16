@@ -17,4 +17,4 @@ fi
 token_header_param="x-access-token:"
 token_param=$token_header_param${WALLY_TOKEN}
 
-curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"email":"webmaster@agenciamacro.com.br","passwd":"admin123"}' $target 
+curl --header "${token_param}" -H "Content-Type: application/json" -X POST -d '{"email":"mario@agenciamacro.com.br","passwd":"oire5479874"}' $target 
