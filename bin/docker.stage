@@ -1,5 +1,3 @@
-#!/bin/bash
-
 cd deploy
 rm -rf bin
 rm -rf dev
