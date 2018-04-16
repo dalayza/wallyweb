@@ -5,8 +5,8 @@ rm -rf bin
 rm -rf dev
 cp -r ../bin bin
 cp -r ../dev/krushwebapi dev
-~/util/hyper stop krushwebapi-dev
-~/util/hyper rm --volumes=true krushwebapi-dev
-~/util/hyper run --detach --name krushwebapi-dev --expose 8080 --expose 8793 --expose 3000 -p 80:8080 -p 8793:8793 -p 3000:3000 --volume `pwd`:/docked desavera/krushweb:krushwebapi-r1 /docked/bin/krushwebapi.stage
-~/util/hyper fip attach 209.177.93.246 krushwebapi-dev
-~/util/hyper logs krushwebapi-dev
+bin/hyper stop krushwebapi-dev
+bin/hyper rm --volumes=true krushwebapi-dev
+bin/hyper run --detach --name krushwebapi-dev --expose 8080 --expose 8793 --expose 3000 -p 80:8080 -p 8793:8793 -p 3000:3000 --volume `pwd`:/docked desavera/krushweb:krushwebapi-r1 /docked/bin/krushwebapi.stage
+bin/hyper fip attach 209.177.93.246 krushwebapi-dev
+bin/hyper logs krushwebapi-dev
