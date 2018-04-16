@@ -1,4 +1,6 @@
-cd deploy
+#!/bin/bash
+
+cd ${WALLY_BUILD}/deploy
 rm -rf bin
 rm -rf dev
 cp -r ../bin bin
