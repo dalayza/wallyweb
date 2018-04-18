@@ -85,6 +85,28 @@
           {
             "group": "Parameter",
             "type": "String",
+            "optional": true,
+            "field": "title",
+            "description": "<p>Deal title.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "price",
+            "description": "<p>Deal price.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "source",
+            "defaultValue": "metaclient",
+            "description": "<p>Deal source (ex : 'facebook bot','google','networking','linkedin','desk','phone','metaclient','inbound marketing').</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
             "optional": false,
             "field": "metaclient_name",
             "description": "<p>Deal Metaclient name.</p>"
@@ -196,8 +218,9 @@
           {
             "group": "Parameter",
             "type": "String",
-            "optional": false,
+            "optional": true,
             "field": "status",
+            "defaultValue": "open",
             "description": "<p>Event status (ex:'done','open')</p>"
           },
           {
@@ -206,6 +229,13 @@
             "optional": true,
             "field": "description",
             "description": "<p>Event description.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "address",
+            "description": "<p>Event address.</p>"
           }
         ]
       }
@@ -1388,6 +1418,21 @@
     "version": "0.0.0",
     "filename": "api/routes/UsersRoutes.js",
     "groupTitle": "api"
+  },
+  {
+    "type": "get",
+    "url": "/me",
+    "title": "Identifies a User.",
+    "name": "IdentifyUser",
+    "group": "auth",
+    "permission": [
+      {
+        "name": "authenticated user"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "auth/AuthController.js",
+    "groupTitle": "auth"
   },
   {
     "type": "post",

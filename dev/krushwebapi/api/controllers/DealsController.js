@@ -10,156 +10,159 @@ var mongoose = require('mongoose'),
 exports.list_all_deals = function(req, res,next) {
 
   var perPage = 10
-  var page = req.params.page || 1
+  var page = req.param('page') || 1
 
-  if (req.param('status') !== undefined) {
+  // A full list of ALL WITH NO RESTRICTION... MUST BE ADMIN
 
-    var cronos = req.param('cronoOrder');
-
-    if (cronos !== undefined && cronos === '-1')
-      Deal.find({'status':req.param('status')},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
-    else 
-      Deal.find({'status':req.param('status')},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
-
-  } else if (req.param('metaclientId') !== undefined) {
-
-    var cronos = req.param('cronoOrder');
-
-    if (cronos !== undefined && cronos === '-1')
-      Deal.find({'metaclient_id':req.param('metaclientId')},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
-    else 
-      Deal.find({'metaclient_id':req.param('metaclientId')},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
-
-  } else if (req.param('metaclientorgId') !== undefined) {
-
-    var cronos = req.param('cronoOrder');
-
-    if (cronos !== undefined && cronos === '-1')
-      Deal.find({'metaclient_org_id':req.param('metaclientorgId')},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
-    else 
-      Deal.find({'metaclient_org_id':req.param('metaclientorgId')},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
-
-  } else if (req.param('clientId') !== undefined) {
-
-    var cronos = req.param('cronoOrder');
-
-    if (cronos !== undefined && cronos === '-1')
-      Deal.find({'client_id':req.param('clientId')},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
-    else 
-      Deal.find({'client_id':req.param('clientId')},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
-        if (err)
-          return next(err);
-
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:sorted.slice(0,max)});
-        } else
-          res.status(200).json({data:sorted});
-      });
+  if (req.user.role === 'admin') {
+    Deal.find({}, function(err, deals) {
+      if (err)
+        return next(err);
+      var max = req.param('max');
+      if (max !== undefined) {
+        res.status(200).json({data:deals.slice(0,max)});
+      } else
+        res.status(200).json({data:deals});
+    });
 
   } else {
 
-    // A full list of ALL WITH NO RESTRICTION... MUST BE ADMIN role...
-    if (req.user.role === 'admin') {
-      Deal.find({}, function(err, deals) {
-        if (err)
-            return next(err);
-        var max = req.param('max');
-        if (max !== undefined) {
-          res.status(200).json({data:deals.slice(0,max)});
-        } else
-          res.status(200).json({data:deals});
-      });
+    if (req.param('status') !== undefined) {
 
+      var cronos = req.param('cronoOrder');
+
+      if (cronos !== undefined && cronos === '-1')
+        Deal.find({'status':req.param('status'),'owner_user_id':req.userId},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+            res.status(200).json({data:sorted});
+        });
+      else 
+        Deal.find({'status':req.param('status'),'owner_user_id':req.userId},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+            res.status(200).json({data:sorted});
+        });
+
+    } else if (req.param('metaclientId') !== undefined) {
+
+      var cronos = req.param('cronoOrder');
+
+      if (cronos !== undefined && cronos === '-1')
+        Deal.find({'metaclient_id':req.param('metaclientId'),'owner_user_id':req.userId},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+            res.status(200).json({data:sorted});
+        });
+      else 
+        Deal.find({'metaclient_id':req.param('metaclientId'),'owner_user_id':req.userId},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+          res.status(200).json({data:sorted});
+        });
+
+    } else if (req.param('metaclientorgId') !== undefined) {
+
+      var cronos = req.param('cronoOrder');
+
+      if (cronos !== undefined && cronos === '-1')
+        Deal.find({'metaclient_org_id':req.param('metaclientorgId'),'owner_user_id':req.userId},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+            res.status(200).json({data:sorted});
+        });
+      else 
+        Deal.find({'metaclient_org_id':req.param('metaclientorgId'),'owner_user_id':req.userId},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+            res.status(200).json({data:sorted});
+        });
+
+    } else if (req.param('clientId') !== undefined) {
+
+      var cronos = req.param('cronoOrder');
+
+      if (cronos !== undefined && cronos === '-1')
+        Deal.find({'client_id':req.param('clientId'),'owner_user_id':req.userId},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+            res.status(200).json({data:sorted});
+        });
+      else 
+        Deal.find({'client_id':req.param('clientId'),'owner_user_id':req.userId},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+            res.status(200).json({data:sorted});
+        });
     } else {
 
-        var cronos = req.param('cronoOrder');
+      // NO MAJOR PARAMS ... check OWNERSHIP ONLY
+      var cronos = req.param('cronoOrder');
 
-        if (cronos !== undefined && cronos === '-1')
-          Deal.find({'owner_user_id':req.userId},null,{sort:'-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, deals) {
-            if (err)
-                return next(err);
-            var max = req.param('max');
-            if (max !== undefined) {
-              res.json(deals.slice(0,max));
-            } else
-              res.json(deals);
-          });
-        else
-          Deal.find({'owner_user_id':req.userId},null,{sort:'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, deals) {
-            if (err)
-                return next(err);
-            var max = req.param('max');
-            if (max !== undefined) {
-              res.json(deals.slice(0,max));
-            } else
-              res.json(deals);
-          });
+      if (cronos !== undefined && cronos === '-1')
+        Deal.find({'owner_user_id':req.userId},null, {sort: '-create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+            res.status(200).json({data:sorted});
+        });
+      else
+        Deal.find({'owner_user_id':req.userId},null, {sort: 'create_date'}).skip((perPage * page) - perPage).limit(perPage).exec(function(err, sorted) {
+          if (err)
+            return next(err);
+
+          var max = req.param('max');
+          if (max !== undefined) {
+            res.status(200).json({data:sorted.slice(0,max)});
+          } else
+            res.status(200).json({data:sorted});
+        });
     }
-  }
+  } 
 };
 
 /*
