@@ -48,7 +48,7 @@ auth.action('read a user', ['admin','manager','cs']);
 auth.action('update a user', ['admin','manager']);
 auth.action('delete a user', ['admin','manager']);
 
-auth.action('list all clients', ['admin']);
+auth.action('list all clients', ['admin','cs']);
 auth.action('create a client', ['admin']);
 auth.action('read a client', ['admin','manager']);
 auth.action('update a client', ['admin']);
@@ -58,7 +58,7 @@ auth.action('list all deals', ['admin','manager','cs']);
 auth.action('create a deal', ['admin','manager','cs']);
 auth.action('read a deal', ['admin','manager','cs']);
 auth.action('update a deal', ['admin','manager','cs']);
-auth.action('delete a deal', ['admin','manager']);
+auth.action('delete a deal', ['admin','manager','cs']);
 
 auth.action('list all events', ['admin','manager','cs']);
 auth.action('create a event', ['admin','manager','cs']);

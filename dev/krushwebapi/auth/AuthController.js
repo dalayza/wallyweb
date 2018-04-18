@@ -53,6 +53,12 @@ router.post('/register', function(req, res , next) {
   }); 
 });
 
+/**
+ * @api {get} /me Identifies a User.
+ * @apiName IdentifyUser
+ * @apiGroup auth
+ * @apiPermission authenticated user
+ */
 router.get('/me', VerifyToken, function(req, res, next) {
   User.findById(req.userId, { passwd: 0 }, function (err, user,next) {
     //if (err) return res.status(500).send("There was a problem finding the user.");
