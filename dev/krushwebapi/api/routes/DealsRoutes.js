@@ -24,12 +24,15 @@ module.exports = function(app,auth) {
  * @apiPermission authenticated user
  * @apiParam {String} product  Deal product.
  * @apiParam {String} client_id Deal Client ID.
- * @apiParam {String} [metaclient_name] Deal Metaclient name.
- * @apiParam {String} [metaclient_phone] Deal Metaclient phone.
- * @apiParam {String} [metaclient_email] Deal Metaclient email.
- * @apiParam {String} [metaclient_name] Deal Metaclient name.
- * @apiParam {String} [metaclient_phone] Deal Metaclient phone.
- * @apiParam {String} [metaclient_email] Deal Metaclient email.
+ * @apiParam {String} [title] Deal title.
+ * @apiParam {String} [price] Deal price.
+ * @apiParam {String} [source="metaclient"] Deal source (ex : 'facebook bot','google','networking','linkedin','desk','phone','metaclient','inbound marketing'). 
+ * @apiParam {String} metaclient_name Deal Metaclient name.
+ * @apiParam {String} metaclient_phone Deal Metaclient phone.
+ * @apiParam {String} metaclient_email Deal Metaclient email.
+ * @apiParam {String} metaclient_name Deal Metaclient name.
+ * @apiParam {String} metaclient_phone Deal Metaclient phone.
+ * @apiParam {String} metaclient_email Deal Metaclient email.
  * @apiParam {String} [metaclient_org_name] Deal Metaclient Organization name. 
  * @apiParam {String} [metaclient_org_regid] Deal Metaclient Organization registration ID.
  * @apiParam {String} [metaclient_org_address] Deal Metaclient Organization address.
@@ -40,6 +43,7 @@ module.exports = function(app,auth) {
  * @apiSuccess {String} JSON string with Deal created.
  */
   app.get('/deals:page',VerifyToken,auth.can('list all deals'),deals_controller.list_all_deals);
+  app.get('/deals',VerifyToken,auth.can('list all deals'),deals_controller.list_all_deals);
   app.post('/deals',VerifyToken,auth.can('create a deal'),deals_controller.create_a_deal);
 
 /**

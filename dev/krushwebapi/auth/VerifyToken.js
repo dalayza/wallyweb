@@ -20,6 +20,7 @@ function verifyToken(req, res, next) {
        if (!user) return res.status(404).send("No user found.");
 
        req.user.role = user.role;
+       req.user.id = user.id;
        next();
      });
   });

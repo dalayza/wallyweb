@@ -307,12 +307,23 @@ exports.update_a_deal = function(req, res,next) {
 
 exports.delete_a_deal = function(req, res,next) {
 
-  Deal.remove({
-    _id: req.params.dealId
-  }, function(err, deal) {
-    if (err)
-      return next(err);
-    res.status(200).json({ message: 'Deal successfully deleted' });
-  });
+  // A full list of ALL WITH NO RESTRICTION... MUST BE ADMIN role...
+  if (req.user.role === 'admin') {
+    Deal.remove({
+      _id: req.params.dealId
+    }, function(err, deal) {
+      if (err)
+        return next(err);
+      res.status(200).json({ message: 'Deal successfully deleted' });
+    });
+  } else {
+    Deal.remove({
+      _id: req.params.dealId,'owner_user_id':req.user.id
+    }, function(err, deal) {
+      if (err)
+        return next(err);
+      res.status(200).json({ message: 'Deal successfully deleted' });
+    });
+  }
 };
 

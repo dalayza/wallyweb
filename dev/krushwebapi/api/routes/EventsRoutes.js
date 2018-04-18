@@ -26,13 +26,15 @@ module.exports = function(app,auth) {
  * @apiPermission authenticated user
  * @apiParam {String} title Event title.
  * @apiParam {String} event_type Event type (ex:'call','meeting','note','e-mail','wally_call')
- * @apiParam {String} status Event status (ex:'done','open')
+ * @apiParam {String} [status="open"] Event status (ex:'done','open')
  * @apiParam {String} [description] Event description.
+ * @apiParam {String} [address] Event address.
  *
  * @apiSuccess {String} JSON string with Event created.
  */
 
   app.get('/events:page',VerifyToken,auth.can('list all events'),events_controller.list_all_events);
+  app.get('/events',VerifyToken,auth.can('list all events'),events_controller.list_all_events);
   app.post('/events',VerifyToken,auth.can('create a event'),events_controller.create_a_event);
 
 /**

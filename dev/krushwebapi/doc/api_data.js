@@ -85,21 +85,21 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "String",
-            "optional": true,
+            "optional": false,
             "field": "metaclient_name",
             "description": "<p>Deal Metaclient name.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
-            "optional": true,
+            "optional": false,
             "field": "metaclient_phone",
             "description": "<p>Deal Metaclient phone.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
-            "optional": true,
+            "optional": false,
             "field": "metaclient_email",
             "description": "<p>Deal Metaclient email.</p>"
           },
