@@ -1,4 +1,0 @@
-#!/bin/bash
-
-export WALLY_DEV=dev
-cd /docked/dev/ && /usr/bin/npm run stage
