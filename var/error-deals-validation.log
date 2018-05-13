@@ -1,0 +1,28 @@
+ "res": {
+    "statusCode": 500
+  },
+  "req": {
+    "url": "/deals",
+    "headers": {
+      "host": "api.agenciamacro.com",
+      "content-length": "339",
+      "accept-encoding": "gzip, deflate",
+      "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZWYzZGVjYzJlNjZjMDAxNTg3MGRmZCIsImlhdCI6MTUyNTYyODM5Nn0.Buv9fei2jBSznhYu5db2hjplqBJPKzz_F1yWi6k0jAo",
+      "content-type": "application/json; charset=utf-8",
+      "connection": "keep-alive",
+      "accept": "application/json",
+      "user-agent": "Zapier",
+      "x-newrelic-id": "VgMAVF9bGwIHVVRTBwMO",
+      "x-newrelic-transaction": "PxQPBF5SCQYGAQUGBgBTVgEAFB8EBw8RVU4aWl0ABQMGU1wFVVACBlRTBkNKQQBSVF0EWwZUFTs="
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/deals",
+    "query": {}
+  },
+  "responseTime": 86,
+  "level": "info",
+  "message": "HTTP POST /deals",
+  "timestamp": "2018-05-10T02:19:21.285Z"
+}
+

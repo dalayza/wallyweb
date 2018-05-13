@@ -1,0 +1,20 @@
+{
+    "_id": {
+        "$oid": "5a9bdd120c4e5300158c4cb1"
+    },
+    "title": "Maria Mendonca Promoção",
+    "metaclient_id": {
+        "$oid": "5a9bdd120c4e5300158c4cb2"
+    },
+    "product": "Promoção",
+    "campaign": "Facebook_leads-matricula",
+    "followers": [],
+    "created_date": {
+        "$date": "2018-03-04T11:48:34.119Z"
+    },
+    "currency": "REAL",
+    "status": "LEAD",
+    "targets": [],
+    "product_source_type": "site",
+    "__v": 0
+}
