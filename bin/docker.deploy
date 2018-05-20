@@ -6,8 +6,9 @@ cd deploy
 cp -r ../bin bin
 cp -r ../dev/krushwebapi dev
 bin/hyper config --accesskey YZAV45AVDPKX0NRJ5Y8XEZ5Z --secretkey EwXg8Zp0XVdhkQOXbByyVtYBgd0zXROuzP1jok05 --default-region us-west-1
-~/util/hyper stop krushwebapi
-~/util/hyper rm --volumes=true krushwebapi
-~/util/hyper run --detach --name krushwebapi --expose 8080 --expose 8793 --expose 3000 -p 80:8080 -p 8793:8793 -p 3000:3000 --volume `pwd`:/docked desavera/krushweb:krushwebapi-r1 /docked/bin/krushwebapi.run
-~/util/hyper fip attach 162.221.195.113 krushwebapi
-~/util/hyper logs krushwebapi
+./bin/hyper stop krushwebapi
+./bin/hyper rm --volumes=true krushwebapi
+./bin/hyper run --detach --name krushwebapi --expose 8080 --expose 8793 --expose 3000 -p 80:8080 -p 8793:8793 -p 3000:3000 --volume `pwd`:/docked desavera/krushweb:krushwebapi-r1 /docked/bin/krushwebapi.run
+./bin/hyper fip attach 162.221.195.113 krushwebapi
+./bin/hyper logs krushwebapi
+rm -rf deploy

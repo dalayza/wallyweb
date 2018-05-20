@@ -1,0 +1,39 @@
+{
+  "res": {
+    "statusCode": 500
+  },
+  "req": {
+    "url": "/deals",
+    "headers": {
+      "host": "api.agenciamacro.com",
+      "content-length": "322",
+      "accept-encoding": "gzip, deflate",
+      "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZWYzZGVjYzJlNjZjMDAxNTg3MGRmZCIsImlhdCI6MTUyNTYyODM5Nn0.Buv9fei2jBSznhYu5db2hjplqBJPKzz_F1yWi6k0jAo",
+      "content-type": "application/json; charset=utf-8",
+      "connection": "keep-alive",
+      "accept": "application/json",
+      "user-agent": "Zapier",
+      "x-newrelic-id": "VgMAVF9bGwIHVVRTBwMO",
+      "x-newrelic-transaction": "PxQCVAcCDlVWUlIAAlBTAlADFB8EBw8RVU4aVw1ZVQRVAw9SU1RSBgACBUNKQQBSVF0EWwZUFTs="
+    },
+    "method": "POST",
+    "httpVersion": "1.1",
+    "originalUrl": "/deals",
+    "query": {}
+  },
+  "responseTime": 83,
+  "level": "info",
+  "message": "HTTP POST /deals",
+  "timestamp": "2018-05-15T16:53:47.262Z"
+}
+ValidationError: Deals validation failed
+    at ValidationError (/docked/dev/node_modules/mongoose/lib/error/validation.js:28:11)
+    at model.Document.invalidate (/docked/dev/node_modules/mongoose/lib/document.js:1675:32)
+    at /docked/dev/node_modules/mongoose/lib/document.js:1547:17
+    at validate (/docked/dev/node_modules/mongoose/lib/schematype.js:784:7)
+    at /docked/dev/node_modules/mongoose/lib/schematype.js:829:11
+    at Array.forEach (<anonymous>)
+    at SchemaString.SchemaType.doValidate (/docked/dev/node_modules/mongoose/lib/schematype.js:789:19)
+    at /docked/dev/node_modules/mongoose/lib/document.js:1545:9
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)

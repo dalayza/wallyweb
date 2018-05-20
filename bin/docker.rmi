@@ -1,1 +1,1 @@
-~/util/hyper volume ls | grep -v DRIVER | grep -v ac2 | grep -v 4f1 | awk -F" " '{print $2}' | xargs -i ~/util/hyper volume rm {}
+./bin/hyper volume ls | grep -v DRIVER | grep -v ac2 | grep -v 4f1 | awk -F" " '{print $2}' | xargs -i ~/util/hyper volume rm {}

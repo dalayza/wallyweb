@@ -28,11 +28,17 @@ jobs:
 
       # - run: yarn install
       # - run: bin/docker.stage
+      - run: |
+              if [ "${CIRCLE_BRANCH}" == "staging" ];
+                then bin/docker.stage;
+              fi
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-        
+              if [ "${CIRCLE_BRANCH}" == "master" ];
+                then bin/docker.deploy;
+              fi
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     key: v1-dependencies-{{ checksum "package.json" }}
       # run tests!
       # - run: yarn test
