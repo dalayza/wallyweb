@@ -29,10 +29,13 @@ jobs:
       # - run: yarn install
       # - run: bin/docker.stage
       - run: |
+
+              # A STAGING deployment should be trigged 
               if [ "${CIRCLE_BRANCH}" == "staging" ];
                 then bin/docker.stage;
               fi
 
+              # A PRODUCTION deployment should be trigged 
               if [ "${CIRCLE_BRANCH}" == "master" ];
                 then bin/docker.deploy;
               fi
