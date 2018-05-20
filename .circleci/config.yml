@@ -31,7 +31,6 @@ jobs:
               if [ "${CIRCLE_BRANCH}" == "staging" ];
                 then bin/docker.stage;
               fi
-
               if [ "${CIRCLE_BRANCH}" == "master" ];
                 then bin/docker.deploy;
               fi
