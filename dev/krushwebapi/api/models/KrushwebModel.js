@@ -250,6 +250,219 @@ var SessionsSchema = new Schema({
   }
 });
 
+var ClientconfigSchema = new Schema ({
+
+  client_id: {
+        type: Schema.ObjectId, ref: 'Client',
+        required: 'client config settings client id is required'
+  },
+
+  phone_config: {
+    status: {
+      type: String,
+      enum: ['active', 'inactive'],
+      default: 'inactive'
+      },
+    queue_dial_mode: {
+      type: String,
+      enum: ['interval', 'continuous', 'continuos interval'],
+      default: 'interval'
+      },
+    dial_interval: {
+      type: Number,
+      default: 5
+    },
+    metaclient_calls_limit: [{
+      max: {
+        type: Number,
+        default: 3
+      },
+      repeat_call_interval: {
+        type: Number,
+        default: 30
+      }
+    }],
+    user_calls_limit: [{
+      max: {
+          type: Number,
+          default: 3
+      },
+      suspend_time: {
+        type: Number,
+        default: 60
+      }
+    }],
+    cs_users_ids: [{
+        type: Schema.ObjectId, ref: 'Users'
+    }],
+    deals_sorting: {
+      type: String,
+      enum: ['no', 'random all users', 'random online users', 'random active users']
+    },
+    auto_send_sms: {
+      type : String,
+      enum: ['active', 'inactive'],
+      default: 'inactive'
+    },
+    data_console: {
+      type: String,
+      enum: ['slack', 'tts', 'wally push'],
+      default: 'tts'
+    },
+    call_to_phone: {
+      type: String,
+      enum: ['phone', 'mobile', 'extension'],
+      default: 'extension'
+    },
+    work_schedule: {
+    // starttime and endtime uses format HH:MM
+        sunday: [{
+            starttime: {
+                type: String
+            },
+            endtime: {
+                type: String
+            }
+        }],
+        monday: [{
+            starttime: {
+                type: String
+            },
+            endtime: {
+                type: String
+            }
+        }],
+        tuesday: [{
+            starttime: {
+                type: String
+            },
+            endtime: {
+                type: String
+            }
+        }],
+        wednesday: [{
+            starttime: {
+                type: String
+            },
+            endtime: {
+                type: String
+            }
+        }],
+        thursday: [{
+            starttime: {
+                type: String
+            },
+            endtime: {
+                type: String
+            }
+        }],
+        friday: [{
+            starttime: {
+                type: String
+            },
+            endtime: {
+                type: String
+            }
+        }],
+        saturday: [{
+            starttime: {
+                type: String
+            },
+            endtime: {
+                type: String
+            }
+        }]
+    }
+  }
+});
+
+var UserconfigSchema = new Schema ({
+
+    client_id: {
+      type: Schema.ObjectId, ref: 'Client',
+      required: 'user config settings client id is required'
+    },
+    status: {
+      type: String,
+      enum: ['active', 'inactive'],
+      default: 'active'
+    },
+    pushmessage_leads: {
+      type: String,
+      enum: ['active', 'inactive'],
+      default: 'active'
+    },
+    work_schedule: {
+      sunday: [{
+          starttime: {
+              type: String
+          },
+          endtime: {
+              type: String
+          }
+      }],
+      monday: [{
+          starttime: {
+              type: String
+          },
+          endtime: {
+              type: String
+          }
+      }],
+      tuesday: [{
+          starttime: {
+              type: String
+          },
+          endtime: {
+              type: String
+          }
+      }],
+      wednesday: [{
+          starttime: {
+              type: String
+          },
+          endtime: {
+              type: String
+          }
+      }],
+      thursday: [{
+          starttime: {
+              type: String
+          },
+          endtime: {
+              type: String
+          }
+      }],
+      friday: [{
+          starttime: {
+              type: String
+          },
+          endtime: {
+              type: String
+          }
+      }],
+      saturday: [{
+          starttime: {
+              type: String
+          },
+          endtime: {
+              type: String
+          }
+      }],
+      exception: [{
+        // this values are to disable dialer in holidays and/or similars
+        start_date: {
+          type: Date,
+          required: 'exception worktime start_date is required'
+        },
+        end_date: {
+          type: Date,
+          required: 'exception worktime end date is required'
+        }
+      }]
+    }
+});
+
 module.exports = mongoose.model('Users', UserSchema);
 
 module.exports = mongoose.model('Users', UserSchema);
@@ -259,3 +472,5 @@ module.exports = mongoose.model('Metaclients', MetaclientSchema);
 module.exports = mongoose.model('MetaclientOrganizations', MetaclientOrganizationSchema);
 module.exports = mongoose.model('Deals', DealSchema);
 module.exports = mongoose.model('Events', EventSchema);
+module.exports = mongoose.model('Clientconfig', ClientconfigSchema);
+module.exports = mongoose.model('Userconfig', UserconfigSchema);

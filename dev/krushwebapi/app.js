@@ -20,7 +20,7 @@ mongoose.Promise = global.Promise;
 if (process.argv[2] === 'dev')
   mongoose.connect('mongodb://admin:admin123@ds253918.mlab.com:53918/wallytmpdb');
 else
-  mongoose.connect('mongodb://admin:admin123@ds259865.mlab.com:59865/krushwebdb');
+  mongoose.connect('mongodb://admin:admin123@ds229551-a0.mlab.com:29551/krushwebdb');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
